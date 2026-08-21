@@ -1,6 +1,8 @@
-import { supabase } from './lib/supabase.js';
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hideLoader = () => document.body.classList.add('loaded');
+if (document.readyState === 'complete') hideLoader();
+else window.addEventListener('load', hideLoader, { once: true });
+window.setTimeout(hideLoader, 2500);
 const header = document.querySelector('.site-header');
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.site-nav');
@@ -53,12 +55,19 @@ if (contactForm) contactForm.addEventListener('submit', async event => {
     status.textContent = 'Sending...';
     submitButton.disabled = true;
 
-    const { error } = await supabase.from('contact_messages').insert({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        project: formData.get('project'),
-        message: formData.get('message')
-    });
+    let error;
+    try {
+        const { supabase } = await
+        import ('./lib/supabase.js');
+        ({ error } = await supabase.from('contact_messages').insert({
+            name: formData.get('name'),
+            email: formData.get('email'),
+            project: formData.get('project'),
+            message: formData.get('message')
+        }));
+    } catch (submissionError) {
+        error = submissionError;
+    }
 
     submitButton.disabled = false;
 
@@ -123,4 +132,3 @@ if (canvas) {
     window.addEventListener('resize', resize);
     if (reduceMotion) cancelAnimationFrame(frame);
 }
-window.addEventListener('load', () => document.body.classList.add('loaded'));
