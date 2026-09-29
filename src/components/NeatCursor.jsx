@@ -175,19 +175,51 @@ export default function NeatCursor({ activePalette }) {
         };
     }, []);
 
+    // Ensure cursor is always in the #top-layer to appear above <dialog> modals
+    useEffect(() => {
+        const bumpToTop = () => {
+            if (canvasRef.current && canvasRef.current.showPopover) {
+                try {
+                    // Hide then immediately show to push it to the very top of the top layer
+                    canvasRef.current.hidePopover();
+                    canvasRef.current.showPopover();
+                } catch (e) {
+                    // Ignore
+                }
+            }
+        };
+
+        // Initial bump
+        if (canvasRef.current && canvasRef.current.showPopover) {
+            try {
+                canvasRef.current.showPopover();
+            } catch (e) {
+                // Ignore
+            }
+        }
+
+        window.addEventListener('bump-cursor', bumpToTop);
+        return () => window.removeEventListener('bump-cursor', bumpToTop);
+    }, []);
+
     return (
         <canvas
             ref={canvasRef}
             className="neat-cursor-canvas pointer-events-none"
+            popover="manual"
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 width: '100vw',
                 height: '100vh',
-                zIndex: 99999,
+                zIndex: 999999,
                 pointerEvents: 'none',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                backgroundColor: 'transparent',
+                border: 'none',
+                margin: 0,
+                padding: 0
             }}
             aria-hidden="true"
         />

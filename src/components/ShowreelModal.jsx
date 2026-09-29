@@ -6,17 +6,13 @@ export default function ShowreelModal({ isOpen, onClose }) {
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const dialog = dialogRef.current;
-        if (!dialog) return;
-
         if (isOpen) {
-            dialog.showModal();
+            window.dispatchEvent(new Event('bump-cursor'));
             if (videoRef.current) {
                 videoRef.current.currentTime = 0;
                 videoRef.current.play().catch(() => {});
             }
         } else {
-            dialog.close();
             if (videoRef.current) {
                 videoRef.current.pause();
             }
@@ -24,23 +20,22 @@ export default function ShowreelModal({ isOpen, onClose }) {
     }, [isOpen]);
 
     const handleBackdropClick = (e) => {
-        const rect = dialogRef.current.getBoundingClientRect();
-        const isInDialog = (
-            rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-            rect.left <= e.clientX && e.clientX <= rect.left + rect.width
-        );
-        if (!isInDialog) {
+        if (e.target === e.currentTarget) {
             onClose();
         }
     };
 
     return (
-        <dialog
-            ref={dialogRef}
-            className="glass-modal"
+        <div 
+            className={`modal-backdrop ${isOpen ? 'open' : ''}`}
             onClick={handleBackdropClick}
-            aria-labelledby="showreel-title"
         >
+            <div
+                className={`glass-modal ${isOpen ? 'open' : ''}`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="showreel-title"
+            >
             <div className="modal-header">
                 <div className="modal-header-left">
                     <span className="badge-dot" style={{ backgroundColor: 'var(--accent-cyan)', boxShadow: '0 0 10px var(--accent-cyan)' }} aria-hidden="true" />
@@ -90,6 +85,7 @@ export default function ShowreelModal({ isOpen, onClose }) {
                     </div>
                 </div>
             </div>
-        </dialog>
+        </div>
+        </div>
     );
 }

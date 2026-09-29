@@ -12,24 +12,15 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const dialog = dialogRef.current;
-        if (!dialog) return;
-
         if (isOpen) {
-            dialog.showModal();
+            window.dispatchEvent(new Event('bump-cursor'));
         } else {
-            dialog.close();
             setStatus('');
         }
     }, [isOpen]);
 
     const handleBackdropClick = (e) => {
-        const rect = dialogRef.current.getBoundingClientRect();
-        const isInDialog = (
-            rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-            rect.left <= e.clientX && e.clientX <= rect.left + rect.width
-        );
-        if (!isInDialog) {
+        if (e.target === e.currentTarget) {
             onClose();
         }
     };
@@ -75,12 +66,16 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
     };
 
     return (
-        <dialog
-            ref={dialogRef}
-            className="glass-modal"
+        <div 
+            className={`modal-backdrop ${isOpen ? 'open' : ''}`}
             onClick={handleBackdropClick}
-            aria-labelledby="contact-modal-title"
         >
+            <div
+                className={`glass-modal ${isOpen ? 'open' : ''}`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="contact-modal-title"
+            >
             <div className="modal-header">
                 <div className="modal-header-left">
                     <span className="badge-dot" style={{ backgroundColor: 'var(--accent-lime)', boxShadow: '0 0 10px var(--accent-lime)' }} aria-hidden="true" />
@@ -166,6 +161,7 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
                     </button>
                 </form>
             </div>
-        </dialog>
+        </div>
+        </div>
     );
 }

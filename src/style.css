@@ -847,7 +847,7 @@ dialog {
    Compliant with modern @starting-style, transition-behavior: allow-discrete
    ========================================================================== */
 
-dialog.glass-modal {
+.glass-modal {
     position: fixed;
     inset: 0;
     margin: auto;
@@ -867,6 +867,7 @@ dialog.glass-modal {
 
     /* Discrete transitions for entry & exit */
     opacity: 0;
+    pointer-events: none;
     transform: scale(0.94) translateY(12px);
     transition-property: opacity, transform, display, overlay;
     transition-duration: 0.35s;
@@ -874,8 +875,9 @@ dialog.glass-modal {
     transition-behavior: allow-discrete;
 }
 
-dialog.glass-modal[open] {
+.glass-modal.open {
     opacity: 1;
+    pointer-events: auto;
     transform: scale(1) translateY(0);
 
     @starting-style {
@@ -884,22 +886,22 @@ dialog.glass-modal[open] {
     }
 }
 
-dialog.glass-modal::backdrop {
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
-    transition: display 0.35s allow-discrete, overlay 0.35s allow-discrete, background-color 0.35s ease-out, backdrop-filter 0.35s ease-out;
+    pointer-events: none;
+    transition: all 0.35s ease-out;
 }
 
-dialog.glass-modal[open]::backdrop {
+.modal-backdrop.open {
     background-color: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-
-    @starting-style {
-        background-color: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(0px);
-    }
+    pointer-events: auto;
 }
 
 .modal-header {
@@ -1098,7 +1100,7 @@ textarea.form-control {
         scroll-behavior: auto !important;
     }
     
-    dialog.glass-modal {
+    .glass-modal {
         transform: none !important;
     }
 }
