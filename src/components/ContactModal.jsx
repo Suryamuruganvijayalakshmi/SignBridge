@@ -76,92 +76,92 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
                 aria-modal="true"
                 aria-labelledby="contact-modal-title"
             >
-            <div className="modal-header">
-                <div className="modal-header-left">
-                    <span className="badge-dot" style={{ backgroundColor: 'var(--accent-lime)', boxShadow: '0 0 10px var(--accent-lime)' }} aria-hidden="true" />
-                    <h2 id="contact-modal-title" className="modal-title">
-                        START A PROJECT // TRANSMISSION
-                    </h2>
-                </div>
-                <button
-                    type="button"
-                    onClick={onClose}
-                    className="modal-close-btn"
-                    aria-label="Close Contact dialog"
-                >
-                    <X size={18} />
-                </button>
-            </div>
-
-            <div className="modal-body">
-                <form onSubmit={handleSubmit} className="contact-form">
-                    <div className="form-group">
-                        <label htmlFor="modal-name">NAME / IDENTITY</label>
-                        <input
-                            type="text"
-                            id="modal-name"
-                            required
-                            placeholder="Your name or organization"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="form-control"
-                            autoComplete="name"
-                        />
+                <div className="modal-header">
+                    <div className="modal-header-left">
+                        <span className="badge-dot" style={{ backgroundColor: 'var(--accent-lime)', boxShadow: '0 0 10px var(--accent-lime)' }} aria-hidden="true" />
+                        <h2 id="contact-modal-title" className="modal-title">
+                            START A PROJECT // TRANSMISSION
+                        </h2>
                     </div>
-
-                    <div className="form-group">
-                        <label htmlFor="modal-email">COMMUNICATION UPLINK / EMAIL</label>
-                        <input
-                            type="email"
-                            id="modal-email"
-                            required
-                            placeholder="you@company.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="form-control"
-                            autoComplete="email"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="modal-project">PROJECT / DOMAIN FOCUS</label>
-                        <input
-                            type="text"
-                            id="modal-project"
-                            placeholder="Software, AI, IoT, Smart Table, or MVP"
-                            value={project}
-                            onChange={(e) => setProject(e.target.value)}
-                            className="form-control"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="modal-message">TRANSMISSION PAYLOAD</label>
-                        <textarea
-                            id="modal-message"
-                            required
-                            rows={3}
-                            placeholder="Tell us what you are building, automating or scaling..."
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="form-control"
-                        />
-                    </div>
-
-                    {status && <div className="form-status" role="status">{status}</div>}
-
                     <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn-primary-lime"
-                        style={{ width: '100%', marginTop: '0.5rem' }}
+                        type="button"
+                        onClick={onClose}
+                        className="modal-close-btn"
+                        aria-label="Close Contact dialog"
                     >
-                        <span>{loading ? 'TRANSMITTING...' : 'DISPATCH TRANSMISSION'}</span>
-                        <Send size={16} aria-hidden="true" />
+                        <X size={18} />
                     </button>
-                </form>
+                </div>
+
+                <div className="modal-body">
+                    <form onSubmit={handleSubmit} className="contact-form">
+                        <div className="form-group">
+                            <label htmlFor="modal-name">NAME / IDENTITY</label>
+                            <input
+                                type="text"
+                                id="modal-name"
+                                required
+                                placeholder="Your name or organization"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="form-control"
+                                autoComplete="name"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="modal-email">COMMUNICATION UPLINK / EMAIL</label>
+                            <input
+                                type="email"
+                                id="modal-email"
+                                required
+                                placeholder="you@company.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="form-control"
+                                autoComplete="email"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="modal-project">PROJECT / DOMAIN FOCUS</label>
+                            <input
+                                type="text"
+                                id="modal-project"
+                                placeholder="Software, AI, IoT, Smart Table, or MVP"
+                                value={project}
+                                onChange={(e) => setProject(e.target.value)}
+                                className="form-control"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="modal-message">TRANSMISSION PAYLOAD</label>
+                            <textarea
+                                id="modal-message"
+                                required
+                                rows={3}
+                                placeholder="Tell us what you are building, automating or scaling..."
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className="form-control"
+                            />
+                        </div>
+
+                        {status && <div className="form-status" role="status">{status}</div>}
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="btn-primary-lime"
+                            style={{ width: '100%', marginTop: '0.5rem' }}
+                        >
+                            <span>{loading ? 'TRANSMITTING...' : 'DISPATCH TRANSMISSION'}</span>
+                            <Send size={16} aria-hidden="true" />
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
         </div>
     );
 }

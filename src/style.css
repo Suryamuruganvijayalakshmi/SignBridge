@@ -36,6 +36,7 @@
 
     /* Text Hierarchy for Pure White Background */
     --text-pure: #09090b;
+    --text-primary: #09090b;   /* alias for --text-pure used in some components */
     --text-60: #334155;
     --text-50: #475569;
     --text-30: #94a3b8;
@@ -53,6 +54,7 @@
     --glass-border-cyan: 1px solid rgba(14, 165, 233, 0.35);
     --glass-blur: blur(16px);
     --glass-blur-deep: blur(24px);
+    --border-color: rgba(0, 0, 0, 0.12);  /* generic border alias */
 
     /* Typography */
     --font-display: 'Cabinet Grotesk', 'Archivo', system-ui, -apple-system, sans-serif;
@@ -1384,18 +1386,11 @@ textarea.form-control {
     transform: translateY(-5px);
     background: var(--glass-bg-hover);
     border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07), 0 0 30px rgba(99, 102, 241, 0.2);
 }
 
 .capability-card:hover::before {
     opacity: 1;
-}
-
-.capability-card.card-activated {
-    border-color: rgba(99, 102, 241, 0.45);
-    background: rgba(255, 255, 255, 0.045);
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(99, 102, 241, 0.16);
-    transform: translateY(-3px);
 }
 
 /* Card Header: Node Badge & Framed Icon Box */
@@ -2495,7 +2490,7 @@ textarea.form-control {
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--text-50);
+    color: var(--text-pure);
     text-transform: uppercase;
     margin: 1.5rem 0 2.5rem;
 }
@@ -2650,54 +2645,219 @@ textarea.form-control {
 }
 
 .faq-answer-content {
-    padding: 0 1.5rem 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
     font-size: 14px;
     color: var(--text-50);
     line-height: 1.6;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-    margin-top: 0.5rem;
-    padding-top: 1rem;
 }
 
 /* ==========================================================================
-   FOOTER WRAPPER
+   SITE FOOTER — Dark full-width marketing footer
    ========================================================================== */
 
-.lumina-footer-wrapper {
+.site-footer {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    background: #09090b;          /* zinc-950 equivalent */
+    color: #ffffff;
+    margin-top: 5rem;
     position: relative;
     z-index: 20;
-    pointer-events: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    background: rgba(248, 250, 252, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    pointer-events: auto;
 }
 
-.sub-footer-bar {
+/* Centered inner wrapper — matches section-frame max-width */
+.footer-inner {
     width: 100%;
-    padding: 1.5rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--text-50);
-    text-transform: uppercase;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5rem 3rem 2rem;
 }
 
 @media (max-width: 768px) {
-    .sub-footer-bar {
-        padding: 1.25rem 1.5rem;
-        flex-direction: column;
-        gap: 0.6rem;
-        text-align: center;
+    .footer-inner {
+        padding: 3.5rem 1.5rem 1.5rem;
     }
 }
+
+/* ── Top Row: CTA (left) + Link columns (right) ── */
+.footer-top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 5rem;
+}
+
+@media (max-width: 900px) {
+    .footer-top-row {
+        flex-direction: column;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+}
+
+/* ── Left: CTA block ── */
+.footer-cta-block {
+    flex: 1;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+}
+
+.footer-cta-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.footer-cta-accent {
+    color: var(--accent-iris-light);
+    text-shadow: 0 0 40px rgba(99, 102, 241, 0.55);
+}
+
+.footer-cta-sub {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.45);
+    max-width: 420px;
+    margin-bottom: 2rem;
+}
+
+.footer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    color: #09090b;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.footer-cta-btn:hover {
+    transform: scale(1.03);
+}
+
+/* ── Right: Link columns ── */
+.footer-link-columns {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    padding-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .footer-link-columns {
+        gap: 2.5rem;
+    }
+}
+
+.footer-link-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-col-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 0.25rem;
+}
+
+.footer-link {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.footer-link:hover {
+    color: var(--accent-iris-light);
+}
+
+.footer-link--magenta:hover {
+    color: var(--accent-magenta);
+}
+
+.footer-link--cyan:hover {
+    color: var(--accent-cyan);
+}
+
+/* ── Bottom: Brand wordmark + copyright ── */
+.footer-brand-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 2.5rem;
+}
+
+.footer-wordmark {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 11rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.08);
+    user-select: none;
+    margin: 0 0 2rem;
+}
+
+.footer-meta-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+    padding-bottom: 0.5rem;
+}
+
+@media (max-width: 640px) {
+    .footer-meta-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+
 
 /* ==========================================================================
    CAPABILITIES SVG JOURNEY / CONNECTOR LINE
@@ -2828,6 +2988,7 @@ textarea.form-control {
     z-index: 2;
 }
 
+/* scroll-activated state: subtle lift with iris accent border */
 .capability-card.card-activated {
     border-color: rgba(99, 102, 241, 0.45);
     background: #ffffff;

@@ -66,11 +66,11 @@ export default function SmartTableSection({ onOpenShowreel, onOpenContact }) {
                                 <span className="pricing-note">one-time / card</span>
                             </div>
 
-                            <div className="product-actions-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                            <div className="product-actions-group">
                                 <Link
                                     to="/product"
-                                    className="btn-secondary"
-                                    style={{ padding: '0.75rem 1.5rem', fontSize: '13px', textDecoration: 'none', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '4px' }}
+                                    className="btn-secondary-glass"
+                                    style={{ padding: '0.75rem 1.5rem', fontSize: '13px', textDecoration: 'none' }}
                                 >
                                     View Details
                                 </Link>
