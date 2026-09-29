@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import ProductPage from './pages/ProductPage.jsx';
 import NeatCursor from './components/NeatCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -183,31 +185,38 @@ export default function App() {
                     onOpenContact={() => setContactOpen(true)}
                 />
 
-                <Hero
-                    onOpenShowreel={() => setShowreelOpen(true)}
-                    onOpenContact={() => setContactOpen(true)}
-                />
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <Hero
+                                onOpenShowreel={() => setShowreelOpen(true)}
+                                onOpenContact={() => setContactOpen(true)}
+                            />
 
-                <DisciplinesMarquee />
+                            <DisciplinesMarquee />
 
-                <CapabilitiesSection />
+                            <CapabilitiesSection />
 
-                <SmartTableSection
-                    onOpenShowreel={() => setShowreelOpen(true)}
-                    onOpenContact={() => setContactOpen(true)}
-                />
+                            <SmartTableSection
+                                onOpenShowreel={() => setShowreelOpen(true)}
+                                onOpenContact={() => setContactOpen(true)}
+                            />
 
-                <ResearchSection onOpenContact={() => setContactOpen(true)} />
+                            <ResearchSection onOpenContact={() => setContactOpen(true)} />
 
-                <ProcessTimeline />
+                            <ProcessTimeline />
 
-                <TeamSection />
+                            <TeamSection />
 
-                <VisionBanner />
+                            <VisionBanner />
 
-                <ContactSection onNotification={triggerToast} />
+                            <ContactSection onNotification={triggerToast} />
 
-                <FaqSection />
+                            <FaqSection />
+                        </>
+                    } />
+                    <Route path="/product" element={<ProductPage />} />
+                </Routes>
 
                 <Footer />
             </div>
