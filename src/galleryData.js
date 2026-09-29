@@ -102,7 +102,7 @@ export const SIGNBRIDGE_PROFILE = {
       category: "E-commerce Product Design",
       year: "2026",
       color: "#2563eb",
-      image: "/assets/art1.png",
+      image: "/assets/shopcart.png",
       description: "ShopCart is a clean student-focused shopping experience for discovering tech accessories, comparing products, and adding essentials to a cart without unnecessary friction.",
       stats: { catalog: "Tech Accessories", audience: "Students", flow: "Browse to Cart" },
       tags: ["Product UI", "Responsive Web", "Shopping Cart", "Catalog Design", "E-commerce"]
@@ -116,7 +116,7 @@ export const SIGNBRIDGE_PROFILE = {
       category: "Business Dashboard & Data",
       year: "2026",
       color: "#ff6b00",
-      image: "/assets/art1.png",
+      image: "/assets/salestracker.png",
       description: "A dark operations dashboard for tracking lubricant sales, filtering records by date or product, reviewing tax totals, and exporting reports for business use.",
       stats: { records: "Date to Date", reporting: "Excel Export", focus: "Sales Register" },
       tags: ["Dashboard UI", "Data Tables", "Sales Reporting", "Filters", "Business Tools"]
@@ -163,14 +163,14 @@ export const FOUNDER_DATA = {
   headlineSub: "Design that",
   headlineIsnt: "isn't.",
   bio: "Founding lead designing digital products end-to-end — intelligent software, AI applications, web platforms, and IoT systems.",
-  photo: "/assets/founder.jpg",
+  photo: "/assets/surya.jpeg",
   team: [
     {
       id: 1,
       name: "Surya V M",
       role: "Founder & Lead Product Designer",
       badge: "FOUNDER",
-      image: "/assets/founder.jpg",
+      image: "/assets/surya.jpeg",
       bio: "Founding lead designing digital products end-to-end — spatial software, UX strategy, and WebGL experiences."
     },
     {
@@ -178,7 +178,7 @@ export const FOUNDER_DATA = {
       name: "Sowbigasri S",
       role: "UI/UX Designer",
       badge: "DESIGN",
-      image: "/assets/uiux_designer.jpg",
+      image: "/assets/sowbi.jpeg",
       bio: "Crafting intuitive user interfaces, visual design systems, and seamless digital product interactions."
     },
     {
@@ -186,7 +186,7 @@ export const FOUNDER_DATA = {
       name: "Laksana S",
       role: "Database Engineer",
       badge: "DATA SYSTEMS",
-      image: "/assets/db_engineer.jpg",
+      image: "/assets/laksana.png",
       bio: "Architecting high-performance database schemas, data telemetry pipelines, and spatial query engines."
     },
     {
@@ -194,7 +194,7 @@ export const FOUNDER_DATA = {
       name: "Kamalesh S",
       role: "Software Developer",
       badge: "ENGINEERING",
-      image: "/assets/kamalesh.jpg",
+      image: "/assets/kamalesh.jpeg",
       bio: "Full-stack software developer building scalable backend APIs, web applications, and interactive frontends."
     }
   ],

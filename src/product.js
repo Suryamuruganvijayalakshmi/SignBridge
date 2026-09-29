@@ -1,42 +1,57 @@
 import { supabase } from './lib/supabase.js';
 
 const requestForm = document.querySelector('.request-form');
-const status = requestForm.querySelector('.request-status');
-const submitButton = requestForm.querySelector('button[type="submit"]');
 
-document.querySelectorAll('.request-link').forEach(function(link) {
-    link.addEventListener('click', function() {
-        requestForm.elements.request_type.value = link.dataset.requestType;
-    });
-});
+if (requestForm) {
+    const status = requestForm.querySelector('.request-status');
+    const submitButton = requestForm.querySelector('button[type="submit"]');
 
-requestForm.addEventListener('submit', async function(event) {
-    event.preventDefault();
-    const formData = new FormData(requestForm);
-    const requestType = formData.get('request_type');
-    const project = formData.get('project') || 'Smart Table Starter Kit';
-    const phone = formData.get('phone');
-    const message = formData.get('message') || 'Smart Table request';
-
-    submitButton.disabled = true;
-    status.classList.remove('error');
-    status.textContent = 'Sending...';
-
-    const { error } = await supabase.from('contact_messages').insert({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        project: requestType + ' - ' + project + (phone ? ' - Phone: ' + phone : ''),
-        message
+    document.querySelectorAll('.request-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (requestForm.elements.request_type) {
+                requestForm.elements.request_type.value = link.dataset.requestType;
+            }
+        });
     });
 
-    submitButton.disabled = false;
-    if (error) {
-        status.classList.add('error');
-        status.textContent = 'Unable to send. Please check your details and try again.';
-        console.error('Smart Table request failed:', error);
-        return;
-    }
+    requestForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(requestForm);
+        const requestType = formData.get('request_type');
+        const project = formData.get('project') || 'Smart Table Starter Kit';
+        const phone = formData.get('phone');
+        const message = formData.get('message') || 'Smart Table request';
 
-    status.textContent = 'Request received. We will be in touch shortly.';
-    requestForm.reset();
-});
+        if (submitButton) submitButton.disabled = true;
+        if (status) {
+            status.classList.remove('error');
+            status.textContent = 'Sending...';
+        }
+
+        let error;
+        try {
+            const res = await supabase.from('contact_messages').insert({
+                name: formData.get('name'),
+                email: formData.get('email'),
+                project: requestType + ' - ' + project + (phone ? ' - Phone: ' + phone : ''),
+                message
+            });
+            error = res.error;
+        } catch (err) {
+            error = err;
+        }
+
+        if (submitButton) submitButton.disabled = false;
+        if (error) {
+            if (status) {
+                status.classList.add('error');
+                status.textContent = 'Unable to send. Please check your details and try again.';
+            }
+            console.error('Smart Table request failed:', error);
+            return;
+        }
+
+        if (status) status.textContent = 'Request received. We will be in touch shortly.';
+        requestForm.reset();
+    });
+}

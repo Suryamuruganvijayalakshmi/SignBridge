@@ -1,8 +1,11 @@
+import { supabase } from './lib/supabase.js';
+
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hideLoader = () => document.body.classList.add('loaded');
 if (document.readyState === 'complete') hideLoader();
 else window.addEventListener('load', hideLoader, { once: true });
 window.setTimeout(hideLoader, 2500);
+
 const header = document.querySelector('.site-header');
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.site-nav');
@@ -16,6 +19,7 @@ if (nav) nav.querySelectorAll('a').forEach(link => link.addEventListener('click'
     if (menu) menu.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
 }));
+
 const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -23,15 +27,19 @@ const revealObserver = new IntersectionObserver(entries => entries.forEach(entry
     }
 }), { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
 const navObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) document.querySelectorAll('.site-nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`)); }), { rootMargin: '-40% 0px -50% 0px' });
 document.querySelectorAll('main section[id]').forEach(section => navObserver.observe(section));
+
 document.querySelectorAll('.step').forEach(step => step.addEventListener('mouseenter', () => {
     document.querySelectorAll('.step').forEach(item => item.classList.remove('active'));
     step.classList.add('active');
 }));
+
 const productStage = document.querySelector('.product-stage');
 const productObserver = new IntersectionObserver(entries => entries.forEach(entry => entry.target.classList.toggle('in-view', entry.isIntersecting)), { threshold: 0.35 });
 if (productStage) productObserver.observe(productStage);
+
 const metricObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) {
         entry.target.classList.add('counted');
@@ -39,11 +47,13 @@ const metricObserver = new IntersectionObserver(entries => entries.forEach(entry
     }
 }), { threshold: 0.7 });
 document.querySelectorAll('.metrics-grid strong').forEach(metric => metricObserver.observe(metric));
+
 const hero = document.querySelector('.hero');
 if (!reduceMotion && window.matchMedia('(min-width: 801px)').matches && hero) hero.addEventListener('mousemove', event => {
     const visual = document.querySelector('#network-canvas');
-    visual.style.transform = `translate(${(event.clientX / window.innerWidth - .5) * 12}px, ${(event.clientY / window.innerHeight - .5) * 8}px)`;
+    if (visual) visual.style.transform = `translate(${(event.clientX / window.innerWidth - .5) * 12}px, ${(event.clientY / window.innerHeight - .5) * 8}px)`;
 });
+
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) contactForm.addEventListener('submit', async event => {
     event.preventDefault();
@@ -57,14 +67,13 @@ if (contactForm) contactForm.addEventListener('submit', async event => {
 
     let error;
     try {
-        const { supabase } = await
-        import ('./lib/supabase.js');
-        ({ error } = await supabase.from('contact_messages').insert({
+        const res = await supabase.from('contact_messages').insert({
             name: formData.get('name'),
             email: formData.get('email'),
             project: formData.get('project'),
             message: formData.get('message')
-        }));
+        });
+        error = res.error;
     } catch (submissionError) {
         error = submissionError;
     }
