@@ -82,12 +82,23 @@ export const CardSwap = forwardRef(({
     const intervalRef = useRef(0);
     const container = useRef(null);
 
-    const swap = () => {
+    const swap = (targetIndex = null) => {
         if (order.current.length < 2) return;
         if (tlRef.current && tlRef.current.isActive()) return;
 
-        const [front, ...rest] = order.current;
-        const elFront = refs[front]?.current;
+        const currentFront = order.current[0];
+        
+        if (targetIndex !== null && currentFront === targetIndex) return;
+
+        let rest;
+        if (targetIndex !== null) {
+            const remaining = order.current.filter(x => x !== currentFront && x !== targetIndex);
+            rest = [targetIndex, ...remaining];
+        } else {
+            rest = order.current.slice(1);
+        }
+
+        const elFront = refs[currentFront]?.current;
         if (!elFront) return;
 
         if (onActiveIndexChange) {
@@ -96,7 +107,7 @@ export const CardSwap = forwardRef(({
 
         const tl = gsap.timeline({
             onComplete: () => {
-                order.current = [...rest, front];
+                order.current = [...rest, currentFront];
             }
         });
         tlRef.current = tl;
@@ -151,6 +162,7 @@ export const CardSwap = forwardRef(({
 
     useImperativeHandle(ref, () => ({
         swap,
+        goTo: (idx) => swap(idx),
         getActiveIndex: () => order.current[0],
         getTotal: () => order.current.length
     }));

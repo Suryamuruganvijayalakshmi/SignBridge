@@ -80,7 +80,7 @@ export default function TeamSection() {
                 if (currentZone !== lastScrollZoneRef.current && currentZone >= 0 && currentZone < team.length) {
                     lastScrollZoneRef.current = currentZone;
                     if (cardSwapRef.current) {
-                        cardSwapRef.current.swap();
+                        cardSwapRef.current.goTo(currentZone);
                     }
                 }
             }
@@ -90,13 +90,18 @@ export default function TeamSection() {
         return () => window.removeEventListener('scroll', onScroll);
     }, [team.length]);
 
-    // Wheel event over showcase: scrolling over the deck directly triggers card swap
     const handleWheelOverDeck = (e) => {
         wheelAccumulatorRef.current += e.deltaY;
         if (Math.abs(wheelAccumulatorRef.current) > 70) {
+            const dir = Math.sign(wheelAccumulatorRef.current);
             wheelAccumulatorRef.current = 0;
             if (cardSwapRef.current) {
-                cardSwapRef.current.swap();
+                const total = cardSwapRef.current.getTotal();
+                const current = cardSwapRef.current.getActiveIndex();
+                let nextIdx = current + dir;
+                if (nextIdx >= total) nextIdx = 0;
+                if (nextIdx < 0) nextIdx = total - 1;
+                cardSwapRef.current.goTo(nextIdx);
             }
         }
     };
@@ -194,7 +199,9 @@ export default function TeamSection() {
                                     <button
                                         key={m.num}
                                         type="button"
-                                        onClick={handleManualSwap}
+                                        onClick={() => {
+                                            if (cardSwapRef.current) cardSwapRef.current.goTo(idx);
+                                        }}
                                         className={`member-pill-btn ${isCurrent ? 'active' : ''}`}
                                     >
                                         <span className="pill-dot" />
