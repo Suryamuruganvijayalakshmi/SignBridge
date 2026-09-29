@@ -1,5 +1,5 @@
 {
-  "name": "signbridge-gallery-tunnel",
+  "name": "signbridge-studio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -22,9 +22,10 @@
     "threejs-components": "^0.0.30"
   },
   "devDependencies": {
-    "vite": "^5.0.12"
-  },
-  "overrides": {
-    "rollup": "npm:@rollup/wasm-node"
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.14"
   }
 }
+

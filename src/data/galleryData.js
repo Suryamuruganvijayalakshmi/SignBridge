@@ -1,5 +1,5 @@
 export const SIGNBRIDGE_PROFILE = {
-  brand: "SignBridge",
+  brand: "SIGNBRIDGE",
   tagline: "Bridging Ideas with Technology.",
   shortDescription: "SignBridge is a technology startup building intelligent software, AI-powered applications, web platforms, IoT systems and digital products that transform real-world problems into practical technology solutions.",
   overview: "SignBridge is an emerging technology and software-development startup focused on building modern digital products, intelligent software solutions, AI-powered applications, and emerging-technology systems.",
@@ -15,81 +15,60 @@ export const SIGNBRIDGE_PROFILE = {
     "INNOVATION"
   ],
 
-  coreFocus: [
-    "Software Development",
-    "Web Development",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Computer Vision",
-    "Automation",
-    "IoT & Embedded Systems",
-    "Cloud & Backend Development",
-    "Digital Product Development",
-    "Startup MVP Development"
-  ],
-
-  skillSets: [
+  capabilities: [
     {
-      category: "Web Development",
-      icon: "globe",
-      color: "#00f2fe",
-      skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Tailwind CSS", "Responsive Web Design", "UI/UX implementation", "Frontend development", "Node.js", "Express.js", "REST APIs"]
+      number: "01",
+      icon: "⌘",
+      title: "Software Engineering",
+      description: "Scalable web applications, APIs, backend systems, dashboards and digital platforms.",
+      techStack: "HTML5 · React · Next.js · Node.js"
     },
     {
-      category: "AI & Machine Learning",
-      icon: "cpu",
-      color: "#ff4d38",
-      skills: ["Python", "Machine Learning", "TensorFlow", "Computer Vision", "MediaPipe", "Roboflow", "Edge AI", "TinyML", "AI model integration", "Real-time object/gesture recognition", "Data processing"]
+      number: "02",
+      icon: "⌁",
+      title: "AI & Machine Learning",
+      description: "Intelligent systems using machine learning, computer vision and real-time AI.",
+      techStack: "Python · TensorFlow · MediaPipe · TinyML"
     },
     {
-      category: "Programming",
-      icon: "code",
-      color: "#8b5cf6",
-      skills: ["C", "C++", "Python", "Java", "JavaScript"]
+      number: "03",
+      icon: "◌",
+      title: "Cloud & Backend",
+      description: "Cloud-connected applications, authentication, databases, APIs and real-time infrastructure.",
+      techStack: "Firebase · Firestore · REST APIs"
     },
     {
-      category: "Backend & Cloud",
-      icon: "cloud",
-      color: "#3b82f6",
-      skills: ["Firebase", "Firebase Authentication", "Firestore", "Firebase Realtime Database", "Node.js", "Express.js", "REST API development", "Cloud-connected applications"]
+      number: "04",
+      icon: "⌬",
+      title: "IoT & Embedded Systems",
+      description: "Connected hardware systems combining sensors, microcontrollers and intelligent edge computing.",
+      techStack: "ESP32 · Arduino · Raspberry Pi"
     },
     {
-      category: "IoT & Embedded Systems",
-      icon: "zap",
-      color: "#10b981",
-      skills: ["ESP32", "ESP8266", "Arduino", "Raspberry Pi", "Sensor integration", "Embedded programming", "IoT monitoring", "Edge computing", "Wireless communication", "Hardware–software integration"]
+      number: "05",
+      icon: "∿",
+      title: "Data & Signal Processing",
+      description: "Real-time data processing, signal analysis and machine-learning feature extraction.",
+      techStack: "FFT · Signal Processing · Visualization"
     },
     {
-      category: "Data & Signal Processing",
-      icon: "bar-chart",
-      color: "#ec4899",
-      skills: ["Data analysis", "Sensor-data processing", "Signal processing", "FFT", "Current-signal analysis", "Real-time data visualization", "Machine-learning feature extraction"]
+      number: "06",
+      icon: "↗",
+      title: "Product Development",
+      description: "Turning early concepts into functional prototypes, MVPs and deployable digital products.",
+      techStack: "Rapid Prototyping · UI/UX · Deployment"
     }
   ],
 
-  technologiesMatrix: [
-    { category: "Programming", techs: "C, C++, Python, Java, JavaScript" },
-    { category: "Frontend", techs: "HTML, CSS, JavaScript, React, Tailwind" },
-    { category: "Backend", techs: "Node.js, Express.js" },
-    { category: "Database", techs: "Firebase, Firestore, Realtime Database" },
-    { category: "AI/ML", techs: "TensorFlow, MediaPipe, Roboflow" },
-    { category: "Computer Vision", techs: "OpenCV, MediaPipe" },
-    { category: "IoT", techs: "ESP32, ESP8266, Arduino" },
-    { category: "Embedded", techs: "Arduino IDE, C/C++" },
-    { category: "Edge AI", techs: "TinyML, TensorFlow Lite" },
-    { category: "Cloud", techs: "Firebase, Cloud APIs" },
-    { category: "Development", techs: "Git, GitHub, APIs" }
-  ],
-
   pipeline: [
-    { step: "01", name: "Problem", desc: "Identify real-world bottleneck or market need" },
-    { step: "02", name: "Research", desc: "Technical feasibility, stack & user study" },
-    { step: "03", name: "Idea", desc: "Conceptual architectural solution design" },
-    { step: "04", name: "Prototype", desc: "Rapid 3D/UI low-fidelity build" },
-    { step: "05", name: "AI/Software Dev", desc: "Core ML training & full-stack development" },
-    { step: "06", name: "Testing", desc: "Validation, edge benchmarking & QA" },
-    { step: "07", name: "MVP", desc: "Deployable minimum viable product" },
-    { step: "08", name: "Deployment", desc: "Cloud & edge infrastructure launch" }
+    { step: "01", name: "Problem", desc: "Identify the real-world bottleneck." },
+    { step: "02", name: "Research", desc: "Study users, technology and feasibility." },
+    { step: "03", name: "Idea", desc: "Define the architecture and direction." },
+    { step: "04", name: "Prototype", desc: "Build and validate the first experience." },
+    { step: "05", name: "Build", desc: "Develop software and infrastructure." },
+    { step: "06", name: "Test", desc: "Validate performance and reliability." },
+    { step: "07", name: "MVP", desc: "Create the deployable product." },
+    { step: "08", name: "Deploy", desc: "Launch cloud and edge systems." }
   ],
 
   rdCapabilities: [
@@ -105,7 +84,7 @@ export const SIGNBRIDGE_PROFILE = {
       image: "/assets/shopcart.png",
       description: "ShopCart is a clean student-focused shopping experience for discovering tech accessories, comparing products, and adding essentials to a cart without unnecessary friction.",
       stats: { catalog: "Tech Accessories", audience: "Students", flow: "Browse to Cart" },
-      tags: ["Product UI", "Responsive Web", "Shopping Cart", "Catalog Design", "E-commerce"]
+      tags: ["Product UI", "Responsive Web", "E-commerce"]
     },
     {
       id: "indianoil-sales-hub",
@@ -119,7 +98,7 @@ export const SIGNBRIDGE_PROFILE = {
       image: "/assets/salestracker.png",
       description: "A dark operations dashboard for tracking lubricant sales, filtering records by date or product, reviewing tax totals, and exporting reports for business use.",
       stats: { records: "Date to Date", reporting: "Excel Export", focus: "Sales Register" },
-      tags: ["Dashboard UI", "Data Tables", "Sales Reporting", "Filters", "Business Tools"]
+      tags: ["Dashboard UI", "Data Tables", "Reporting"]
     },
     {
       id: "iot-edge-ai",
@@ -133,7 +112,7 @@ export const SIGNBRIDGE_PROFILE = {
       image: "/assets/art1.png",
       description: "EcoClamp is an intelligent motor-health monitoring system utilizing non-invasive current transducers, ESP32 microcontrollers, FFT signal analysis, and localized TinyML anomaly detection.",
       stats: { sensors: "Non-Invasive SCT", edgeML: "TinyML On-Device", processing: "FFT Real-Time" },
-      tags: ["ESP32", "TinyML", "FFT Signal Processing", "Current Sensing", "Predictive Maintenance"]
+      tags: ["ESP32", "FFT", "Predictive Maintenance"]
     },
     {
       id: "aerospace-tech",
@@ -147,12 +126,38 @@ export const SIGNBRIDGE_PROFILE = {
       image: "/assets/art1.png",
       description: "Next-generation R&D concept for autonomous satellite protection and orbital debris monitoring using optical sensor fusion, trajectory prediction algorithms, and companion spacecraft hardware architecture.",
       stats: { tracking: "Multi-Object", fusion: "Sensor Fusion", compute: "Edge Orbital" },
-      tags: ["Sensor Fusion", "AI Tracking", "Orbital Kinematics", "Companion Satellites"]
+      tags: ["AI Tracking", "Orbital Kinematics"]
+    }
+  ],
+
+  services: [
+    { number: "01", title: "Software & Web Development", desc: "High-performance digital products, platforms and APIs." },
+    { number: "02", title: "AI & Computer Vision", desc: "Useful intelligence that sees, learns and acts." },
+    { number: "03", title: "Cloud & API Engineering", desc: "Reliable infrastructure for products that need to scale." },
+    { number: "04", title: "IoT & Automation", desc: "Connected systems that bridge the physical and digital." },
+    { number: "05", title: "Startup MVP Development", desc: "From first signal to something people can use." },
+    { number: "06", title: "Product Prototyping", desc: "Test the experience before committing to the build." }
+  ],
+
+  faqs: [
+    {
+      q: "What kind of projects do you take on?",
+      a: "We work on software products, AI systems, web platforms, IoT solutions, automation systems and early-stage MVPs."
+    },
+    {
+      q: "Can you work with an existing product?",
+      a: "Yes. We can improve, redesign, integrate or extend an existing product."
+    },
+    {
+      q: "How do we get started?",
+      a: "Start with a short conversation describing the problem, product or idea you want to build."
+    },
+    {
+      q: "Can you develop custom AI solutions?",
+      a: "Yes. Solutions can include machine learning, computer vision, real-time recognition and edge AI depending on the problem."
     }
   ]
 };
-
-export const PROJECTS_DATA = SIGNBRIDGE_PROFILE.rdCapabilities;
 
 export const FOUNDER_DATA = {
   name: "Surya V M",
@@ -169,7 +174,7 @@ export const FOUNDER_DATA = {
       id: 1,
       name: "Surya V M",
       role: "Founder & Lead Product Designer",
-      badge: "FOUNDER",
+      badge: "01 / Founder",
       image: "/assets/surya.jpeg",
       bio: "Founding lead designing digital products end-to-end — spatial software, UX strategy, and WebGL experiences."
     },
@@ -177,7 +182,7 @@ export const FOUNDER_DATA = {
       id: 2,
       name: "Sowbigasri S",
       role: "UI/UX Designer",
-      badge: "DESIGN",
+      badge: "02 / Design",
       image: "/assets/sowbi.jpeg",
       bio: "Crafting intuitive user interfaces, visual design systems, and seamless digital product interactions."
     },
@@ -185,7 +190,7 @@ export const FOUNDER_DATA = {
       id: 3,
       name: "Laksana S",
       role: "Database Engineer",
-      badge: "DATA SYSTEMS",
+      badge: "03 / Data Systems",
       image: "/assets/laksana.png",
       bio: "Architecting high-performance database schemas, data telemetry pipelines, and spatial query engines."
     },
@@ -193,16 +198,9 @@ export const FOUNDER_DATA = {
       id: 4,
       name: "Kamalesh S",
       role: "Software Developer",
-      badge: "ENGINEERING",
+      badge: "04 / Engineering",
       image: "/assets/kamalesh.jpeg",
       bio: "Full-stack software developer building scalable backend APIs, web applications, and interactive frontends."
     }
-  ],
-  stats: [
-    { value: "10+", label: "Core Tech Disciplines", icon: "target", color: "#ff4d38" },
-    { value: "4+", label: "Key R&D Domains", icon: "flask", color: "#00f2fe" },
-    { value: "8-Step", label: "Dev Lifecycle Pipeline", icon: "repeat", color: "#8b5cf6" },
-    { value: "100%", label: "Client & MVP Execution", icon: "star", color: "#10b981" }
   ]
 };
-
