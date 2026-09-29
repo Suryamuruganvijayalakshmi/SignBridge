@@ -11,7 +11,7 @@ export default function Hero({ onOpenShowreel, onOpenContact }) {
             </a>
 
             {/* 2. H1 Heading: Two-line giant text, tight tracking, leading-[0.85], second word lime green */}
-            <h1 className="hero-heading">
+            <h1 className="hero-heading !text-[4.5rem] md:!text-[6.5rem] lg:!text-[9rem] 2xl:!text-[11rem] 3xl:!text-[14rem] !leading-[0.85]">
                 <span className="line-one">BEYOND</span>
                 <span className="line-two text-lime">DIGITAL</span>
             </h1>

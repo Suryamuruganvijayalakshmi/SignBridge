@@ -25,7 +25,7 @@ export default function SmartTableSection({ onOpenShowreel, onOpenContact }) {
                     </p>
                 </div>
 
-                <div className="smart-table-card">
+                <div className="smart-table-card !flex !flex-col lg:!flex-row !gap-8">
                     <div className="smart-table-visual">
                         <div className="visual-badge">
                             <span>SMART TABLE</span>

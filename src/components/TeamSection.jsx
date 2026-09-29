@@ -112,7 +112,7 @@ export default function TeamSection() {
     return (
         <section ref={sectionRef} className="site-section section-team" id="team">
             <div className="section-frame">
-                <div className="team-showcase-layout">
+                <div className="team-showcase-layout !grid !grid-cols-1 lg:!grid-cols-2 !gap-12">
                     {/* Left Column: Spotlight Info & Telemetry */}
                     <div className="team-spotlight-info">
                         <span className="section-eyebrow">

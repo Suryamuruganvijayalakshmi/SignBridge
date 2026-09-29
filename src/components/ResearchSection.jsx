@@ -19,7 +19,7 @@ export default function ResearchSection({ onOpenContact }) {
                     </p>
                 </div>
 
-                <div className="project-grid">
+                <div className="project-grid !grid !grid-cols-1 md:!grid-cols-2 lg:!grid-cols-2 xl:!grid-cols-3 3xl:!grid-cols-4 !gap-6">
                     {/* Project 1: ShopCart */}
                     <article className="project-card">
                         <div className="project-visual-frame">

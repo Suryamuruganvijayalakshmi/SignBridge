@@ -49,7 +49,7 @@ export default function ContactSection({ onNotification }) {
 
     return (
         <section className="site-section section-contact" id="contact">
-            <div className="section-frame contact-grid-layout">
+            <div className="section-frame contact-grid-layout !grid !grid-cols-1 lg:!grid-cols-2 !gap-12">
                 {/* Left: Contact Info */}
                 <div className="contact-info-block">
                     <span className="section-eyebrow">

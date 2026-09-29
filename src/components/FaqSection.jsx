@@ -29,7 +29,7 @@ export default function FaqSection() {
 
     return (
         <section className="site-section section-faq" id="faq">
-            <div className="section-frame faq-grid-layout">
+            <div className="section-frame faq-grid-layout !grid !grid-cols-1 lg:!grid-cols-2 !gap-12">
                 <div className="faq-header-column">
                     <span className="section-eyebrow">
                         <span className="eyebrow-pip" /> // 07 — PROTOCOL FAQ

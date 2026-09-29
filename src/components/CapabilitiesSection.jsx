@@ -298,8 +298,8 @@ export default function CapabilitiesSection() {
                     </div>
                 </div>
 
-                {/* Capability Cards Grid (Neat 3-column structured grid) */}
-                <div className="capability-grid">
+                {/* Capability Cards Grid (Neat responsive structured grid) */}
+                <div className="capability-grid !grid !grid-cols-1 md:!grid-cols-2 lg:!grid-cols-2 xl:!grid-cols-3 3xl:!grid-cols-4 !gap-6">
                     {capabilities.map((cap, index) => {
                         const isActivated = scrollProgress >= (index + 0.25) / capabilities.length;
                         return (
