@@ -1,0 +1,96 @@
+import React, { useState } from 'react';
+import { Zap, Volume2, VolumeX, ArrowUpRight, Menu, X } from 'lucide-react';
+
+export default function Navbar({ soundEnabled, onToggleSound, onOpenContact }) {
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const navItems = [
+        { label: '// CAPABILITIES', href: '#capabilities' },
+        { label: '// SMART TABLE', href: '#smart-table' },
+        { label: '// R&D LAB', href: '#research' },
+        { label: '// PROCESS', href: '#process' },
+        { label: '// TEAM', href: '#team' },
+        { label: '// CONTACT', href: '#contact' },
+    ];
+
+    return (
+        <header className="lumina-header" role="banner">
+            {/* Left: SignBridge Logo */}
+            <a href="#home" className="logo-container" aria-label="SIGNBRIDGE home">
+                <Zap className="logo-icon-zap" aria-hidden="true" />
+                <span className="logo-text">SIGNBRIDGE</span>
+            </a>
+
+            {/* Center: Desktop Links */}
+            <nav className="nav-links-center" aria-label="Primary Navigation">
+                {navItems.map((item) => (
+                    <a key={item.label} href={item.href} className="nav-link">
+                        {item.label}
+                    </a>
+                ))}
+            </nav>
+
+            {/* Right: Sound Toggle & Contact CTA */}
+            <div className="header-actions">
+                <button
+                    type="button"
+                    onClick={onToggleSound}
+                    className="sound-toggle-btn"
+                    aria-label={soundEnabled ? 'Mute synthesizer audio' : 'Enable synthesizer audio'}
+                    title={soundEnabled ? 'Synthesizer Audio Active' : 'Synthesizer Audio Muted'}
+                >
+                    {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+
+                <button
+                    type="button"
+                    onClick={onOpenContact}
+                    className="btn-get-in-touch"
+                    aria-haspopup="dialog"
+                >
+                    <span>Start a Project</span>
+                    <ArrowUpRight size={14} aria-hidden="true" />
+                </button>
+
+                {/* Mobile Menu Button */}
+                <button
+                    type="button"
+                    className="mobile-menu-btn"
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label={mobileOpen ? 'Close Menu' : 'Open Menu'}
+                    aria-expanded={mobileOpen}
+                >
+                    {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+                </button>
+            </div>
+
+            {/* Mobile Dropdown */}
+            {mobileOpen && (
+                <div className="mobile-nav-drawer" role="dialog" aria-modal="true">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.label}
+                            href={item.href}
+                            className="mobile-nav-link"
+                            onClick={() => setMobileOpen(false)}
+                        >
+                            {item.label}
+                        </a>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setMobileOpen(false);
+                            onOpenContact();
+                        }}
+                        className="btn-primary-lime"
+                        style={{ width: '100%', marginTop: '1rem' }}
+                    >
+                        <span>Start a Project</span>
+                        <ArrowUpRight size={16} />
+                    </button>
+                </div>
+            )}
+        </header>
+    );
+}

@@ -1,134 +1,247 @@
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const hideLoader = () => document.body.classList.add('loaded');
-if (document.readyState === 'complete') hideLoader();
-else window.addEventListener('load', hideLoader, { once: true });
-window.setTimeout(hideLoader, 2500);
-const header = document.querySelector('.site-header');
-const menu = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.site-nav');
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
-if (menu) menu.addEventListener('click', () => {
-    const open = menu.getAttribute('aria-expanded') === 'true';
-    menu.setAttribute('aria-expanded', String(!open));
-    nav.classList.toggle('open', !open);
-});
-if (nav) nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    if (menu) menu.setAttribute('aria-expanded', 'false');
-    nav.classList.remove('open');
-}));
-const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-    }
-}), { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-const navObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) document.querySelectorAll('.site-nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`)); }), { rootMargin: '-40% 0px -50% 0px' });
-document.querySelectorAll('main section[id]').forEach(section => navObserver.observe(section));
-document.querySelectorAll('.step').forEach(step => step.addEventListener('mouseenter', () => {
-    document.querySelectorAll('.step').forEach(item => item.classList.remove('active'));
-    step.classList.add('active');
-}));
-const productStage = document.querySelector('.product-stage');
-const productObserver = new IntersectionObserver(entries => entries.forEach(entry => entry.target.classList.toggle('in-view', entry.isIntersecting)), { threshold: 0.35 });
-if (productStage) productObserver.observe(productStage);
-const metricObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) {
-        entry.target.classList.add('counted');
-        metricObserver.unobserve(entry.target);
-    }
-}), { threshold: 0.7 });
-document.querySelectorAll('.metrics-grid strong').forEach(metric => metricObserver.observe(metric));
-const hero = document.querySelector('.hero');
-if (!reduceMotion && window.matchMedia('(min-width: 801px)').matches && hero) hero.addEventListener('mousemove', event => {
-    const visual = document.querySelector('#network-canvas');
-    visual.style.transform = `translate(${(event.clientX / window.innerWidth - .5) * 12}px, ${(event.clientY / window.innerHeight - .5) * 8}px)`;
-});
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) contactForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const status = form.querySelector('.form-status');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const formData = new FormData(form);
+import { LuminaTubesManager, NEON_PALETTES } from './luminaTubes.js';
 
-    status.textContent = 'Sending...';
-    submitButton.disabled = true;
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize 3D Interactive Tubes Cursor
+    const canvas = document.getElementById('tubes-canvas');
+    const toast = document.getElementById('spectrum-toast');
+    const specName = document.getElementById('active-spectrum-name');
+    const dot1 = document.getElementById('spec-dot-1');
+    const dot2 = document.getElementById('spec-dot-2');
+    const dot3 = document.getElementById('spec-dot-3');
+    const coordsEl = document.getElementById('interaction-coords');
+    const soundToggleBtn = document.getElementById('sound-toggle-btn');
+    const soundIcon = document.getElementById('sound-icon');
 
-    let error;
-    try {
-        const { supabase } = await
-        import ('./lib/supabase.js');
-        ({ error } = await supabase.from('contact_messages').insert({
-            name: formData.get('name'),
-            email: formData.get('email'),
-            project: formData.get('project'),
-            message: formData.get('message')
-        }));
-    } catch (submissionError) {
-        error = submissionError;
-    }
+    let toastTimer = null;
+    const showToast = (message) => {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove('visible');
+        }, 2200);
+    };
 
-    submitButton.disabled = false;
+    const tubesManager = new LuminaTubesManager(canvas, {
+        onSpectrumChange: (palette) => {
+            if (specName) specName.textContent = palette.name;
+            if (dot1 && palette.tubes[0]) dot1.style.backgroundColor = palette.tubes[0];
+            if (dot2 && palette.tubes[1]) dot2.style.backgroundColor = palette.tubes[1];
+            if (dot3 && palette.tubes[2]) dot3.style.backgroundColor = palette.tubes[2];
 
-    if (error) {
-        status.textContent = 'Unable to send your message. Please try again.';
-        console.error('Contact form submission failed:', error);
-        return;
-    }
+            // Update accent glows dynamically if desired
+            if (palette.accent) {
+                document.documentElement.style.setProperty('--current-accent', palette.accent);
+            }
 
-    status.textContent = 'Thanks — we’ll be in touch shortly.';
-    form.reset();
-});
-if (!reduceMotion) document.querySelectorAll('.magnetic').forEach(button => {
-    button.addEventListener('mousemove', event => {
-        const box = button.getBoundingClientRect();
-        button.style.transform = `translate(${(event.clientX - box.left - box.width / 2) * .12}px, ${(event.clientY - box.top - box.height / 2) * .12}px)`;
+            showToast(`// SPECTRUM SHIFTED: ${palette.name}`);
+        }
     });
-    button.addEventListener('mouseleave', () => { button.style.transform = ''; });
-});
-const canvas = document.querySelector('#network-canvas');
-if (canvas) {
-    const context = canvas.getContext('2d');
-    let points = [];
-    let frame;
-    const resize = () => {
-        const ratio = window.devicePixelRatio;
-        canvas.width = canvas.clientWidth * ratio;
-        canvas.height = canvas.clientHeight * ratio;
-        context.setTransform(ratio, 0, 0, ratio, 0, 0);
-        points = Array.from({ length: window.innerWidth < 700 ? 28 : 54 }, (_, index) => ({ x: Math.random() * canvas.clientWidth, y: Math.random() * canvas.clientHeight, vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18, r: index % 5 === 0 ? 2.2 : 1 }));
-    };
-    const draw = () => {
-        const w = canvas.clientWidth;
-        const h = canvas.clientHeight;
-        context.clearRect(0, 0, w, h);
-        points.forEach(point => {
-            point.x += point.vx;
-            point.y += point.vy;
-            if (point.x < 0 || point.x > w) point.vx *= -1;
-            if (point.y < 0 || point.y > h) point.vy *= -1;
+
+    // 2. Mouse Coordinate Tracking for the "MOUSE INTERACTION ACTIVE" footer HUD
+    let mouseThrottle = 0;
+    window.addEventListener('pointermove', (e) => {
+        const now = Date.now();
+        if (now - mouseThrottle > 60 && coordsEl) {
+            mouseThrottle = now;
+            coordsEl.textContent = `[X: ${e.clientX} | Y: ${e.clientY}]`;
+        }
+    }, { passive: true });
+
+    // 3. Audio Toggle
+    if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isEnabled = tubesManager.toggleAudio();
+            if (soundIcon) {
+                soundIcon.innerHTML = isEnabled ? `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                ` : `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+            showToast(isEnabled ? '// AUDIO FEEDBACK: SYNTHESIZED' : '// AUDIO FEEDBACK: MUTED');
         });
-        points.forEach((point, index) => {
-            points.slice(index + 1).forEach(other => {
-                const distance = Math.hypot(point.x - other.x, point.y - other.y);
-                if (distance < 150) {
-                    context.strokeStyle = `rgba(197, 255, 78, ${.11 * (1 - distance / 150)})`;
-                    context.beginPath();
-                    context.moveTo(point.x, point.y);
-                    context.lineTo(other.x, other.y);
-                    context.stroke();
-                }
+    }
+
+    // 4. Showreel Modal Management
+    const showreelBtn = document.getElementById('showreel-trigger');
+    const showreelModal = document.getElementById('showreel-dialog');
+    const showreelCloseBtn = document.getElementById('showreel-close');
+    const showreelVideo = document.getElementById('showreel-video');
+
+    if (showreelBtn && showreelModal) {
+        showreelBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showreelModal.showModal();
+            tubesManager.playCyberSound(720);
+            if (showreelVideo) {
+                showreelVideo.currentTime = 0;
+                showreelVideo.play().catch(() => {});
+            }
+        });
+
+        const closeShowreel = () => {
+            showreelModal.close();
+            if (showreelVideo) {
+                showreelVideo.pause();
+            }
+        };
+
+        if (showreelCloseBtn) {
+            showreelCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeShowreel();
             });
-            context.fillStyle = point.r > 1 ? '#c5ff4e' : 'rgba(197,255,78,.35)';
-            context.beginPath();
-            context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
-            context.fill();
+        }
+
+        // Light dismiss (click on backdrop to close)
+        showreelModal.addEventListener('click', (e) => {
+            const rect = showreelModal.getBoundingClientRect();
+            const isInDialog = (
+                rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+            );
+            if (!isInDialog) {
+                closeShowreel();
+            }
         });
-        if (!reduceMotion) frame = requestAnimationFrame(draw);
+    }
+
+    // 5. Contact Modal ("Get in Touch")
+    const contactBtn = document.getElementById('contact-trigger');
+    const contactModal = document.getElementById('contact-dialog');
+    const contactCloseBtn = document.getElementById('contact-close');
+    const contactForm = document.getElementById('lumina-contact-form');
+    const formStatus = document.getElementById('contact-status');
+
+    if (contactBtn && contactModal) {
+        contactBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            contactModal.showModal();
+            tubesManager.playCyberSound(620);
+        });
+
+        const closeContact = () => {
+            contactModal.close();
+        };
+
+        if (contactCloseBtn) {
+            contactCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeContact();
+            });
+        }
+
+        contactModal.addEventListener('click', (e) => {
+            const rect = contactModal.getBoundingClientRect();
+            const isInDialog = (
+                rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+            );
+            if (!isInDialog) {
+                closeContact();
+            }
+        });
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                if (submitBtn) submitBtn.disabled = true;
+                if (formStatus) formStatus.textContent = '// TRANSMITTING TELEMETRY TO LUMINA CORE...';
+
+                tubesManager.playCyberSound(880);
+
+                setTimeout(() => {
+                    if (formStatus) formStatus.textContent = '// DISPATCH SUCCESSFUL: CONNECTION PROTOCOL INITIALIZED.';
+                    if (submitBtn) submitBtn.disabled = false;
+                    contactForm.reset();
+                    showToast('// DISPATCH RECEIVED: WE WILL COMMENCE UPLINK.');
+                    setTimeout(closeContact, 1800);
+                }, 1000);
+            });
+        }
+    }
+
+    // 6. Architecture / Protocol Specification Drawer
+    const archTrigger = document.getElementById('nav-arch-trigger');
+    const protocolTrigger = document.getElementById('nav-protocol-trigger');
+    const spectrumTrigger = document.getElementById('nav-spectrum-trigger');
+    const initProtocolBtn = document.getElementById('init-protocol-btn');
+    const specModal = document.getElementById('spec-dialog');
+    const specCloseBtn = document.getElementById('spec-close');
+
+    const openSpecModal = (e) => {
+        if (e) e.stopPropagation();
+        if (specModal) {
+            specModal.showModal();
+            tubesManager.playCyberSound(580);
+        }
     };
-    resize();
-    draw();
-    window.addEventListener('resize', resize);
-    if (reduceMotion) cancelAnimationFrame(frame);
-}
+
+    if (archTrigger) archTrigger.addEventListener('click', openSpecModal);
+    if (protocolTrigger) protocolTrigger.addEventListener('click', openSpecModal);
+    if (initProtocolBtn) initProtocolBtn.addEventListener('click', openSpecModal);
+
+    if (spectrumTrigger) {
+        spectrumTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tubesManager.shiftSpectrum();
+        });
+    }
+
+    if (specCloseBtn && specModal) {
+        specCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            specModal.close();
+        });
+
+        specModal.addEventListener('click', (e) => {
+            const rect = specModal.getBoundingClientRect();
+            const isInDialog = (
+                rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+            );
+            if (!isInDialog) {
+                specModal.close();
+            }
+        });
+    }
+
+    // 7. Interactive Footer Status click shifts spectrum
+    const footerStatusBtn = document.getElementById('footer-status-btn');
+    if (footerStatusBtn) {
+        footerStatusBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tubesManager.shiftSpectrum();
+        });
+    }
+
+    const spectrumPill = document.getElementById('spectrum-pill');
+    if (spectrumPill) {
+        spectrumPill.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tubesManager.shiftSpectrum();
+        });
+    }
+
+    // 8. Palette preset buttons inside specification modal
+    const paletteButtons = document.querySelectorAll('.palette-preset-btn');
+    paletteButtons.forEach((btn, index) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (NEON_PALETTES[index]) {
+                tubesManager.shiftSpectrum(NEON_PALETTES[index]);
+            }
+        });
+    });
+});
