@@ -24,7 +24,7 @@ export default function ResearchSection({ onOpenContact }) {
                     <article className="project-card">
                         <div className="project-visual-frame">
                             <img
-                                src="/shopcart.png"
+                                src="/assets/shopcart.png"
                                 alt="ShopCart student technology marketplace interface"
                                 className="project-img"
                                 loading="lazy"
@@ -54,7 +54,7 @@ export default function ResearchSection({ onOpenContact }) {
                     <article className="project-card">
                         <div className="project-visual-frame">
                             <img
-                                src="/salestracker.png"
+                                src="/assets/salestracker.png"
                                 alt="IndianOil lubricant sales dashboard"
                                 className="project-img"
                                 loading="lazy"

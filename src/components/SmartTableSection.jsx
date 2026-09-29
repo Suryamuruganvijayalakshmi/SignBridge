@@ -31,7 +31,7 @@ export default function SmartTableSection({ onOpenShowreel, onOpenContact }) {
                             <small>NFC / QR CONTACTLESS</small>
                         </div>
                         <img
-                            src="/Gemini_Generated_Image_ygc7srygc7srygc7.png"
+                            src="/assets/nfc-menu-starter-kit.png"
                             alt="SignBridge Smart Table NFC menu card on table"
                             className="smart-table-img"
                             loading="lazy"

@@ -17,7 +17,7 @@ export default function TeamSection() {
             name: 'Surya V M',
             role: 'Founder & Lead Product Designer',
             badge: 'FOUNDER // LEAD',
-            image: '/Surya.jpeg',
+            image: '/assets/surya.jpeg',
             bio: 'Directing spatial product architecture, UX systems, and full-stack software engineering from concept to deployment.',
             skills: ['Spatial Product Architecture', 'Full-Stack Engineering', 'UX Design', 'Hardware Systems']
         },
@@ -27,7 +27,7 @@ export default function TeamSection() {
             name: 'Sowbigasri S',
             role: 'UI/UX Designer',
             badge: 'DESIGN SYSTEM',
-            image: '/Sowbi.jpeg',
+            image: '/assets/sowbi.jpeg',
             bio: 'Crafting intuitive user interfaces, visual design systems, and responsive digital product interaction flows.',
             skills: ['Visual Design', 'Design Systems', 'User Research', 'Prototyping']
         },
@@ -37,7 +37,7 @@ export default function TeamSection() {
             name: 'Laksana S',
             role: 'Database Engineer',
             badge: 'DATA SYSTEMS',
-            image: '/Laksana.png',
+            image: '/assets/laksana.png',
             bio: 'Architecting high-performance database schemas, data telemetry pipelines, and real-time synchronization.',
             skills: ['Database Architecture', 'Telemetry Pipelines', 'PostgreSQL', 'Cloud Infrastructure']
         },
@@ -47,7 +47,7 @@ export default function TeamSection() {
             name: 'Kamalesh S',
             role: 'Software Developer',
             badge: 'ENGINEERING',
-            image: '/Kamalesh.jpeg',
+            image: '/assets/kamalesh.jpeg',
             bio: 'Full-stack software developer engineering scalable cloud APIs, web platforms, and intelligent edge compute.',
             skills: ['Full-Stack Development', 'API Engineering', 'Edge AI', 'Microservices']
         }

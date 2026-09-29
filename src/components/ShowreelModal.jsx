@@ -66,7 +66,7 @@ export default function ShowreelModal({ isOpen, onClose }) {
                         playsInline
                         preload="metadata"
                     >
-                        <source src="/SignBridge_product_launch_advert._202608200750.mp4" type="video/mp4" />
+                        <source src="/assets/signbridge-product-launch.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
