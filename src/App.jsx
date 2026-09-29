@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Routes, Route } from 'react-router-dom';
-const ProductPage = React.lazy(() => import('./pages/ProductPage.jsx'));
 import NeatCursor from './components/NeatCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -77,6 +75,7 @@ export default function App() {
     const [toastVisible, setToastVisible] = useState(false);
     const [showreelOpen, setShowreelOpen] = useState(false);
     const [contactOpen, setContactOpen] = useState(false);
+    const [coords, setCoords] = useState({ x: null, y: null });
 
     const activePalette = RIBBON_SPECTRUMS[paletteIndex];
     const toastTimerRef = useRef(null);
@@ -138,7 +137,20 @@ export default function App() {
         });
     };
 
+    // Track mouse coordinates for footer telemetry
+    useEffect(() => {
+        let lastTime = 0;
+        const onPointerMove = (e) => {
+            const now = Date.now();
+            if (now - lastTime > 60) {
+                lastTime = now;
+                setCoords({ x: e.clientX, y: e.clientY });
+            }
+        };
 
+        window.addEventListener('pointermove', onPointerMove, { passive: true });
+        return () => window.removeEventListener('pointermove', onPointerMove);
+    }, []);
 
     // Spacebar shortcut to cycle spectrum
     useEffect(() => {
@@ -171,42 +183,31 @@ export default function App() {
                     onOpenContact={() => setContactOpen(true)}
                 />
 
-                <Routes>
-                    <Route path="/" element={
-                        <>
-                            <Hero
-                                onOpenShowreel={() => setShowreelOpen(true)}
-                                onOpenContact={() => setContactOpen(true)}
-                            />
+                <Hero
+                    onOpenShowreel={() => setShowreelOpen(true)}
+                    onOpenContact={() => setContactOpen(true)}
+                />
 
-                            <DisciplinesMarquee />
+                <DisciplinesMarquee />
 
-                            <CapabilitiesSection />
+                <CapabilitiesSection />
 
-                            <SmartTableSection
-                                onOpenShowreel={() => setShowreelOpen(true)}
-                                onOpenContact={() => setContactOpen(true)}
-                            />
+                <SmartTableSection
+                    onOpenShowreel={() => setShowreelOpen(true)}
+                    onOpenContact={() => setContactOpen(true)}
+                />
 
-                            <ResearchSection onOpenContact={() => setContactOpen(true)} />
+                <ResearchSection onOpenContact={() => setContactOpen(true)} />
 
-                            <ProcessTimeline />
+                <ProcessTimeline />
 
-                            <TeamSection />
+                <TeamSection />
 
-                            <VisionBanner />
+                <VisionBanner />
 
-                            <ContactSection onNotification={triggerToast} />
+                <ContactSection onNotification={triggerToast} />
 
-                            <FaqSection />
-                        </>
-                    } />
-                    <Route path="/product" element={
-                        <React.Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center font-mono text-xs text-blue-600">LOADING MODULE...</div>}>
-                            <ProductPage />
-                        </React.Suspense>
-                    } />
-                </Routes>
+                <FaqSection />
 
                 <Footer />
             </div>

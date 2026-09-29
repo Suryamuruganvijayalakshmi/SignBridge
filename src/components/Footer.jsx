@@ -1,76 +1,56 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 export default function Footer() {
-  return (
-    <footer className="bg-slate-900 text-slate-100 py-20 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-10 pb-16">
-        <div>
-          <Link to="/" className="font-extrabold tracking-wider text-base text-white flex items-center">
-            <span className="inline-grid place-items-center text-white bg-gradient-to-br from-blue-600 to-violet-600 w-6 h-6 rounded mr-2 font-extrabold text-xs">
-              S
-            </span>
-            SIGNBRIDGE<span className="text-blue-500 ml-0.5">.</span>
-          </Link>
-          <p className="mt-4 text-slate-400 text-sm leading-relaxed">
-            Bridging ideas with technology.
-          </p>
-        </div>
+    return (
+        <footer className="lumina-footer-wrapper" role="contentinfo">
+            <div className="lumina-footer">
+                {/* Left side: Clean brand identity */}
+                <div className="footer-brand-meta">
+                    <span className="footer-brand-title">SIGNBRIDGE</span>
+                    <span className="footer-brand-sub">// BEYOND DIGITAL</span>
+                </div>
 
-        <p className="text-slate-400 text-sm leading-relaxed">
-          Intelligent software, AI applications, web platforms, and IoT systems built for scale and real-world impact.
-        </p>
+                {/* Right side: Official Social Links */}
+                <div className="social-links-right">
+                    {/* Instagram */}
+                    <a
+                        href="https://www.instagram.com/sign_bridgee/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon-btn icon-instagram"
+                        aria-label="SignBridge on Instagram"
+                        title="SignBridge on Instagram"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                    </a>
 
-        <div className="flex gap-12 md:justify-end">
-          <div className="flex flex-col gap-3">
-            <b className="font-mono text-xs uppercase tracking-wider text-blue-400 font-bold mb-1">
-              Navigate
-            </b>
-            <a href="/#capabilities" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              Capabilities
-            </a>
-            <a href="/#research" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              R&amp;D
-            </a>
-            <a href="/#process" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              Process
-            </a>
-            <a href="/#team" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              Team
-            </a>
-            <Link to="/product" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              Smart Table
-            </Link>
-          </div>
+                    {/* LinkedIn */}
+                    <a
+                        href="https://www.linkedin.com/company/signbridgesurya"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon-btn icon-linkedin"
+                        aria-label="SignBridge on LinkedIn"
+                        title="SignBridge on LinkedIn"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
 
-          <div className="flex flex-col gap-3">
-            <b className="font-mono text-xs uppercase tracking-wider text-blue-400 font-bold mb-1">
-              Connect
-            </b>
-            <a
-              href="mailto:signbridge.aiauto@gmail.com"
-              className="font-mono text-xs text-slate-400 hover:text-white transition-colors"
-            >
-              Email
-            </a>
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-mono text-xs text-slate-400 hover:text-white transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a href="tel:+919842253267" className="font-mono text-xs text-slate-400 hover:text-white transition-colors">
-              Call
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between text-slate-500 font-mono text-xs gap-3">
-        <span>© 2026 SIGNBRIDGE. All rights reserved.</span>
-        <span>Software · AI · Web · Cloud · IoT</span>
-      </div>
-    </footer>
-  );
+            {/* Bottom Credits Bar */}
+            <div className="sub-footer-bar">
+                <span>© 2026 SIGNBRIDGE. All rights reserved.</span>
+                <span>Software · AI · Web · Cloud · IoT · Automation · Innovation</span>
+            </div>
+        </footer>
+    );
 }

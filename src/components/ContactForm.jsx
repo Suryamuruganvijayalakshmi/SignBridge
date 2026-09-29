@@ -42,8 +42,8 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="border-t border-slate-200 pt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
-      <label className="block text-slate-500 font-mono text-[10px] uppercase tracking-wider border-b border-slate-200 pb-4">
+    <form className="contact-form reveal" onSubmit={handleSubmit}>
+      <label>
         Name
         <input
           name="name"
@@ -51,11 +51,10 @@ export default function ContactForm() {
           placeholder="Your name"
           value={formData.name}
           onChange={handleChange}
-          className="block w-full bg-transparent border-0 text-slate-900 focus:outline-none pt-2 text-base font-sans"
         />
       </label>
 
-      <label className="block text-slate-500 font-mono text-[10px] uppercase tracking-wider border-b border-slate-200 pb-4">
+      <label>
         Email
         <input
           type="email"
@@ -64,22 +63,20 @@ export default function ContactForm() {
           placeholder="you@company.com"
           value={formData.email}
           onChange={handleChange}
-          className="block w-full bg-transparent border-0 text-slate-900 focus:outline-none pt-2 text-base font-sans"
         />
       </label>
 
-      <label className="block text-slate-500 font-mono text-[10px] uppercase tracking-wider border-b border-slate-200 pb-4">
+      <label>
         Project / Company
         <input
           name="project"
           placeholder="What are we building?"
           value={formData.project}
           onChange={handleChange}
-          className="block w-full bg-transparent border-0 text-slate-900 focus:outline-none pt-2 text-base font-sans"
         />
       </label>
 
-      <label className="block text-slate-500 font-mono text-[10px] uppercase tracking-wider border-b border-slate-200 pb-4">
+      <label>
         Message
         <textarea
           name="message"
@@ -88,25 +85,15 @@ export default function ContactForm() {
           placeholder="Tell us a little about the idea..."
           value={formData.message}
           onChange={handleChange}
-          className="block w-full bg-transparent border-0 text-slate-900 focus:outline-none pt-2 text-base font-sans resize-y"
         />
       </label>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="mt-4 inline-flex items-center justify-center px-6 py-4 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-violet-600 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all disabled:opacity-50"
-      >
-        {submitting ? 'Sending...' : 'Send message'} <span className="ml-2 text-violet-200">↗</span>
+      <button className="button button-lime" type="submit" disabled={submitting}>
+        {submitting ? 'Sending...' : 'Send message'} <span>↗</span>
       </button>
 
       {statusMessage.text && (
-        <p
-          className={`font-mono text-xs mt-2 ${
-            statusMessage.isError ? 'text-red-600' : 'text-blue-600 font-semibold'
-          }`}
-          role="status"
-        >
+        <p className={`form-status ${statusMessage.isError ? 'error' : ''}`} role="status">
           {statusMessage.text}
         </p>
       )}

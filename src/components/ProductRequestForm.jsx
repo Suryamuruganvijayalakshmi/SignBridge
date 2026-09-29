@@ -60,24 +60,16 @@ export default function ProductRequestForm({ defaultRequestType = 'Buy' }) {
   };
 
   return (
-    <form
-      className="bg-white border border-slate-200 rounded-2xl p-8 shadow-xl flex flex-col gap-5"
-      onSubmit={handleSubmit}
-    >
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+    <form className="request-form" onSubmit={handleSubmit}>
+      <label>
         Request type
-        <select
-          name="request_type"
-          value={formData.request_type}
-          onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal"
-        >
+        <select name="request_type" value={formData.request_type} onChange={handleChange}>
           <option value="Demo">Book a demo</option>
           <option value="Buy">Buy starter kit</option>
         </select>
       </label>
 
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+      <label>
         Name
         <input
           name="name"
@@ -85,11 +77,10 @@ export default function ProductRequestForm({ defaultRequestType = 'Buy' }) {
           placeholder="Your name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal"
         />
       </label>
 
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+      <label>
         Email
         <input
           type="email"
@@ -98,33 +89,30 @@ export default function ProductRequestForm({ defaultRequestType = 'Buy' }) {
           placeholder="you@company.com"
           value={formData.email}
           onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal"
         />
       </label>
 
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+      <label>
         Restaurant / Company
         <input
           name="project"
           placeholder="Restaurant or company name"
           value={formData.project}
           onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal"
         />
       </label>
 
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+      <label>
         Phone
         <input
           name="phone"
           placeholder="Phone number"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal"
         />
       </label>
 
-      <label className="flex flex-col gap-2 text-xs font-bold text-slate-800">
+      <label>
         Notes
         <textarea
           name="message"
@@ -132,25 +120,15 @@ export default function ProductRequestForm({ defaultRequestType = 'Buy' }) {
           placeholder="Tell us what you need..."
           value={formData.message}
           onChange={handleChange}
-          className="w-full border border-slate-200 rounded-lg p-3 text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 font-normal resize-y"
         />
       </label>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="mt-2 inline-flex items-center justify-center px-6 py-4 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-violet-600 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all disabled:opacity-50"
-      >
-        {submitting ? 'Sending...' : 'Send request'} <span className="ml-2 text-violet-200">↗</span>
+      <button className="btn btn-primary" type="submit" disabled={submitting}>
+        {submitting ? 'Sending...' : 'Send request'} <span>↗</span>
       </button>
 
       {statusMessage.text && (
-        <p
-          className={`font-mono text-xs mt-2 ${
-            statusMessage.isError ? 'text-red-600' : 'text-emerald-600 font-semibold'
-          }`}
-          role="status"
-        >
+        <p className={`request-status ${statusMessage.isError ? 'error' : ''}`} role="status">
           {statusMessage.text}
         </p>
       )}
