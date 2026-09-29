@@ -176,6 +176,7 @@ export const FOUNDER_DATA = {
       role: "Founder & Lead Product Designer",
       badge: "01 / Founder",
       image: "/assets/surya.jpeg",
+      portfolio: "https://surya.signbridge.click",
       bio: "Founding lead designing digital products end-to-end — spatial software, UX strategy, and WebGL experiences."
     },
     {
