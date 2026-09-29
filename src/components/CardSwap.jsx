@@ -90,12 +90,13 @@ export const CardSwap = forwardRef(({
         const elFront = refs[front]?.current;
         if (!elFront) return;
 
+        if (onActiveIndexChange) {
+            onActiveIndexChange(rest[0]);
+        }
+
         const tl = gsap.timeline({
             onComplete: () => {
                 order.current = [...rest, front];
-                if (onActiveIndexChange) {
-                    onActiveIndexChange(rest[0]);
-                }
             }
         });
         tlRef.current = tl;
