@@ -1,13 +1,10 @@
-import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-    build: {
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, 'index.html'),
-                product: resolve(__dirname, 'product.html')
-            }
-        }
-    }
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true
+  }
 });

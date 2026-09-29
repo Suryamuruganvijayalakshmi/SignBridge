@@ -1,5 +1,5 @@
 {
-  "name": "signbridge-gallery-tunnel",
+  "name": "signbridge-studio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,15 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rollup/wasm-node": "^4.63.5",
-    "@supabase/supabase-js": "^2.112.3",
-    "gsap": "^3.12.5",
-    "three": "^0.160.0"
+    "@supabase/supabase-js": "^2.49.1",
+    "gsap": "^3.12.7",
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.2.0",
+    "three": "^0.173.0"
   },
   "devDependencies": {
-    "vite": "^5.0.12"
-  },
-  "overrides": {
-    "rollup": "npm:@rollup/wasm-node"
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.14"
   }
 }
+
