@@ -2062,6 +2062,67 @@ textarea.form-control {
     color: var(--accent-iris);
 }
 
+/* Portfolio Link in Spotlight */
+.spotlight-portfolio-row {
+    margin-top: 1.4rem;
+}
+
+.spotlight-portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1.5px solid rgba(99, 102, 241, 0.28);
+    color: var(--text-pure);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08);
+}
+
+.spotlight-portfolio-link:hover {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
+}
+
+.spotlight-portfolio-link .portfolio-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent-lime);
+    color: #000000;
+    transition: transform 0.25s ease;
+}
+
+.spotlight-portfolio-link:hover .portfolio-link-icon {
+    transform: rotate(45deg);
+}
+
+.spotlight-portfolio-link .portfolio-link-label {
+    font-weight: 700;
+}
+
+.spotlight-portfolio-link .portfolio-link-url {
+    color: var(--accent-iris);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+}
+
+.spotlight-portfolio-link:hover .portfolio-link-url {
+    color: #a5b4fc;
+}
+
 /* Interactive Controls & Hints */
 .team-controls-row {
     display: flex;
@@ -2316,6 +2377,13 @@ textarea.form-control {
     box-shadow: 0 0 8px var(--accent-lime);
 }
 
+.card-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
 .card-member-name {
     font-family: var(--font-display);
     font-size: 1.55rem;
@@ -2323,6 +2391,32 @@ textarea.form-control {
     letter-spacing: -0.02em;
     color: var(--text-pure);
     text-transform: uppercase;
+    margin: 0;
+}
+
+.card-portfolio-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 9999px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--accent-iris);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.card-portfolio-pill:hover {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+    transform: scale(1.05);
 }
 
 .card-member-role {

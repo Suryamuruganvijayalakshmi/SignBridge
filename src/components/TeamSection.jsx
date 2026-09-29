@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CardSwap, { Card } from './CardSwap.jsx';
-import { ArrowRight, RotateCw, Mouse, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, RotateCw, Mouse, Sparkles } from 'lucide-react';
 
 export default function TeamSection() {
     const sectionRef = useRef(null);
@@ -18,6 +18,7 @@ export default function TeamSection() {
             role: 'Founder & Lead Product Designer',
             badge: 'FOUNDER // LEAD',
             image: '/assets/surya.jpeg',
+            portfolio: 'https://surya.signbridge.click',
             bio: 'Directing spatial product architecture, UX systems, and full-stack software engineering from concept to deployment.',
             skills: ['Spatial Product Architecture', 'Full-Stack Engineering', 'UX Design', 'Hardware Systems']
         },
@@ -147,6 +148,24 @@ export default function TeamSection() {
                                     </span>
                                 ))}
                             </div>
+
+                            {activeMember.portfolio && (
+                                <div className="spotlight-portfolio-row">
+                                    <a
+                                        href={activeMember.portfolio}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="spotlight-portfolio-link"
+                                        aria-label={`Visit ${activeMember.name}'s portfolio at surya.signbridge.click`}
+                                    >
+                                        <span className="portfolio-link-icon">
+                                            <ArrowUpRight size={13} />
+                                        </span>
+                                        <span className="portfolio-link-label">EXPLORE PORTFOLIO //</span>
+                                        <span className="portfolio-link-url">surya.signbridge.click</span>
+                                    </a>
+                                </div>
+                            )}
                         </div>
 
                         {/* Interactive Controls & Scroll Cue */}
@@ -226,7 +245,22 @@ export default function TeamSection() {
                                                 <span className="card-num-text">{member.num} // TEAM</span>
                                                 <span className="card-status-dot" />
                                             </div>
-                                            <h4 className="card-member-name">{member.name}</h4>
+                                            <div className="card-name-row">
+                                                <h4 className="card-member-name">{member.name}</h4>
+                                                {member.portfolio && (
+                                                    <a
+                                                        href={member.portfolio}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="card-portfolio-pill"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        title="Visit Surya's Portfolio (surya.signbridge.click)"
+                                                    >
+                                                        <span>PORTFOLIO</span>
+                                                        <ArrowUpRight size={11} />
+                                                    </a>
+                                                )}
+                                            </div>
                                             <p className="card-member-role text-lime">{member.role}</p>
                                         </div>
 
