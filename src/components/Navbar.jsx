@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Zap, Volume2, VolumeX, ArrowUpRight, Menu, X } from 'lucide-react';
+import { Zap, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ soundEnabled, onToggleSound, onOpenContact }) {
+export default function Navbar({ onOpenContact }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const navItems = [
@@ -33,15 +33,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact }) {
 
             {/* Right: Sound Toggle & Contact CTA */}
             <div className="header-actions">
-                <button
-                    type="button"
-                    onClick={onToggleSound}
-                    className="sound-toggle-btn"
-                    aria-label={soundEnabled ? 'Mute synthesizer audio' : 'Enable synthesizer audio'}
-                    title={soundEnabled ? 'Synthesizer Audio Active' : 'Synthesizer Audio Muted'}
-                >
-                    {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
-                </button>
+
 
                 <button
                     type="button"

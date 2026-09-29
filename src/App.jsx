@@ -72,7 +72,6 @@ export const RIBBON_SPECTRUMS = [
 
 export default function App() {
     const [paletteIndex, setPaletteIndex] = useState(0);
-    const [soundEnabled, setSoundEnabled] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
     const [showreelOpen, setShowreelOpen] = useState(false);
@@ -81,30 +80,6 @@ export default function App() {
 
     const activePalette = RIBBON_SPECTRUMS[paletteIndex];
     const toastTimerRef = useRef(null);
-    const audioCtxRef = useRef(null);
-
-    const playSynthFeedback = (freq = 520, type = 'sine') => {
-        if (!soundEnabled) return;
-        try {
-            if (!audioCtxRef.current) {
-                audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            const ctx = audioCtxRef.current;
-            if (ctx.state === 'suspended') ctx.resume();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, ctx.currentTime);
-            gain.gain.setValueAtTime(0.04, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.16);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.16);
-        } catch (e) {
-            // Audio ignore
-        }
-    };
 
     const triggerToast = (msg) => {
         setToastMessage(msg);
@@ -123,19 +98,7 @@ export default function App() {
             if (next.accent) {
                 document.documentElement.style.setProperty('--current-accent', next.accent);
             }
-            playSynthFeedback(587, 'triangle');
             return nextIdx;
-        });
-    };
-
-    const handleToggleSound = () => {
-        setSoundEnabled((prev) => {
-            const next = !prev;
-            triggerToast(next ? '// AUDIO FEEDBACK: SYNTHESIZED' : '// AUDIO FEEDBACK: MUTED');
-            if (next) {
-                playSynthFeedback(880, 'sine');
-            }
-            return next;
         });
     };
 
@@ -180,8 +143,6 @@ export default function App() {
             {/* 2. UI Content Layer */}
             <div className="lumina-viewport">
                 <Navbar
-                    soundEnabled={soundEnabled}
-                    onToggleSound={handleToggleSound}
                     onOpenContact={() => setContactOpen(true)}
                 />
 
