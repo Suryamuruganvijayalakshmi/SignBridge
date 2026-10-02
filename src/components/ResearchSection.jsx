@@ -100,14 +100,16 @@ export default function ResearchSection({ onOpenContact }) {
                                 <span className="tag">FFT Signal</span>
                                 <span className="tag">Predictive Maint</span>
                             </div>
-                            <button
-                                type="button"
-                                onClick={onOpenContact}
+                            <a
+                                href="https://ecoclamp.vercel.app"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="project-link"
+                                aria-label="Launch EcoClamp live platform at ecoclamp.vercel.app"
                             >
                                 <span>Explore Project</span>
                                 <ArrowUpRight size={14} />
-                            </button>
+                            </a>
                         </div>
                     </article>
 

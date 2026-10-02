@@ -31,16 +31,34 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
         }, 30);
     }, []);
 
-    // Initialize audio on mount
+    // Initialize and attach to global audio element on mount
     useEffect(() => {
-        const audio = new Audio('/gigidelaromusic-soft-harmonic-breath-short-450972.mp3');
-        audio.loop = true;
-        audio.preload = 'auto';
-        audio.volume = 0.55;
+        let audio = document.getElementById('signbridge-global-audio');
+        if (!audio) {
+            audio = new Audio('/gigidelaromusic-soft-harmonic-breath-short-450972.mp3');
+            audio.loop = true;
+            audio.preload = 'auto';
+            audio.volume = 0.55;
+        }
         audioRef.current = audio;
+
+        const updatePlayingState = () => {
+            if (audio && !audio.paused && !audio.muted && audio.volume > 0) {
+                setIsPlaying(true);
+            } else {
+                setIsPlaying(false);
+            }
+        };
+
+        audio.addEventListener('play', updatePlayingState);
+        audio.addEventListener('playing', updatePlayingState);
+        audio.addEventListener('pause', updatePlayingState);
+        audio.addEventListener('volumechange', updatePlayingState);
 
         const attemptPlay = () => {
             if (isMuted || !audioRef.current) return;
+            audioRef.current.muted = false;
+            audioRef.current.volume = 0.55;
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise
@@ -49,10 +67,17 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
                         setHasInteracted(true);
                     })
                     .catch(() => {
-                        // Browser autoplay policy prevented instant unmuted playback.
-                        // Wait for first user interaction (click, touch, keydown, scroll)
+                        // Browser autoplay policy prevented unmuted playback.
+                        // Play muted first so timeline is locked with the globe
+                        if (audioRef.current) {
+                            audioRef.current.muted = true;
+                            audioRef.current.play().catch(() => {});
+                        }
+
                         const onFirstInteraction = () => {
                             if (!isMuted && audioRef.current) {
+                                audioRef.current.muted = false;
+                                audioRef.current.volume = 0.55;
                                 audioRef.current.play().then(() => {
                                     setIsPlaying(true);
                                     setHasInteracted(true);
@@ -67,6 +92,7 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
                             window.removeEventListener('keydown', onFirstInteraction);
                             window.removeEventListener('touchstart', onFirstInteraction);
                             window.removeEventListener('scroll', onFirstInteraction);
+                            window.removeEventListener('mousemove', onFirstInteraction);
                         };
 
                         window.addEventListener('pointerdown', onFirstInteraction, { once: true, passive: true });
@@ -74,6 +100,7 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
                         window.addEventListener('keydown', onFirstInteraction, { once: true, passive: true });
                         window.addEventListener('touchstart', onFirstInteraction, { once: true, passive: true });
                         window.addEventListener('scroll', onFirstInteraction, { once: true, passive: true });
+                        window.addEventListener('mousemove', onFirstInteraction, { once: true, passive: true });
                     });
             }
         };
@@ -83,14 +110,18 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
         };
 
         window.addEventListener('signbridge-play-audio', handleForcePlay);
+        window.__signbridge_play_audio = handleForcePlay;
         attemptPlay();
 
         return () => {
             window.removeEventListener('signbridge-play-audio', handleForcePlay);
+            delete window.__signbridge_play_audio;
             clearInterval(fadeTimerRef.current);
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
+            if (audio) {
+                audio.removeEventListener('play', updatePlayingState);
+                audio.removeEventListener('playing', updatePlayingState);
+                audio.removeEventListener('pause', updatePlayingState);
+                audio.removeEventListener('volumechange', updatePlayingState);
             }
         };
     }, [isMuted]);

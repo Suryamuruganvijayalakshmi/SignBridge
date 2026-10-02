@@ -51,6 +51,8 @@ export default function NeatCursor({ activePalette }) {
         const TRAIL_COUNT = 20;
         const trail = Array.from({ length: TRAIL_COUNT }, () => ({ x: -100, y: -100 }));
 
+        let isOverInput = false;
+
         const onPointerMove = (e) => {
             const clientX = e.clientX;
             const clientY = e.clientY;
@@ -68,11 +70,11 @@ export default function NeatCursor({ activePalette }) {
 
             // Detect interactive target hover for subtle dot scale
             const target = e.target;
+            isOverInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA');
+
             const interactive = target && (
                 target.tagName === 'A' ||
                 target.tagName === 'BUTTON' ||
-                target.tagName === 'INPUT' ||
-                target.tagName === 'TEXTAREA' ||
                 target.getAttribute('role') === 'button' ||
                 target.closest('a, button, [role="button"], .interactive-hover, .btn-primary-lime, .btn-secondary-glass, .glass-card, .footer-interaction-status, .spectrum-pill-indicator')
             );
@@ -102,7 +104,8 @@ export default function NeatCursor({ activePalette }) {
         const render = () => {
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-            if (mouse.x > 0 && mouse.active) {
+            // If user is hovering over a real input/textarea, hide custom cursor to allow native typing cursor
+            if (mouse.x > 0 && mouse.active && !isOverInput) {
                 // 1. Update trail nodes (silky spring chain)
                 trail[0].x = mouse.x;
                 trail[0].y = mouse.y;

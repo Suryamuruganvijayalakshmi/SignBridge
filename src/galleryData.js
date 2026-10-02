@@ -133,7 +133,9 @@ export const SIGNBRIDGE_PROFILE = {
       image: "/assets/art1.png",
       description: "EcoClamp is an intelligent motor-health monitoring system utilizing non-invasive current transducers, ESP32 microcontrollers, FFT signal analysis, and localized TinyML anomaly detection.",
       stats: { sensors: "Non-Invasive SCT", edgeML: "TinyML On-Device", processing: "FFT Real-Time" },
-      tags: ["ESP32", "TinyML", "FFT Signal Processing", "Current Sensing", "Predictive Maintenance"]
+      tags: ["ESP32", "TinyML", "FFT Signal Processing", "Current Sensing", "Predictive Maintenance"],
+      url: "https://ecoclamp.vercel.app",
+      liveUrl: "https://ecoclamp.vercel.app"
     },
     {
       id: "aerospace-tech",

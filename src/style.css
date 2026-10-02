@@ -84,6 +84,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 html, body {
@@ -127,6 +130,13 @@ html, body {
 }
 
 ::selection {
+    background: transparent;
+}
+
+input::selection,
+textarea::selection,
+.contact-input::selection,
+.contact-textarea::selection {
     background: var(--accent-iris);
     color: #ffffff;
 }
@@ -149,12 +159,34 @@ html, body {
     background: transparent !important;
 }
 
+/* Base cursor behavior: default arrow everywhere, pointer on clickable items */
+body, div, p, span, h1, h2, h3, h4, h5, h6, article, section, header, footer, main, aside, label {
+    cursor: default;
+}
+
+a, button, [role="button"], .project-link, .team-dept-tab, .member-pill-btn, .btn-primary-lime, .btn-secondary-glass, .sound-toggle-btn {
+    cursor: pointer;
+}
+
+/* ONLY legitimate form fields in Transmission & Collaboration allow typing cursor and text selection */
+input,
+textarea,
+.contact-input,
+.contact-textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    cursor: text !important;
+}
+
 @media (pointer: fine) {
-    body, a, button, [role="button"], select {
+    *, *::before, *::after {
         cursor: none !important;
     }
 
-    input, textarea, [contenteditable="true"] {
+    input,
+    textarea,
+    .contact-input,
+    .contact-textarea {
         cursor: text !important;
     }
 }

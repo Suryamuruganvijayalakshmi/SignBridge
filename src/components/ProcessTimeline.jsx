@@ -40,7 +40,6 @@ export default function ProcessTimeline() {
                                 onMouseEnter={() => setActiveStep(idx)}
                                 onClick={() => setActiveStep(idx)}
                                 role="button"
-                                tabIndex={0}
                             >
                                 <div className="step-header">
                                     <span className="step-number">{step.num}</span>

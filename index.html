@@ -35,6 +35,56 @@
 </head>
 
 <body style="background-color: #ffffff; margin: 0;">
+    <!-- Global Ambient Soundtrack (Starts immediately at the beginning of the site) -->
+    <audio id="signbridge-global-audio" src="/gigidelaromusic-soft-harmonic-breath-short-450972.mp3" preload="auto" loop playsinline autoplay></audio>
+    <script>
+        (function() {
+            var audio = document.getElementById('signbridge-global-audio');
+            if (!audio) return;
+            audio.volume = 0.55;
+            
+            function tryStart() {
+                var p = audio.play();
+                if (p !== undefined) {
+                    p.then(function() {
+                        cleanup();
+                    }).catch(function() {
+                        // If unmuted autoplay blocked, run muted so track syncs with globe
+                        audio.muted = true;
+                        audio.play().catch(function() {});
+                    });
+                }
+            }
+
+            function unlockAudio() {
+                if (audio) {
+                    audio.muted = false;
+                    audio.volume = 0.55;
+                    audio.play().then(function() {
+                        cleanup();
+                    }).catch(function() {});
+                }
+            }
+
+            function cleanup() {
+                window.removeEventListener('pointerdown', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+                window.removeEventListener('keydown', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('mousemove', unlockAudio);
+                window.removeEventListener('scroll', unlockAudio);
+            }
+
+            tryStart();
+            window.addEventListener('pointerdown', unlockAudio, { passive: true });
+            window.addEventListener('touchstart', unlockAudio, { passive: true });
+            window.addEventListener('keydown', unlockAudio, { passive: true });
+            window.addEventListener('click', unlockAudio, { passive: true });
+            window.addEventListener('mousemove', unlockAudio, { passive: true, once: true });
+            window.addEventListener('scroll', unlockAudio, { passive: true });
+        })();
+    </script>
+
     <!-- React Root Mount Target -->
     <div id="root"></div>
 
