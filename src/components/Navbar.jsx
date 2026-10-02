@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Zap, ArrowUpRight, Menu, X } from 'lucide-react';
+import { Zap, Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ onOpenContact }) {
+export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onReplayIntro }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const navItems = [
@@ -31,9 +31,19 @@ export default function Navbar({ onOpenContact }) {
                 ))}
             </nav>
 
-            {/* Right: Sound Toggle & Contact CTA */}
+            {/* Right: Sound Toggle, Replay Intro & Contact CTA */}
             <div className="header-actions">
 
+
+                <button
+                    type="button"
+                    onClick={onReplayIntro}
+                    className="sound-toggle-btn replay-intro-nav-btn"
+                    aria-label="Replay Cinematic Particle Intro"
+                    title="Replay Cinematic Particle Intro"
+                >
+                    <Sparkles size={16} />
+                </button>
 
                 <button
                     type="button"
@@ -70,6 +80,18 @@ export default function Navbar({ onOpenContact }) {
                             {item.label}
                         </a>
                     ))}
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setMobileOpen(false);
+                            onReplayIntro?.();
+                        }}
+                        className="mobile-nav-link"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: '#6366f1' }}
+                    >
+                        <Sparkles size={16} />
+                        <span>// REPLAY INTRO</span>
+                    </button>
                     <button
                         type="button"
                         onClick={() => {

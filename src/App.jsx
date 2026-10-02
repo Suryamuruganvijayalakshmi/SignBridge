@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ProductPage from './pages/ProductPage.jsx';
 import NeatCursor from './components/NeatCursor.jsx';
@@ -17,6 +17,7 @@ import Footer from './components/Footer.jsx';
 import ShowreelModal from './components/ShowreelModal.jsx';
 import ContactModal from './components/ContactModal.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
+import SignBridgeIntroStage from './components/ParticleGlobe/SignBridgeIntroStage.jsx';
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -76,10 +77,48 @@ export default function App() {
     const [toastVisible, setToastVisible] = useState(false);
     const [showreelOpen, setShowreelOpen] = useState(false);
     const [contactOpen, setContactOpen] = useState(false);
-    const [coords, setCoords] = useState({ x: null, y: null });
+    // Globe animation is the definitive starter of the site on every opening
+    const [introComplete, setIntroComplete] = useState(false);
 
     const activePalette = RIBBON_SPECTRUMS[paletteIndex];
     const toastTimerRef = useRef(null);
+    const audioCtxRef = useRef(null);
+
+    const handleReplayIntro = useCallback(() => {
+        try {
+            sessionStorage.removeItem('signbridge-intro-seen');
+        } catch (e) {}
+        setIntroComplete(false);
+        triggerToast('// REPLAYING CINEMATIC PARTICLE INTRO');
+        playSynthFeedback(660, 'sine');
+    }, []);
+
+    const handleIntroFinished = useCallback(() => {
+        setIntroComplete(true);
+    }, []);
+
+    const playSynthFeedback = (freq = 520, type = 'sine') => {
+        if (!soundEnabled) return;
+        try {
+            if (!audioCtxRef.current) {
+                audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            const ctx = audioCtxRef.current;
+            if (ctx.state === 'suspended') ctx.resume();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.16);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.16);
+        } catch (e) {
+            // Audio ignore
+        }
+    };
 
     const triggerToast = (msg) => {
         setToastMessage(msg);
@@ -102,20 +141,16 @@ export default function App() {
         });
     };
 
-    // Track mouse coordinates for footer telemetry
-    useEffect(() => {
-        let lastTime = 0;
-        const onPointerMove = (e) => {
-            const now = Date.now();
-            if (now - lastTime > 60) {
-                lastTime = now;
-                setCoords({ x: e.clientX, y: e.clientY });
+    const handleToggleSound = () => {
+        setSoundEnabled((prev) => {
+            const next = !prev;
+            triggerToast(next ? '// AUDIO FEEDBACK: SYNTHESIZED' : '// AUDIO FEEDBACK: MUTED');
+            if (next) {
+                playSynthFeedback(880, 'sine');
             }
-        };
-
-        window.addEventListener('pointermove', onPointerMove, { passive: true });
-        return () => window.removeEventListener('pointermove', onPointerMove);
-    }, []);
+            return next;
+        });
+    };
 
     // Spacebar shortcut to cycle spectrum
     useEffect(() => {
@@ -131,8 +166,8 @@ export default function App() {
 
     return (
         <div className="signbridge-app">
-            {/* 1. Ultra-Clean Luxury Neat Cursor (Iris precision dot, magnetic glass follower & subtle comet streamline) */}
-            <NeatCursor activePalette={activePalette} />
+            {/* 1. Ultra-Clean Luxury Neat Cursor (Active only when main website is visible) */}
+            {introComplete && <NeatCursor activePalette={activePalette} />}
 
             {/* Subtle cyber grid texture on pure white background */}
             <div className="cyber-grid-overlay" aria-hidden="true" />
@@ -140,10 +175,19 @@ export default function App() {
             {/* Floating Spectrum HUD Toast */}
             <SpectrumToast message={toastMessage} visible={toastVisible} />
 
-            {/* 2. UI Content Layer */}
-            <div className="lumina-viewport">
+            {/* 2. UI Content Layer - Hidden during intro starter, reveals seamlessly */}
+            <div
+                className="lumina-viewport"
+                style={{
+                    opacity: introComplete ? 1 : 0,
+                    visibility: introComplete ? 'visible' : 'hidden',
+                    pointerEvents: introComplete ? 'auto' : 'none',
+                    transition: 'opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s'
+                }}
+            >
                 <Navbar
                     onOpenContact={() => setContactOpen(true)}
+                    onReplayIntro={handleReplayIntro}
                 />
 
                 <Routes>
@@ -179,7 +223,7 @@ export default function App() {
                     <Route path="/product" element={<ProductPage />} />
                 </Routes>
 
-                <Footer />
+                <Footer onReplayIntro={handleReplayIntro} />
             </div>
 
             {/* 3. Top-Layer Dialog Modals */}
@@ -193,6 +237,11 @@ export default function App() {
                 onClose={() => setContactOpen(false)}
                 onNotification={triggerToast}
             />
+
+            {/* 4. Full-Screen Cinematic Particle Intro Animation (Visible first on entry) */}
+            {!introComplete && (
+                <SignBridgeIntroStage onComplete={handleIntroFinished} />
+            )}
         </div>
     );
 }

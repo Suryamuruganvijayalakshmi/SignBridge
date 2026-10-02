@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
-export default function Footer() {
+export default function Footer({ onReplayIntro }) {
     return (
         <footer className="site-footer" style={{ pointerEvents: 'auto' }}>
             <div className="footer-inner">
@@ -73,10 +73,27 @@ export default function Footer() {
                     <h1 className="footer-wordmark">SIGNBRIDGE</h1>
                     <div className="footer-meta-bar">
                         <span>© 2026 SIGNBRIDGE. ALL RIGHTS RESERVED.</span>
+                        {onReplayIntro && (
+                            <button
+                                type="button"
+                                onClick={onReplayIntro}
+                                className="footer-replay-link"
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    color: 'var(--accent-iris, #6366f1)',
+                                    cursor: 'pointer',
+                                    fontFamily: 'inherit',
+                                    fontSize: '0.85rem'
+                                }}
+                                title="Replay cinematic particle globe intro"
+                            >
+                                ↺ Replay Cinematic Particle Intro
+                            </button>
+                        )}
                         <span>BEYOND DIGITAL // INNOVATION STUDIO</span>
                     </div>
                 </div>
-
             </div>
         </footer>
     );

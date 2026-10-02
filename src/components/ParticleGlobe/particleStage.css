@@ -1,0 +1,117 @@
+/* ==========================================================================
+   SIGNBRIDGE // CINEMATIC INTRO STAGE STYLES
+   Pure Minimalist White Canvas x Electric Cyan & Fiery Orange Particles
+   ========================================================================== */
+
+/* Base Stage */
+.stage {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    user-select: none;
+}
+
+.stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    pointer-events: none;
+}
+
+/* 1. Full-Screen Intro Overlay (First View On Entry) */
+.stage.intro-stage {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    background: #ffffff;
+    overflow: hidden;
+    opacity: 1;
+    pointer-events: auto;
+    cursor: default;
+    user-select: none;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stage.intro-stage canvas {
+    pointer-events: none;
+}
+
+.stage.intro-stage.is-exiting {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Dedicated, distraction-free Skip Button for White Canvas */
+.stage-skip-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    color: #64748b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-6px);
+    animation: stageFadeIn 0.4s ease-out 0.9s forwards;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+.stage-skip-btn:hover {
+    color: #0f172a;
+    border-color: rgba(2, 132, 199, 0.4);
+    background: rgba(0, 0, 0, 0.07);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15);
+    transform: translateY(-8px);
+}
+
+.stage-skip-btn:focus-visible {
+    outline: 2px solid #0284c7;
+    outline-offset: 2px;
+}
+
+.stage-skip-key {
+    display: inline-block;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.06);
+    font-size: 0.62rem;
+    color: #0284c7;
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes stageFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stage-skip-btn {
+        top: 1.25rem;
+        right: 1.25rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.65rem;
+    }
+}

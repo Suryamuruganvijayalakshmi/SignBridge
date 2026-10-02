@@ -10,15 +10,31 @@
     <meta property="og:description" content="Building digital bridges between ideas and innovation.">
     <meta property="og:type" content="website">
 
+    <!-- Preload SignBridge Brand Logo for Instant Particle Intro -->
+    <link rel="preload" as="image" href="/sign logo.png" crossorigin="anonymous">
+    
     <!-- Fonts: Cabinet Grotesk (800, 900), Satoshi (300, 400, 500, 700), Archivo, JetBrains Mono -->
     <link rel="preconnect" href="https://api.fontshare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Zero-Flash Baseline Styling for Cinematic Particle Starter (White Background) -->
+    <style>
+        html, body, #root {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color: #ffffff; margin: 0;">
     <!-- React Root Mount Target -->
     <div id="root"></div>
 
