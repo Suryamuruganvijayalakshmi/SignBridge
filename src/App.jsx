@@ -18,6 +18,7 @@ import ShowreelModal from './components/ShowreelModal.jsx';
 import ContactModal from './components/ContactModal.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
 import SignBridgeIntroStage from './components/ParticleGlobe/SignBridgeIntroStage.jsx';
+import AudioController from './components/AudioController.jsx';
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -141,16 +142,16 @@ export default function App() {
         });
     };
 
-    const handleToggleSound = () => {
-        setSoundEnabled((prev) => {
+    const [isMuted, setIsMuted] = useState(false);
+    const soundEnabled = !isMuted;
+
+    const handleToggleMute = useCallback(() => {
+        setIsMuted((prev) => {
             const next = !prev;
-            triggerToast(next ? '// AUDIO FEEDBACK: SYNTHESIZED' : '// AUDIO FEEDBACK: MUTED');
-            if (next) {
-                playSynthFeedback(880, 'sine');
-            }
+            triggerToast(next ? '// SOUNDTRACK: MUTED' : '// SOUNDTRACK: AUDIO ON');
             return next;
         });
-    };
+    }, []);
 
     // Spacebar shortcut to cycle spectrum
     useEffect(() => {
@@ -166,6 +167,13 @@ export default function App() {
 
     return (
         <div className="signbridge-app">
+            {/* Global Ambient Soundtrack Player with Autoplay & Mute Control */}
+            <AudioController
+                isMuted={isMuted}
+                onToggleMute={handleToggleMute}
+                triggerToast={triggerToast}
+            />
+
             {/* 1. Ultra-Clean Luxury Neat Cursor (Active only when main website is visible) */}
             {introComplete && <NeatCursor activePalette={activePalette} />}
 
@@ -186,6 +194,8 @@ export default function App() {
                 }}
             >
                 <Navbar
+                    soundEnabled={soundEnabled}
+                    onToggleSound={handleToggleMute}
                     onOpenContact={() => setContactOpen(true)}
                     onReplayIntro={handleReplayIntro}
                 />

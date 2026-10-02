@@ -2161,7 +2161,7 @@ textarea.form-control {
 .member-quick-pills {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.55rem;
     margin-top: 1.35rem;
     flex-wrap: wrap;
 }
@@ -2172,15 +2172,18 @@ textarea.form-control {
     gap: 0.5rem;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.12em;
-    padding: 0.45rem 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.45rem 0.85rem;
     border-radius: 9999px;
     background: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: var(--text-60);
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .member-pill-btn .pill-dot {
@@ -2188,24 +2191,32 @@ textarea.form-control {
     height: 6px;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.2);
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .member-pill-btn:hover {
     background: rgba(99, 102, 241, 0.08);
     color: var(--accent-iris);
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-1px);
+}
+
+.member-pill-btn:active {
+    transform: translateY(0) scale(0.97);
 }
 
 .member-pill-btn.active {
     background: rgba(99, 102, 241, 0.12);
     border-color: var(--accent-iris);
     color: var(--accent-iris);
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.16);
 }
 
 .member-pill-btn.active .pill-dot {
     background: var(--accent-lime);
     box-shadow: 0 0 8px var(--accent-lime);
+    transform: scale(1.2);
 }
 
 /* ==========================================================================
@@ -3698,3 +3709,125 @@ textarea.form-control {
         display: none;
     }
 }
+
+/* ==========================================================================
+   GLOBAL AUDIO HUD CONTROLLER (Persistently accessible, ambient soundtrack)
+   ========================================================================== */
+.global-audio-hud {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 99999;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.audio-hud-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 1rem 0.55rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(99, 102, 241, 0.12);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.audio-hud-btn:hover {
+    background: #ffffff;
+    border-color: var(--accent-iris);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.22);
+}
+
+.audio-hud-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.global-audio-hud.is-muted .audio-hud-btn {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.audio-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-visualizer-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 14px;
+    padding-bottom: 1px;
+}
+
+.audio-bar {
+    width: 2.5px;
+    background: var(--accent-iris, #6366f1);
+    border-radius: 2px;
+    height: 3px;
+    transition: height 0.2s ease, background 0.2s ease;
+}
+
+.global-audio-hud.is-muted .audio-bar {
+    background: #94a3b8;
+    height: 3px !important;
+}
+
+.audio-bar.animating.bar-1 {
+    animation: bar-pulse-1 0.85s infinite ease-in-out alternate;
+}
+.audio-bar.animating.bar-2 {
+    animation: bar-pulse-2 0.7s infinite ease-in-out alternate 0.15s;
+}
+.audio-bar.animating.bar-3 {
+    animation: bar-pulse-3 0.95s infinite ease-in-out alternate 0.3s;
+}
+.audio-bar.animating.bar-4 {
+    animation: bar-pulse-4 0.65s infinite ease-in-out alternate 0.05s;
+}
+
+@keyframes bar-pulse-1 {
+    0% { height: 3px; }
+    100% { height: 12px; }
+}
+@keyframes bar-pulse-2 {
+    0% { height: 4px; }
+    100% { height: 14px; }
+}
+@keyframes bar-pulse-3 {
+    0% { height: 2px; }
+    100% { height: 10px; }
+}
+@keyframes bar-pulse-4 {
+    0% { height: 3px; }
+    100% { height: 13px; }
+}
+
+.audio-hud-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-pure);
+}
+
+.global-audio-hud.is-muted .audio-hud-label {
+    color: #64748b;
+}
+
+@media (max-width: 640px) {
+    .global-audio-hud {
+        bottom: 1.25rem;
+        right: 1.25rem;
+    }
+}
+

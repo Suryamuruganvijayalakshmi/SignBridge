@@ -33,7 +33,19 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
 
             {/* Right: Sound Toggle, Replay Intro & Contact CTA */}
             <div className="header-actions">
-
+                <button
+                    type="button"
+                    onClick={onToggleSound}
+                    className={`sound-toggle-btn ${soundEnabled ? 'is-playing' : 'is-muted'}`}
+                    aria-label={soundEnabled ? "Mute Ambient Soundtrack (M)" : "Unmute Ambient Soundtrack (M)"}
+                    title={soundEnabled ? "Mute Soundtrack (M)" : "Unmute Soundtrack (M)"}
+                >
+                    {soundEnabled ? (
+                        <Volume2 size={16} className="text-iris" />
+                    ) : (
+                        <VolumeX size={16} className="text-slate-400" />
+                    )}
+                </button>
 
                 <button
                     type="button"
@@ -91,6 +103,17 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                     >
                         <Sparkles size={16} />
                         <span>// REPLAY INTRO</span>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            onToggleSound?.();
+                        }}
+                        className="mobile-nav-link"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: soundEnabled ? '#6366f1' : '#64748b' }}
+                    >
+                        {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                        <span>{soundEnabled ? '// AMBIENT SOUND ON' : '// AMBIENT SOUND MUTED'}</span>
                     </button>
                     <button
                         type="button"

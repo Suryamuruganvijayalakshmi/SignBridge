@@ -23,18 +23,33 @@ export const Card = forwardRef(({ customClass = '', className = '', style = {}, 
 
 Card.displayName = 'Card';
 
-const makeSlot = (i, distX, distY, total) => ({
-    x: i * distX,
-    y: -i * distY,
-    z: -i * distX * 1.5,
-    zIndex: total - i
-});
+/**
+ * Slot calculator for 3D perspective deck
+ * Tapers depth, scale, and opacity evenly across cards
+ */
+const makeSlot = (i, distX, distY, total) => {
+    // Graceful opacity falloff for deeper cards in large decks (e.g. 12 cards)
+    const opacity = i > 4 ? Math.max(0.18, 1 - (i - 3) * 0.14) : 1;
+    const scale = Math.max(0.82, 1 - i * 0.022);
 
-const placeNow = (el, slot, skew) =>
+    return {
+        x: i * distX,
+        y: -i * distY,
+        z: -i * distX * 1.6,
+        zIndex: total - i,
+        scale,
+        opacity
+    };
+};
+
+const placeNow = (el, slot, skew) => {
+    if (!el) return;
     gsap.set(el, {
         x: slot.x,
         y: slot.y,
         z: slot.z,
+        scale: slot.scale,
+        opacity: slot.opacity,
         xPercent: -50,
         yPercent: -50,
         skewY: skew,
@@ -42,39 +57,21 @@ const placeNow = (el, slot, skew) =>
         zIndex: slot.zIndex,
         force3D: true
     });
+};
 
 export const CardSwap = forwardRef(({
     width = 420,
     height = 500,
     cardDistance = 45,
     verticalDistance = 40,
-    delay = 4500,
+    delay = 5000,
     pauseOnHover = true,
     onCardClick,
     onActiveIndexChange,
-    skewAmount = 5,
-    easing = 'elastic',
+    skewAmount = 4,
+    easing = 'smooth', // 'smooth' uses synchronized power3.out with equal timing
     children
 }, ref) => {
-    const config =
-        easing === 'elastic'
-            ? {
-                ease: 'elastic.out(0.6,0.9)',
-                durDrop: 1.8,
-                durMove: 1.8,
-                durReturn: 1.8,
-                promoteOverlap: 0.9,
-                returnDelay: 0.05
-            }
-            : {
-                ease: 'power1.inOut',
-                durDrop: 0.8,
-                durMove: 0.8,
-                durReturn: 0.8,
-                promoteOverlap: 0.45,
-                returnDelay: 0.2
-            };
-
     const childArr = useMemo(() => Children.toArray(children), [children]);
     const refs = useMemo(() => childArr.map(() => React.createRef()), [childArr.length]);
     const order = useRef(Array.from({ length: childArr.length }, (_, i) => i));
@@ -82,126 +79,305 @@ export const CardSwap = forwardRef(({
     const intervalRef = useRef(0);
     const container = useRef(null);
 
-    const swap = (targetIndex = null) => {
-        if (order.current.length < 2) return;
-        if (tlRef.current && tlRef.current.isActive()) return;
+    // Keep activeIndex synced cleanly
+    const onActiveIndexChangeRef = useRef(onActiveIndexChange);
+    useEffect(() => {
+        onActiveIndexChangeRef.current = onActiveIndexChange;
+    }, [onActiveIndexChange]);
+
+    // Reset auto-cycle timer helper
+    const resetInterval = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = 0;
+        }
+        if (delay > 0) {
+            intervalRef.current = window.setInterval(() => {
+                swapNext();
+            }, delay);
+        }
+    };
+
+    /**
+     * swapNext — Advances to the next card in order with equal timing
+     */
+    const swapNext = () => {
+        const total = order.current.length;
+        if (total < 2) return;
+
+        // If an animation is in flight, cleanly cancel it to stay responsive
+        if (tlRef.current) {
+            tlRef.current.kill();
+            tlRef.current = null;
+        }
 
         const currentFront = order.current[0];
-        
-        if (targetIndex !== null && currentFront === targetIndex) return;
-
-        let rest;
-        if (targetIndex !== null) {
-            const remaining = order.current.filter(x => x !== currentFront && x !== targetIndex);
-            rest = [targetIndex, ...remaining];
-        } else {
-            rest = order.current.slice(1);
-        }
+        const nextFront = order.current[1];
+        const rest = order.current.slice(1);
 
         const elFront = refs[currentFront]?.current;
         if (!elFront) return;
 
-        if (onActiveIndexChange) {
-            onActiveIndexChange(rest[0]);
+        // Immediately notify parent about the new active card
+        if (onActiveIndexChangeRef.current) {
+            onActiveIndexChangeRef.current(nextFront);
         }
 
         const tl = gsap.timeline({
             onComplete: () => {
                 order.current = [...rest, currentFront];
+                // Ensure all items are precisely placed
+                order.current.forEach((idx, i) => {
+                    const el = refs[idx]?.current;
+                    if (el) {
+                        const slot = makeSlot(i, cardDistance, verticalDistance, total);
+                        placeNow(el, slot, skewAmount);
+                    }
+                });
+                tlRef.current = null;
             }
         });
         tlRef.current = tl;
 
+        // 1. Front card drops down smoothly
         tl.to(elFront, {
-            y: '+=500',
-            duration: config.durDrop,
-            ease: config.ease
-        });
+            y: '+=240',
+            opacity: 0.25,
+            scale: 0.92,
+            duration: 0.35,
+            ease: 'power2.in'
+        }, 0);
 
-        tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
+        // 2. All remaining cards glide forward 1 slot in perfect unison (EQUAL TIMING)
         rest.forEach((idx, i) => {
             const el = refs[idx]?.current;
             if (!el) return;
-            const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
-            tl.set(el, { zIndex: slot.zIndex }, 'promote');
-            tl.to(
-                el,
-                {
-                    x: slot.x,
-                    y: slot.y,
-                    z: slot.z,
-                    duration: config.durMove,
-                    ease: config.ease
-                },
-                `promote+=${i * 0.15}`
-            );
+            const targetSlot = makeSlot(i, cardDistance, verticalDistance, total);
+
+            tl.set(el, { zIndex: targetSlot.zIndex }, 0.05);
+            tl.to(el, {
+                x: targetSlot.x,
+                y: targetSlot.y,
+                z: targetSlot.z,
+                scale: targetSlot.scale,
+                opacity: targetSlot.opacity,
+                duration: 0.6,
+                ease: 'power3.out'
+            }, 0.05);
         });
 
-        const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
-        tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
-        tl.call(
-            () => {
-                gsap.set(elFront, { zIndex: backSlot.zIndex });
-            },
-            undefined,
-            'return'
-        );
+        // 3. Front card tucks into the back slot
+        const backSlot = makeSlot(total - 1, cardDistance, verticalDistance, total);
+        tl.set(elFront, {
+            x: backSlot.x,
+            z: backSlot.z,
+            zIndex: backSlot.zIndex
+        }, 0.35);
 
-        tl.to(
-            elFront,
-            {
-                x: backSlot.x,
-                y: backSlot.y,
-                z: backSlot.z,
-                duration: config.durReturn,
-                ease: config.ease
-            },
-            'return'
-        );
+        tl.to(elFront, {
+            y: backSlot.y,
+            opacity: backSlot.opacity,
+            scale: backSlot.scale,
+            duration: 0.38,
+            ease: 'power3.out'
+        }, 0.35);
+    };
+
+    /**
+     * swapPrev — Cycles backward in deck
+     */
+    const swapPrev = () => {
+        const total = order.current.length;
+        if (total < 2) return;
+
+        if (tlRef.current) {
+            tlRef.current.kill();
+            tlRef.current = null;
+        }
+
+        const lastItem = order.current[total - 1];
+        const newOrder = [lastItem, ...order.current.slice(0, total - 1)];
+
+        goTo(lastItem);
+    };
+
+    /**
+     * goTo — Instantly navigates to a specific child index on single click!
+     * Smoothly rotates the circular deck to bring target to the front slot.
+     */
+    const goTo = (targetIndex) => {
+        const total = order.current.length;
+        if (total === 0) return;
+
+        // Reset auto-cycle timer so user has ample time to inspect the clicked member
+        resetInterval();
+
+        // 1. Immediately kill any in-flight timeline — NO LOCKOUT, SINGLE CLICK ALWAYS REGISTERS
+        if (tlRef.current) {
+            tlRef.current.kill();
+            tlRef.current = null;
+        }
+
+        // If target is already at the front, ensure spotlight is active and add gentle pulse
+        if (order.current[0] === targetIndex) {
+            if (onActiveIndexChangeRef.current) {
+                onActiveIndexChangeRef.current(targetIndex);
+            }
+            const frontEl = refs[targetIndex]?.current;
+            if (frontEl) {
+                gsap.fromTo(frontEl, 
+                    { scale: 1.03 }, 
+                    { scale: 1, duration: 0.3, ease: 'power2.out' }
+                );
+            }
+            return;
+        }
+
+        const targetPos = order.current.indexOf(targetIndex);
+        if (targetPos === -1) return;
+
+        // Immediately notify parent about target selection
+        if (onActiveIndexChangeRef.current) {
+            onActiveIndexChangeRef.current(targetIndex);
+        }
+
+        // Circular rotation so targetIndex becomes 0, and relative deck order is preserved
+        const newOrder = [
+            ...order.current.slice(targetPos),
+            ...order.current.slice(0, targetPos)
+        ];
+
+        const cardsToBack = order.current.slice(0, targetPos);
+        const cardsAdvancing = order.current.slice(targetPos);
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                order.current = newOrder;
+                // Snap all cards to their precise mathematical slot coordinates
+                newOrder.forEach((idx, i) => {
+                    const el = refs[idx]?.current;
+                    if (el) {
+                        const slot = makeSlot(i, cardDistance, verticalDistance, total);
+                        placeNow(el, slot, skewAmount);
+                    }
+                });
+                tlRef.current = null;
+            }
+        });
+        tlRef.current = tl;
+
+        // 1. Target card smoothly glides to front slot (0)
+        const targetEl = refs[targetIndex]?.current;
+        const slot0 = makeSlot(0, cardDistance, verticalDistance, total);
+        if (targetEl) {
+            tl.set(targetEl, { zIndex: total + 10 }, 0);
+            tl.to(targetEl, {
+                x: slot0.x,
+                y: slot0.y,
+                z: slot0.z,
+                scale: slot0.scale,
+                opacity: 1,
+                duration: 0.52,
+                ease: 'power3.out'
+            }, 0);
+        }
+
+        // 2. Other advancing cards glide forward to their new slots (EQUAL TIMING)
+        cardsAdvancing.forEach((idx) => {
+            if (idx === targetIndex) return;
+            const el = refs[idx]?.current;
+            if (!el) return;
+            const newPos = newOrder.indexOf(idx);
+            const slot = makeSlot(newPos, cardDistance, verticalDistance, total);
+
+            tl.set(el, { zIndex: slot.zIndex }, 0);
+            tl.to(el, {
+                x: slot.x,
+                y: slot.y,
+                z: slot.z,
+                scale: slot.scale,
+                opacity: slot.opacity,
+                duration: 0.52,
+                ease: 'power3.out'
+            }, 0);
+        });
+
+        // 3. Cards moving to the back dip down gently, swap zIndex, and rise into their back slots
+        cardsToBack.forEach((idx) => {
+            const el = refs[idx]?.current;
+            if (!el) return;
+            const newPos = newOrder.indexOf(idx);
+            const slot = makeSlot(newPos, cardDistance, verticalDistance, total);
+
+            // Dip down slightly to avoid intersecting forward-moving cards
+            tl.to(el, {
+                y: '+=160',
+                opacity: 0.2,
+                duration: 0.24,
+                ease: 'power2.in'
+            }, 0);
+
+            // Re-assign to back zIndex
+            tl.set(el, {
+                zIndex: slot.zIndex,
+                x: slot.x,
+                z: slot.z
+            }, 0.24);
+
+            // Rise smoothly into back slot
+            tl.to(el, {
+                y: slot.y,
+                opacity: slot.opacity,
+                scale: slot.scale,
+                duration: 0.32,
+                ease: 'power3.out'
+            }, 0.24);
+        });
     };
 
     useImperativeHandle(ref, () => ({
-        swap,
-        goTo: (idx) => swap(idx),
+        swap: swapNext,
+        next: swapNext,
+        prev: swapPrev,
+        goTo: (idx) => goTo(idx),
         getActiveIndex: () => order.current[0],
         getTotal: () => order.current.length
     }));
 
+    // Initial placement on mount or when children change
     useEffect(() => {
         const total = refs.length;
+        order.current = Array.from({ length: total }, (_, i) => i);
+
         refs.forEach((r, i) => {
             if (r.current) {
                 placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount);
             }
         });
 
-        if (delay > 0) {
-            intervalRef.current = window.setInterval(swap, delay);
-        }
+        resetInterval();
 
         if (pauseOnHover && container.current) {
             const node = container.current;
             const pause = () => {
-                tlRef.current?.pause();
-                clearInterval(intervalRef.current);
+                if (intervalRef.current) clearInterval(intervalRef.current);
             };
             const resume = () => {
-                tlRef.current?.play();
-                if (delay > 0) {
-                    intervalRef.current = window.setInterval(swap, delay);
-                }
+                resetInterval();
             };
             node.addEventListener('mouseenter', pause);
             node.addEventListener('mouseleave', resume);
             return () => {
                 node.removeEventListener('mouseenter', pause);
                 node.removeEventListener('mouseleave', resume);
-                clearInterval(intervalRef.current);
+                if (intervalRef.current) clearInterval(intervalRef.current);
             };
         }
 
-        return () => clearInterval(intervalRef.current);
-    }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing, refs]);
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, refs.length]);
 
     const rendered = childArr.map((child, i) =>
         isValidElement(child)
@@ -212,7 +388,12 @@ export const CardSwap = forwardRef(({
                 onClick: (e) => {
                     child.props.onClick?.(e);
                     if (onCardClick) onCardClick(i);
-                    swap();
+                    // If front card is clicked, cycle to next; if back card is clicked, bring that card forward!
+                    if (order.current[0] === i) {
+                        swapNext();
+                    } else {
+                        goTo(i);
+                    }
                 }
             })
             : child

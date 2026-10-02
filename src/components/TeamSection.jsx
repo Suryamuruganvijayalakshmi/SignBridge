@@ -183,55 +183,17 @@ export default function TeamSection() {
         return idx !== -1 ? idx : 0;
     }, [filteredTeam, activeMember.id]);
 
-    // Scroll-driven card swapping:
-    useEffect(() => {
-        let lastTime = 0;
-
-        const onScroll = () => {
-            const now = Date.now();
-            if (now - lastTime < 60) return;
-            lastTime = now;
-
-            if (!sectionRef.current) return;
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            if (rect.top <= windowHeight * 0.6 && rect.bottom >= windowHeight * 0.3) {
-                const sectionHeight = rect.height;
-                const scrolledIntoSection = (windowHeight * 0.6) - rect.top;
-                const progress = Math.min(1, Math.max(0, scrolledIntoSection / sectionHeight));
-
-                const currentZone = Math.floor(progress * filteredTeam.length);
-
-                if (currentZone !== lastScrollZoneRef.current && currentZone >= 0 && currentZone < filteredTeam.length) {
-                    lastScrollZoneRef.current = currentZone;
-                    const targetMember = filteredTeam[currentZone];
-                    if (targetMember) {
-                        setActiveMemberId(targetMember.id);
-                        if (cardSwapRef.current) {
-                            cardSwapRef.current.goTo(currentZone);
-                        }
-                    }
-                }
-            }
-        };
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, [filteredTeam]);
-
     const handleWheelOverDeck = (e) => {
         wheelAccumulatorRef.current += e.deltaY;
-        if (Math.abs(wheelAccumulatorRef.current) > 70) {
+        if (Math.abs(wheelAccumulatorRef.current) > 60) {
             const dir = Math.sign(wheelAccumulatorRef.current);
             wheelAccumulatorRef.current = 0;
             if (cardSwapRef.current) {
-                const total = cardSwapRef.current.getTotal();
-                const current = cardSwapRef.current.getActiveIndex();
-                let nextIdx = current + dir;
-                if (nextIdx >= total) nextIdx = 0;
-                if (nextIdx < 0) nextIdx = total - 1;
-                cardSwapRef.current.goTo(nextIdx);
+                if (dir > 0) {
+                    cardSwapRef.current.next ? cardSwapRef.current.next() : cardSwapRef.current.swap();
+                } else {
+                    cardSwapRef.current.prev ? cardSwapRef.current.prev() : cardSwapRef.current.swap();
+                }
             }
         }
     };
@@ -248,25 +210,10 @@ export default function TeamSection() {
             ? CORE_TECHNICAL_TEAM 
             : CORE_TECHNICAL_TEAM.filter(m => m.category === catId);
         if (members.length > 0) {
-            setActiveMemberId(members[0].id);
-        }
-    };
-
-    const handleSpotlightMember = (member) => {
-        setActiveMemberId(member.id);
-        // If the member is in the current filtered view, navigate 3D deck to their index
-        const idx = filteredTeam.findIndex(m => m.id === member.id);
-        if (idx !== -1 && cardSwapRef.current) {
-            cardSwapRef.current.goTo(idx);
-        } else {
-            // Switch category to show them in the 3D deck
-            setSelectedCategory(member.category);
-        }
-
-        // Smoothly scroll spotlight into view if clicking from roster below
-        if (sectionRef.current) {
-            const topPos = sectionRef.current.getBoundingClientRect().top + window.scrollY - 80;
-            window.scrollTo({ top: topPos, behavior: 'smooth' });
+            const alreadyInCat = members.some(m => m.id === activeMemberId);
+            if (!alreadyInCat) {
+                setActiveMemberId(members[0].id);
+            }
         }
     };
 
@@ -372,21 +319,27 @@ export default function TeamSection() {
                         </div>
 
                         {/* Quick Member Selector Pills for Filtered Group */}
-                        <div className="member-quick-pills">
+                        <div className="member-quick-pills" role="tablist" aria-label="Select member to spotlight">
                             {filteredTeam.map((m, idx) => {
                                 const isCurrent = m.id === activeMember.id;
                                 return (
                                     <button
                                         key={m.num}
                                         type="button"
-                                        onClick={() => {
+                                        role="tab"
+                                        aria-selected={isCurrent}
+                                        onClick={(e) => {
+                                            e.preventDefault();
                                             setActiveMemberId(m.id);
-                                            if (cardSwapRef.current) cardSwapRef.current.goTo(idx);
+                                            if (cardSwapRef.current) {
+                                                cardSwapRef.current.goTo(idx);
+                                            }
                                         }}
                                         className={`member-pill-btn ${isCurrent ? 'active' : ''}`}
+                                        title={`Spotlight ${m.name} (${m.role})`}
                                     >
                                         <span className="pill-dot" />
-                                        <span>{m.num} {m.name.split(' ')[0]}</span>
+                                        <span className="pill-name">{m.num} {m.name}</span>
                                     </button>
                                 );
                             })}
@@ -407,10 +360,10 @@ export default function TeamSection() {
                             height={490}
                             cardDistance={selectedCategory === 'all' ? 24 : 40}
                             verticalDistance={selectedCategory === 'all' ? 22 : 36}
-                            delay={4500}
+                            delay={5000}
                             pauseOnHover={true}
                             skewAmount={4}
-                            easing="elastic"
+                            easing="smooth"
                             onActiveIndexChange={(newIdx) => {
                                 if (filteredTeam[newIdx]) {
                                     setActiveMemberId(filteredTeam[newIdx].id);
@@ -470,99 +423,6 @@ export default function TeamSection() {
                                 </Card>
                             ))}
                         </CardSwap>
-                    </div>
-                </div>
-
-                {/* 3. Comprehensive Core Technical Team Roster Grid (All 12 Members) */}
-                <div className="team-roster-section">
-                    <div className="team-roster-header">
-                        <span className="section-eyebrow">
-                            <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-iris)' }} /> // COMPLETE ROSTER
-                        </span>
-                        <h3 className="team-roster-title">
-                            Full Engineering &amp; Design Roster <span className="text-iris font-mono text-xl">({CORE_TECHNICAL_TEAM.length})</span>
-                        </h3>
-                        <p className="text-slate-500 text-sm max-w-xl">
-                            Select any team member to view their complete telemetry, technical domain focus, and 3D deck spotlight.
-                        </p>
-                    </div>
-
-                    <div className="team-roster-grid">
-                        {CORE_TECHNICAL_TEAM.map((m) => {
-                            const isSelected = m.id === activeMember.id;
-                            return (
-                                <div
-                                    key={m.id}
-                                    className={`team-roster-card ${isSelected ? 'is-active-spotlight' : ''}`}
-                                    onClick={() => handleSpotlightMember(m)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault();
-                                            handleSpotlightMember(m);
-                                        }
-                                    }}
-                                    aria-label={`View ${m.name}, ${m.role}`}
-                                >
-                                    <div className="team-roster-card-image-wrap">
-                                        <img
-                                            src={m.image}
-                                            alt={m.name}
-                                            className="team-roster-card-img"
-                                            loading="lazy"
-                                        />
-                                        <span className="team-roster-card-badge">{m.badge}</span>
-                                    </div>
-
-                                    <div className="team-roster-card-body">
-                                        <div className="team-roster-meta-row">
-                                            <span className="team-roster-num">{m.num} // SB</span>
-                                            <span className="team-roster-dept-tag">{m.category}</span>
-                                        </div>
-
-                                        <h4 className="team-roster-name">{m.name}</h4>
-                                        <p className="team-roster-role">{m.role}</p>
-
-                                        <div className="team-roster-skills">
-                                            {m.skills.slice(0, 3).map((sk) => (
-                                                <span key={sk} className="team-roster-skill-chip">
-                                                    {sk}
-                                                </span>
-                                            ))}
-                                        </div>
-
-                                        <div className="team-roster-actions">
-                                            <button
-                                                type="button"
-                                                className="team-spotlight-btn"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    handleSpotlightMember(m);
-                                                }}
-                                            >
-                                                <span>SPOTLIGHT IN 3D</span>
-                                                <ArrowRight size={11} />
-                                            </button>
-
-                                            {m.portfolio && (
-                                                <a
-                                                    href={m.portfolio}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="card-portfolio-pill"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    title="Visit Founder Portfolio"
-                                                >
-                                                    <span>PORTFOLIO</span>
-                                                    <ArrowUpRight size={10} />
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
                     </div>
                 </div>
             </div>
