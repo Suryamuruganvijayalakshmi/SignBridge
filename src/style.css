@@ -309,6 +309,21 @@ dialog {
     cursor: pointer;
 }
 
+.logo-emblem-img {
+    height: 32px;
+    width: auto;
+    max-width: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.45));
+    transition: transform var(--duration-fast) var(--ease-out-expo), filter var(--duration-fast);
+    flex-shrink: 0;
+}
+
+.logo-container:hover .logo-emblem-img {
+    transform: scale(1.08) translateY(-1px);
+    filter: drop-shadow(0 0 16px rgba(99, 102, 241, 0.8));
+}
+
 .logo-icon-zap {
     width: 28px;
     height: 28px;

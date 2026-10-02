@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Zap, Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
+import { Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onReplayIntro }) {
@@ -18,7 +18,13 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
         <header className="lumina-header" role="banner">
             {/* Left: SignBridge Logo */}
             <Link to="/" className="logo-container" aria-label="SIGNBRIDGE home">
-                <Zap className="logo-icon-zap" aria-hidden="true" />
+                <img
+                    src="/signbridge-emblem.png"
+                    alt="SignBridge Logo"
+                    className="logo-emblem-img"
+                    width="48"
+                    height="32"
+                />
                 <span className="logo-text">SIGNBRIDGE</span>
             </Link>
 
