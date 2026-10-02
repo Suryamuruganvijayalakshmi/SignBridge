@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { motionValue, animate } from 'motion';
+import { Volume2, VolumeX } from 'lucide-react';
 import { loadPhoto, createParticles, createPhotoOverlay, layoutParticles, highResolutionMix } from './particleEngine.js';
 import './particleStage.css';
 
-export default function SignBridgeIntroStage({ onComplete }) {
+export default function SignBridgeIntroStage({ onComplete, isMuted, onToggleMute }) {
     const stageRef = useRef(null);
     const [isExiting, setIsExiting] = useState(false);
     const [hasEnded, setHasEnded] = useState(false);
@@ -216,7 +217,13 @@ export default function SignBridgeIntroStage({ onComplete }) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             cleanups.forEach(fn => fn());
         };
+        // Attempt to trigger ambient soundtrack at the beginning of the globe
+        window.dispatchEvent(new CustomEvent('signbridge-play-audio'));
     }, []); // STRICTLY EMPTY ARRAY []
+
+    const triggerAudio = useCallback(() => {
+        window.dispatchEvent(new CustomEvent('signbridge-play-audio'));
+    }, []);
 
     if (hasEnded) return null;
 
@@ -226,10 +233,33 @@ export default function SignBridgeIntroStage({ onComplete }) {
             className={`stage intro-stage ${isExiting ? 'is-exiting' : ''}`}
             aria-label="SignBridge cinematic particle brand reveal"
             role="region"
+            onClick={triggerAudio}
+            onTouchStart={triggerAudio}
+            onPointerDown={triggerAudio}
         >
             {/* Canvas is dynamically mounted by Three.js with pointer-events: none */}
 
-            {/* Dedicated Skip Button (Only clicking this explicitly skips) */}
+            {/* Left: Soundtrack Status & Mute Control at the beginning of the globe */}
+            <button
+                type="button"
+                className="stage-sound-btn"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (onToggleMute) onToggleMute();
+                    triggerAudio();
+                }}
+                aria-label={isMuted ? "Unmute Ambient Soundtrack" : "Mute Ambient Soundtrack"}
+                title={isMuted ? "Unmute Soundtrack" : "Mute Soundtrack"}
+            >
+                {isMuted ? (
+                    <VolumeX size={13} className="text-slate-400" />
+                ) : (
+                    <Volume2 size={13} style={{ color: '#6366f1' }} />
+                )}
+                <span>{isMuted ? "SOUND OFF" : "SOUND ON"}</span>
+            </button>
+
+            {/* Right: Dedicated Skip Button (Only clicking this explicitly skips) */}
             <button
                 type="button"
                 className="stage-skip-btn"

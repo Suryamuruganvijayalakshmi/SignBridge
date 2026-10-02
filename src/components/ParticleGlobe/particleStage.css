@@ -98,6 +98,48 @@
     font-weight: 600;
 }
 
+/* Dedicated Soundtrack Status & Mute Button on Globe Stage */
+.stage-sound-btn {
+    position: absolute;
+    top: 2rem;
+    left: 2.5rem;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    color: #475569;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-6px);
+    animation: stageFadeIn 0.4s ease-out 0.9s forwards;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+.stage-sound-btn:hover {
+    color: #0f172a;
+    border-color: rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.08);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15);
+    transform: translateY(-8px);
+}
+
+.stage-sound-btn:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+}
+
 /* Animations */
 @keyframes stageFadeIn {
     to {
@@ -108,6 +150,13 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .stage-sound-btn {
+        top: 1.25rem;
+        left: 1.25rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.65rem;
+    }
+
     .stage-skip-btn {
         top: 1.25rem;
         right: 1.25rem;

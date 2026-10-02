@@ -399,11 +399,41 @@ export const CardSwap = forwardRef(({
             : child
     );
 
+    // Mobile Touch Gesture Support (Swipe left/right to cycle cards)
+    const touchStartPos = useRef({ x: 0, y: 0, time: 0 });
+
+    const handleTouchStart = (e) => {
+        if (!e.touches || e.touches.length === 0) return;
+        touchStartPos.current = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY,
+            time: Date.now()
+        };
+    };
+
+    const handleTouchEnd = (e) => {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        const deltaX = e.changedTouches[0].clientX - touchStartPos.current.x;
+        const deltaY = e.changedTouches[0].clientY - touchStartPos.current.y;
+        const deltaTime = Date.now() - touchStartPos.current.time;
+
+        // Quick horizontal swipe gesture
+        if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1 && deltaTime < 600) {
+            if (deltaX < 0) {
+                swapNext();
+            } else {
+                swapPrev();
+            }
+        }
+    };
+
     return (
         <div
             ref={container}
             className="card-swap-container"
             style={{ width, height }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
         >
             <div className="card-swap-stage">
                 {rendered}

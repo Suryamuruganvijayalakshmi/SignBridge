@@ -40,8 +40,8 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
         audioRef.current = audio;
 
         const attemptPlay = () => {
-            if (isMuted) return;
-            const playPromise = audio.play();
+            if (isMuted || !audioRef.current) return;
+            const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise
                     .then(() => {
@@ -63,12 +63,14 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
 
                         const cleanupListeners = () => {
                             window.removeEventListener('pointerdown', onFirstInteraction);
+                            window.removeEventListener('click', onFirstInteraction);
                             window.removeEventListener('keydown', onFirstInteraction);
                             window.removeEventListener('touchstart', onFirstInteraction);
                             window.removeEventListener('scroll', onFirstInteraction);
                         };
 
                         window.addEventListener('pointerdown', onFirstInteraction, { once: true, passive: true });
+                        window.addEventListener('click', onFirstInteraction, { once: true, passive: true });
                         window.addEventListener('keydown', onFirstInteraction, { once: true, passive: true });
                         window.addEventListener('touchstart', onFirstInteraction, { once: true, passive: true });
                         window.addEventListener('scroll', onFirstInteraction, { once: true, passive: true });
@@ -76,16 +78,22 @@ export default function AudioController({ isMuted, onToggleMute, triggerToast })
             }
         };
 
+        const handleForcePlay = () => {
+            attemptPlay();
+        };
+
+        window.addEventListener('signbridge-play-audio', handleForcePlay);
         attemptPlay();
 
         return () => {
+            window.removeEventListener('signbridge-play-audio', handleForcePlay);
             clearInterval(fadeTimerRef.current);
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current = null;
             }
         };
-    }, []);
+    }, [isMuted]);
 
     // Handle mute / unmute state changes
     useEffect(() => {

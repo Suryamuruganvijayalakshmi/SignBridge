@@ -183,6 +183,39 @@ export default function TeamSection() {
         return idx !== -1 ? idx : 0;
     }, [filteredTeam, activeMember.id]);
 
+    // Responsive card dimensions to guarantee zero horizontal overflow and comfortable mobile viewing
+    const [cardLayout, setCardLayout] = useState(() => {
+        if (typeof window === 'undefined') return { width: 380, height: 480, distX: 24, distY: 22, isMobile: false };
+        const w = window.innerWidth;
+        if (w < 400) {
+            return { width: Math.min(290, w - 36), height: 380, distX: 12, distY: 12, isMobile: true };
+        } else if (w < 640) {
+            return { width: Math.min(320, w - 48), height: 410, distX: 15, distY: 15, isMobile: true };
+        } else if (w < 1024) {
+            return { width: 345, height: 435, distX: 18, distY: 18, isMobile: true };
+        } else {
+            return { width: 380, height: 480, distX: 24, distY: 22, isMobile: false };
+        }
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            const w = window.innerWidth;
+            if (w < 400) {
+                setCardLayout({ width: Math.min(290, w - 36), height: 380, distX: 12, distY: 12, isMobile: true });
+            } else if (w < 640) {
+                setCardLayout({ width: Math.min(320, w - 48), height: 410, distX: 15, distY: 15, isMobile: true });
+            } else if (w < 1024) {
+                setCardLayout({ width: 345, height: 435, distX: 18, distY: 18, isMobile: true });
+            } else {
+                setCardLayout({ width: 380, height: 480, distX: 24, distY: 22, isMobile: false });
+            }
+        };
+
+        window.addEventListener('resize', handleResize, { passive: true });
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const handleWheelOverDeck = (e) => {
         wheelAccumulatorRef.current += e.deltaY;
         if (Math.abs(wheelAccumulatorRef.current) > 60) {
@@ -312,9 +345,9 @@ export default function TeamSection() {
                                 <span>CYCLE NEXT MEMBER</span>
                             </button>
 
-                            <div className="team-scroll-hint" title="Scroll down or wheel over cards to change">
-                                <Mouse size={16} className="text-iris" />
-                                <span>SCROLL OR HOVER TO CYCLE</span>
+                            <div className="team-scroll-hint" title="Cycle through members">
+                                <Mouse size={15} className="text-iris" />
+                                <span>{cardLayout.isMobile ? 'SWIPE CARDS OR TAP PILLS' : 'SCROLL OR HOVER TO CYCLE'}</span>
                             </div>
                         </div>
 
@@ -354,15 +387,15 @@ export default function TeamSection() {
                         <div className="deck-ambient-glow" aria-hidden="true" />
 
                         <CardSwap
-                            key={selectedCategory}
+                            key={`${selectedCategory}-${cardLayout.width}`}
                             ref={cardSwapRef}
-                            width={390}
-                            height={490}
-                            cardDistance={selectedCategory === 'all' ? 24 : 40}
-                            verticalDistance={selectedCategory === 'all' ? 22 : 36}
+                            width={cardLayout.width}
+                            height={cardLayout.height}
+                            cardDistance={selectedCategory === 'all' ? cardLayout.distX : Math.round(cardLayout.distX * 1.35)}
+                            verticalDistance={selectedCategory === 'all' ? cardLayout.distY : Math.round(cardLayout.distY * 1.25)}
                             delay={5000}
                             pauseOnHover={true}
-                            skewAmount={4}
+                            skewAmount={cardLayout.isMobile ? 2 : 4}
                             easing="smooth"
                             onActiveIndexChange={(newIdx) => {
                                 if (filteredTeam[newIdx]) {

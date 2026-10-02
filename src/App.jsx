@@ -250,7 +250,11 @@ export default function App() {
 
             {/* 4. Full-Screen Cinematic Particle Intro Animation (Visible first on entry) */}
             {!introComplete && (
-                <SignBridgeIntroStage onComplete={handleIntroFinished} />
+                <SignBridgeIntroStage
+                    onComplete={handleIntroFinished}
+                    isMuted={isMuted}
+                    onToggleMute={handleToggleMute}
+                />
             )}
         </div>
     );
