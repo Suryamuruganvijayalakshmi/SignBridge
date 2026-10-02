@@ -2463,6 +2463,275 @@ textarea.form-control {
 }
 
 /* ==========================================================================
+   TEAM ROSTER GRID & DEPARTMENT TABS (12 CORE TECHNICAL MEMBERS)
+   ========================================================================== */
+
+.team-dept-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.team-dept-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    color: var(--text-60, #64748b);
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+
+.team-dept-tab:hover {
+    color: var(--text-pure, #0f172a);
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.team-dept-tab.active {
+    color: #ffffff;
+    background: var(--accent-iris, #6366f1);
+    border-color: var(--accent-iris, #6366f1);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.team-dept-tab-count {
+    display: inline-block;
+    padding: 0.1rem 0.35rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.22);
+    font-size: 9.5px;
+    font-weight: 700;
+}
+
+.team-dept-tab:not(.active) .team-dept-tab-count {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-60, #64748b);
+}
+
+/* Roster Grid (All 12 Members) */
+.team-roster-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.team-roster-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2.25rem;
+}
+
+.team-roster-title {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--text-pure, #0f172a);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.team-roster-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .team-roster-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .team-roster-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1440px) {
+    .team-roster-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.team-roster-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+}
+
+.team-roster-card:hover,
+.team-roster-card.is-active-spotlight {
+    border-color: rgba(99, 102, 241, 0.45);
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+    transform: translateY(-4px);
+}
+
+.team-roster-card.is-active-spotlight {
+    outline: 2px solid var(--accent-iris, #6366f1);
+    outline-offset: 1px;
+}
+
+.team-roster-card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.05;
+    background: #f1f5f9;
+    overflow: hidden;
+}
+
+.team-roster-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: contrast(1.04) brightness(0.98);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.team-roster-card:hover .team-roster-card-img {
+    transform: scale(1.05);
+    filter: contrast(1.08) brightness(1.02);
+}
+
+.team-roster-card-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--accent-iris, #6366f1);
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.team-roster-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.team-roster-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.team-roster-num {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--text-60, #64748b);
+    text-transform: uppercase;
+}
+
+.team-roster-dept-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent-iris, #6366f1);
+    text-transform: uppercase;
+}
+
+.team-roster-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--text-pure, #0f172a);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.team-roster-role {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent-iris, #6366f1);
+    margin: 0;
+}
+
+.team-roster-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+}
+
+.team-roster-skill-chip {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: #475569;
+}
+
+.team-roster-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.team-spotlight-btn {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-iris, #6366f1);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.team-spotlight-btn:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
    VISION BANNER
    ========================================================================== */
 
