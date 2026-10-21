@@ -11,6 +11,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
         { label: '// R&D LAB', href: '#research' },
         { label: '// PROCESS', href: '#process' },
         { label: '// TEAM', href: '#team' },
+        { label: '// FAQ', href: '#faq' },
         { label: '// CONTACT', href: '#contact' },
     ];
 

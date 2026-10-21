@@ -1237,12 +1237,28 @@ textarea.form-control {
     min-height: 100px;
 }
 
+select.form-control {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+select.form-control option {
+    background: #ffffff;
+    color: #0f172a;
+    padding: 0.5rem;
+}
+
 .form-status {
     font-family: var(--font-mono);
     font-size: 12px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     min-height: 20px;
-    color: var(--accent-lime);
+    line-height: 1.5;
 }
 
 /* ==========================================================================

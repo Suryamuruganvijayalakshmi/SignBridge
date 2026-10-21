@@ -225,9 +225,9 @@ export default function App() {
 
                             <VisionBanner />
 
-                            <ContactSection onNotification={triggerToast} />
-
                             <FaqSection />
+
+                            <ContactSection onNotification={triggerToast} />
                         </>
                     } />
                     <Route path="/product" element={<ProductPage />} />
