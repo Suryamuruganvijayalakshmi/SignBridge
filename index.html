@@ -11,86 +11,36 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <meta name="description" content="SignBridge transforms ambitious ideas into intelligent, scalable digital products through software engineering, AI, cloud, IoT and emerging technologies.">
-    <meta property="og:title" content="SIGNBRIDGE — BEYOND DIGITAL // Software Engineering &amp; AI Studio">
-    <meta property="og:description" content="Building digital bridges between ideas and innovation.">
+    <meta name="description" content="SignBridge builds NFC digital identity cards, agricultural procurement intelligence platforms like FarmCargo, and intelligent software, AI, cloud, and IoT systems.">
+    <meta property="og:title" content="SIGNBRIDGE — BEYOND DIGITAL // Products, AI &amp; Software Studio">
+    <meta property="og:description" content="Building digital bridges between ideas and innovation — NFC Digital Business &amp; Portfolio Cards, FarmCargo, and custom engineering.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://signbridge.click/">
 
-    <!-- Preload SignBridge Brand Logo for Instant Particle Intro -->
-    <link rel="preload" as="image" href="/sign logo.png" crossorigin="anonymous">
-    <link rel="preload" as="image" href="/signbridge-emblem.png" crossorigin="anonymous">
-    
-    <!-- Fonts: Cabinet Grotesk (800, 900), Satoshi (300, 400, 500, 700), Archivo, JetBrains Mono -->
-    <link rel="preconnect" href="https://api.fontshare.com">
+    <!-- Fonts: Plus Jakarta Sans, Cabinet Grotesk, Satoshi, Archivo, JetBrains Mono -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&f[]=satoshi@300,400,500,700&display=swap">
 
-    <!-- Zero-Flash Baseline Styling for Cinematic Particle Starter (White Background) -->
+    <!-- Zero-Flash Baseline Styling -->
     <style>
         html, body, #root {
             margin: 0;
             padding: 0;
             width: 100%;
             min-height: 100vh;
-            background-color: #ffffff;
-            color: #0f172a;
+            background-color: #8100FF;
+            color: #ffffff;
             overflow-x: hidden;
         }
     </style>
 </head>
 
-<body style="background-color: #ffffff; margin: 0;">
-    <!-- Global Ambient Soundtrack (Starts immediately at the beginning of the site) -->
-    <audio id="signbridge-global-audio" src="/gigidelaromusic-soft-harmonic-breath-short-450972.mp3" preload="auto" loop playsinline autoplay></audio>
-    <script>
-        (function() {
-            var audio = document.getElementById('signbridge-global-audio');
-            if (!audio) return;
-            audio.volume = 0.55;
-            
-            function tryStart() {
-                var p = audio.play();
-                if (p !== undefined) {
-                    p.then(function() {
-                        cleanup();
-                    }).catch(function() {
-                        // If unmuted autoplay blocked, run muted so track syncs with globe
-                        audio.muted = true;
-                        audio.play().catch(function() {});
-                    });
-                }
-            }
-
-            function unlockAudio() {
-                if (audio) {
-                    audio.muted = false;
-                    audio.volume = 0.55;
-                    audio.play().then(function() {
-                        cleanup();
-                    }).catch(function() {});
-                }
-            }
-
-            function cleanup() {
-                window.removeEventListener('pointerdown', unlockAudio);
-                window.removeEventListener('touchstart', unlockAudio);
-                window.removeEventListener('keydown', unlockAudio);
-                window.removeEventListener('click', unlockAudio);
-                window.removeEventListener('mousemove', unlockAudio);
-                window.removeEventListener('scroll', unlockAudio);
-            }
-
-            tryStart();
-            window.addEventListener('pointerdown', unlockAudio, { passive: true });
-            window.addEventListener('touchstart', unlockAudio, { passive: true });
-            window.addEventListener('keydown', unlockAudio, { passive: true });
-            window.addEventListener('click', unlockAudio, { passive: true });
-            window.addEventListener('mousemove', unlockAudio, { passive: true, once: true });
-            window.addEventListener('scroll', unlockAudio, { passive: true });
-        })();
-    </script>
+<body style="background-color: #8100FF; margin: 0; color: #ffffff;">
+    <!-- Ambient Soundtrack (Loaded on user opt-in to keep initial load fast) -->
+    <audio id="signbridge-global-audio" src="/gigidelaromusic-soft-harmonic-breath-short-450972.mp3" preload="none" loop playsinline></audio>
 
     <!-- React Root Mount Target -->
     <div id="root"></div>

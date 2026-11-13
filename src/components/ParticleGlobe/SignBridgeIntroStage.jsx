@@ -210,6 +210,7 @@ export default function SignBridgeIntroStage({ onComplete, isMuted, onToggleMute
             }
         }
 
+        window.dispatchEvent(new CustomEvent('signbridge-play-audio'));
         init();
 
         return () => {
@@ -217,8 +218,6 @@ export default function SignBridgeIntroStage({ onComplete, isMuted, onToggleMute
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             cleanups.forEach(fn => fn());
         };
-        // Attempt to trigger ambient soundtrack at the beginning of the globe
-        window.dispatchEvent(new CustomEvent('signbridge-play-audio'));
     }, []); // STRICTLY EMPTY ARRAY []
 
     const triggerAudio = useCallback(() => {

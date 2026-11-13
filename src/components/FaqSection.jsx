@@ -32,7 +32,7 @@ export default function FaqSection() {
             <div className="section-frame faq-grid-layout !grid !grid-cols-1 lg:!grid-cols-2 !gap-12">
                 <div className="faq-header-column">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // 06 — PROTOCOL FAQ
+                        <span className="eyebrow-pip" /> // 07 — PROTOCOL FAQ
                     </span>
                     <h2 className="section-main-heading">
                         Good to <br />

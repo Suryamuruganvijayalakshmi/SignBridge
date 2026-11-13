@@ -1,57 +1,54 @@
-/**
- * NeatCursor Component
- * Minimalist luxury Baby Pink cursor effect designed for pure white backgrounds.
- * 
- * Features:
- * - Precision Core Dot: Razor-sharp Baby Pink dot (#ff75a0) tracking mouse with 0ms latency.
- * - Fluid Baby Pink Trailing Line: Silky, tapered streamline fading gracefully behind the cursor.
- * - No outer ring/circle (clean, neat and focused).
- * - Full white background contrast with crisp white rim and soft rose glow.
- */
+import React, { useEffect, useRef } from 'react';
 
-import React, { useEffect, useRef, useState } from 'react';
-
-export default function NeatCursor({ activePalette }) {
+export default function NeatCursor() {
     const canvasRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
 
-    // Baby Pink color constants
-    const babyPink = '#ff75a0';        // Vibrant warm baby pink
-    const softBabyPink = '#fbcfe8';    // Delicate pastel baby pink
-    const babyPinkGlow = 'rgba(255, 117, 160, 0.45)';
+    const babyPink = '#ff75a0';
+    const softBabyPink = '#fbcfe8';
 
     useEffect(() => {
-        // Disable on touch-only devices for optimal mobile UX
-        const isTouch = window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(pointer: fine)').matches;
-        if (isTouch) return;
+        const isTouch =
+            window.matchMedia('(pointer: coarse)').matches &&
+            !window.matchMedia('(pointer: fine)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (isTouch || prefersReducedMotion) return;
 
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        let animationFrameId;
+        let animationFrameId = null;
+        let isLoopActive = false;
+        let viewW = window.innerWidth;
+        let viewH = window.innerHeight;
         let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
         const resize = () => {
             dpr = Math.min(window.devicePixelRatio || 1, 2);
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            ctx.scale(dpr, dpr);
+            viewW = window.innerWidth;
+            viewH = window.innerHeight;
+            canvas.width = viewW * dpr;
+            canvas.height = viewH * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         };
         resize();
-        window.addEventListener('resize', resize);
+        window.addEventListener('resize', resize, { passive: true });
 
-        // Core coordinates state
         const mouse = { x: -100, y: -100, active: false };
         let isHovered = false;
         let isClicking = false;
+        let isOverInput = false;
 
-        // Smooth tapered fluid trail (20 smooth chain nodes)
-        const TRAIL_COUNT = 20;
+        const TRAIL_COUNT = 16;
         const trail = Array.from({ length: TRAIL_COUNT }, () => ({ x: -100, y: -100 }));
 
-        let isOverInput = false;
+        const startLoop = () => {
+            if (!isLoopActive) {
+                isLoopActive = true;
+                animationFrameId = requestAnimationFrame(render);
+            }
+        };
 
         const onPointerMove = (e) => {
             const clientX = e.clientX;
@@ -60,39 +57,47 @@ export default function NeatCursor({ activePalette }) {
             if (mouse.x < 0) {
                 mouse.x = clientX;
                 mouse.y = clientY;
-                trail.forEach(p => { p.x = clientX; p.y = clientY; });
+                for (let i = 0; i < TRAIL_COUNT; i++) {
+                    trail[i].x = clientX;
+                    trail[i].y = clientY;
+                }
             }
 
             mouse.x = clientX;
             mouse.y = clientY;
             mouse.active = true;
-            setIsVisible(true);
 
-            // Detect interactive target hover for subtle dot scale
             const target = e.target;
-            isOverInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA');
-
-            const interactive = target && (
-                target.tagName === 'A' ||
-                target.tagName === 'BUTTON' ||
-                target.getAttribute('role') === 'button' ||
-                target.closest('a, button, [role="button"], .interactive-hover, .btn-primary-lime, .btn-secondary-glass, .glass-card, .footer-interaction-status, .spectrum-pill-indicator')
+            isOverInput = !!(target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT'));
+            isHovered = !!(
+                target &&
+                (target.tagName === 'A' ||
+                    target.tagName === 'BUTTON' ||
+                    target.getAttribute('role') === 'button' ||
+                    target.closest('a, button, [role="button"], .interactive-hover, .btn-primary-lime, .btn-secondary-glass'))
             );
 
-            isHovered = !!interactive;
+            startLoop();
         };
 
         const onPointerDown = () => {
             isClicking = true;
+            startLoop();
         };
 
         const onPointerUp = () => {
             isClicking = false;
+            startLoop();
         };
 
         const onPointerLeave = () => {
             mouse.active = false;
-            setIsVisible(false);
+            ctx.clearRect(0, 0, viewW, viewH);
+            isLoopActive = false;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
         };
 
         window.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -100,73 +105,67 @@ export default function NeatCursor({ activePalette }) {
         window.addEventListener('pointerup', onPointerUp, { passive: true });
         document.addEventListener('mouseleave', onPointerLeave);
 
-        // Smooth render loop
         const render = () => {
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            ctx.clearRect(0, 0, viewW, viewH);
 
-            // If user is hovering over a real input/textarea, hide custom cursor to allow native typing cursor
-            if (mouse.x > 0 && mouse.active && !isOverInput) {
-                // 1. Update trail nodes (silky spring chain)
-                trail[0].x = mouse.x;
-                trail[0].y = mouse.y;
-
-                for (let i = 1; i < TRAIL_COUNT; i++) {
-                    const prev = trail[i - 1];
-                    const curr = trail[i];
-                    curr.x += (prev.x - curr.x) * 0.44;
-                    curr.y += (prev.y - curr.y) * 0.44;
-                }
-
-                // 2. Draw Smooth Baby Pink Trailing Line
-                if (trail.length >= 3) {
-                    ctx.save();
-                    for (let i = 0; i < trail.length - 1; i++) {
-                        const p0 = trail[i];
-                        const p1 = trail[i + 1];
-                        const progress = i / (trail.length - 1);
-                        const alpha = (1 - progress) * 0.82;
-                        const lineWidth = Math.max(0.8, (1 - progress) * 4.2);
-
-                        ctx.beginPath();
-                        ctx.moveTo(p0.x, p0.y);
-                        ctx.lineTo(p1.x, p1.y);
-
-                        // Gradient transition from rich baby pink at head to soft pastel at tail
-                        ctx.strokeStyle = i < 8 ? babyPink : softBabyPink;
-                        ctx.lineWidth = lineWidth;
-                        ctx.lineCap = 'round';
-                        ctx.lineJoin = 'round';
-                        ctx.globalAlpha = alpha;
-                        ctx.shadowColor = babyPinkGlow;
-                        ctx.shadowBlur = 6;
-                        ctx.stroke();
-                    }
-                    ctx.restore();
-                }
-
-                // 3. Draw Precision Baby Pink Pointer Dot (Zero Ring Around It)
-                ctx.save();
-                ctx.beginPath();
-                const dotRadius = isClicking ? 2.8 : (isHovered ? 5.2 : 3.8);
-                ctx.arc(mouse.x, mouse.y, dotRadius, 0, Math.PI * 2);
-
-                // Baby pink core with glowing aura
-                ctx.fillStyle = babyPink;
-                ctx.shadowColor = babyPink;
-                ctx.shadowBlur = 10;
-                ctx.fill();
-
-                // Crisp white border for razor-sharp definition on white background
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 1.4;
-                ctx.stroke();
-                ctx.restore();
+            if (!mouse.active || mouse.x < 0 || isOverInput) {
+                isLoopActive = false;
+                animationFrameId = null;
+                return;
             }
 
-            animationFrameId = requestAnimationFrame(render);
-        };
+            trail[0].x = mouse.x;
+            trail[0].y = mouse.y;
 
-        render();
+            let maxDelta = 0;
+            for (let i = 1; i < TRAIL_COUNT; i++) {
+                const prev = trail[i - 1];
+                const curr = trail[i];
+                const dx = (prev.x - curr.x) * 0.44;
+                const dy = (prev.y - curr.y) * 0.44;
+                curr.x += dx;
+                curr.y += dy;
+                maxDelta = Math.max(maxDelta, Math.abs(dx) + Math.abs(dy));
+            }
+
+            // Draw fluid tapered trail without costly per-segment shadowBlur
+            ctx.save();
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            for (let i = 0; i < TRAIL_COUNT - 1; i++) {
+                const p0 = trail[i];
+                const p1 = trail[i + 1];
+                const progress = i / (TRAIL_COUNT - 1);
+                ctx.beginPath();
+                ctx.moveTo(p0.x, p0.y);
+                ctx.lineTo(p1.x, p1.y);
+                ctx.strokeStyle = i < 7 ? babyPink : softBabyPink;
+                ctx.lineWidth = Math.max(0.8, (1 - progress) * 4.0);
+                ctx.globalAlpha = (1 - progress) * 0.78;
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Precision pointer dot
+            ctx.save();
+            ctx.beginPath();
+            const dotRadius = isClicking ? 2.8 : isHovered ? 5.0 : 3.8;
+            ctx.arc(mouse.x, mouse.y, dotRadius, 0, Math.PI * 2);
+            ctx.fillStyle = babyPink;
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+            ctx.restore();
+
+            // Stop RAF loop once trail catches up to stationary cursor
+            if (maxDelta > 0.08 || isClicking) {
+                animationFrameId = requestAnimationFrame(render);
+            } else {
+                isLoopActive = false;
+                animationFrameId = null;
+            }
+        };
 
         return () => {
             window.removeEventListener('resize', resize);
@@ -174,16 +173,14 @@ export default function NeatCursor({ activePalette }) {
             window.removeEventListener('pointerdown', onPointerDown);
             window.removeEventListener('pointerup', onPointerUp);
             document.removeEventListener('mouseleave', onPointerLeave);
-            cancelAnimationFrame(animationFrameId);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
-    // Ensure cursor is always in the #top-layer to appear above <dialog> modals
     useEffect(() => {
         const bumpToTop = () => {
             if (canvasRef.current && canvasRef.current.showPopover) {
                 try {
-                    // Hide then immediately show to push it to the very top of the top layer
                     canvasRef.current.hidePopover();
                     canvasRef.current.showPopover();
                 } catch (e) {
@@ -192,7 +189,6 @@ export default function NeatCursor({ activePalette }) {
             }
         };
 
-        // Initial bump
         if (canvasRef.current && canvasRef.current.showPopover) {
             try {
                 canvasRef.current.showPopover();

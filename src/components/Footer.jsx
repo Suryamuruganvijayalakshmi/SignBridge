@@ -1,14 +1,13 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer({ onReplayIntro }) {
     return (
         <footer className="site-footer" style={{ pointerEvents: 'auto' }}>
             <div className="footer-inner">
-
-                {/* ── Top Row: CTA left + Link columns right ── */}
+                {/* Top Row: CTA left + Link columns right */}
                 <div className="footer-top-row">
-
                     {/* Left: Big CTA block */}
                     <div className="footer-cta-block">
                         <h2 className="footer-cta-heading">
@@ -22,31 +21,28 @@ export default function Footer({ onReplayIntro }) {
                         <a
                             href="mailto:signbridge.aiauto@gmail.com"
                             className="footer-cta-btn"
-                            onMouseEnter={e => {
-                                e.currentTarget.style.background = 'var(--accent-iris)';
-                                e.currentTarget.style.color = '#ffffff';
-                                e.currentTarget.style.boxShadow = '0 0 30px rgba(99,102,241,0.55)';
-                            }}
-                            onMouseLeave={e => {
-                                e.currentTarget.style.background = '#ffffff';
-                                e.currentTarget.style.color = '#09090b';
-                                e.currentTarget.style.boxShadow = 'none';
-                            }}
                         >
-                            Start a Project <ArrowUpRight size={18} />
+                            Start a Project <ArrowUpRight size={18} aria-hidden="true" />
                         </a>
                     </div>
 
                     {/* Right: Link columns */}
                     <div className="footer-link-columns">
                         <div className="footer-link-col">
-                            <h4 className="footer-col-label">Expertise</h4>
-                            <a href="#capabilities" className="footer-link">Software Engineering</a>
-                            <a href="#capabilities" className="footer-link">Artificial Intelligence</a>
-                            <a href="#capabilities" className="footer-link">Cloud &amp; IoT</a>
+                            <h3 className="footer-col-label">Products</h3>
+                            <Link to="/products/nfc-business-card" className="footer-link">NFC Business Card</Link>
+                            <Link to="/products/nfc-portfolio-card" className="footer-link">NFC Portfolio Card</Link>
+                            <Link to="/products/farmcargo" className="footer-link">FarmCargo</Link>
                         </div>
                         <div className="footer-link-col">
-                            <h4 className="footer-col-label">Socials</h4>
+                            <h3 className="footer-col-label">Expertise</h3>
+                            <Link to="/#capabilities" className="footer-link">Software Engineering</Link>
+                            <Link to="/#capabilities" className="footer-link">Artificial Intelligence</Link>
+                            <Link to="/#capabilities" className="footer-link">Cloud &amp; IoT</Link>
+                            <Link to="/cloud-sky" className="footer-link" style={{ color: '#c084fc' }}>Cloud Sky Atmosphere</Link>
+                        </div>
+                        <div className="footer-link-col">
+                            <h3 className="footer-col-label">Socials</h3>
                             <a
                                 href="https://www.instagram.com/sign_bridgee/"
                                 target="_blank"
@@ -67,10 +63,10 @@ export default function Footer({ onReplayIntro }) {
                     </div>
                 </div>
 
-                {/* ── Bottom: Massive brand name ── */}
+                {/* Bottom: Brand wordmark + copyright */}
                 <div className="footer-brand-row">
                     <div className="footer-divider" />
-                    <h1 className="footer-wordmark">SIGNBRIDGE</h1>
+                    <p className="footer-wordmark" aria-hidden="true">SIGNBRIDGE</p>
                     <div className="footer-meta-bar">
                         <span>© 2026 SIGNBRIDGE. ALL RIGHTS RESERVED.</span>
                         {onReplayIntro && (
@@ -81,14 +77,14 @@ export default function Footer({ onReplayIntro }) {
                                 style={{
                                     background: 'none',
                                     border: 'none',
-                                    color: 'var(--accent-iris, #6366f1)',
+                                    color: '#a5b4fc',
                                     cursor: 'pointer',
                                     fontFamily: 'inherit',
                                     fontSize: '0.85rem'
                                 }}
-                                title="Replay cinematic particle globe intro"
+                                title="Launch cinematic particle globe intro"
                             >
-                                ↺ Replay Cinematic Particle Intro
+                                ↺ Launch Cinematic Particle Intro
                             </button>
                         )}
                         <span>BEYOND DIGITAL // INNOVATION STUDIO</span>

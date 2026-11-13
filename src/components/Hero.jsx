@@ -1,36 +1,46 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Cloud } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export default function Hero({ onOpenShowreel, onOpenContact }) {
+export default function Hero() {
     return (
-        <main className="lumina-hero" id="home" role="main">
-            {/* 1. Badge: Tiny magenta uppercase text inside a glass pill */}
-            <a href="#capabilities" className="glass-pill-badge" id="badge-trigger">
-                <span className="badge-dot" aria-hidden="true" />
-                <span className="badge-text">// SOFTWARE ENGINEERING & AI STUDIO</span>
-            </a>
+        <section className="lumina-hero-wrapper" id="home">
+            <main className="lumina-hero" role="main">
+                {/* 1. Badge: Glass pill */}
+                <div className="hero-badge-row">
+                    <a href="#products" className="glass-pill-badge" id="badge-trigger">
+                        <span className="badge-dot" aria-hidden="true" />
+                        <span className="badge-text">// SOFTWARE ENGINEERING &amp; AI STUDIO</span>
+                    </a>
+                    <Link to="/cloud-sky" className="hero-meadow-pill" title="View Full-Screen Cloud Sky Atmosphere">
+                        <Cloud size={13} className="text-iris" />
+                        <span>CLOUD SKY PREVIEW</span>
+                    </Link>
+                </div>
 
-            {/* 2. H1 Heading: Two-line giant text, tight tracking, leading-[0.85], second word lime green */}
-            <h1 className="hero-heading !text-[4.5rem] md:!text-[6.5rem] lg:!text-[9rem] 2xl:!text-[11rem] 3xl:!text-[14rem] !leading-[0.85]">
-                <span className="line-one">BEYOND</span>
-                <span className="line-two text-lime">DIGITAL</span>
-            </h1>
+                {/* 2. H1 Heading */}
+                <h1 className="hero-heading !text-[4.5rem] md:!text-[6.5rem] lg:!text-[9rem] 2xl:!text-[11rem] 3xl:!text-[14rem] !leading-[0.85]">
+                    <span className="line-one">BEYOND</span>
+                    <span className="line-two text-lime">DIGITAL</span>
+                </h1>
 
-            {/* 3. Paragraph: Max-width 650px, font-weight light, color white/50, leading relaxed */}
-            <p className="hero-description">
-                SignBridge transforms ambitious ideas into intelligent, scalable digital products through 
-                software engineering, AI, cloud, IoT and emerging technologies.
-            </p>
+                {/* 3. Description */}
+                <p className="hero-description">
+                    SignBridge transforms ambitious ideas into intelligent, scalable digital products through{' '}
+                    software engineering, AI, cloud, IoT and emerging technologies.
+                </p>
 
-            {/* 4. Action Row: Primary CTA */}
-            <div className="action-row">
-                {/* Primary CTA: Solid lime green with black text */}
-                <a href="#research" className="btn-primary-lime">
-                    <span>EXPLORE OUR WORK</span>
-                    <ArrowRight className="btn-arrow" size={16} aria-hidden="true" />
-                </a>
-            </div>
-
-        </main>
+                {/* 4. Action Row */}
+                <div className="action-row">
+                    <a href="#products" className="btn-primary-lime">
+                        <span>EXPLORE PRODUCTS</span>
+                        <ArrowRight className="btn-arrow" size={16} aria-hidden="true" />
+                    </a>
+                    <a href="#research" className="btn-secondary-glass">
+                        <span>OUR R&amp;D WORK</span>
+                    </a>
+                </div>
+            </main>
+        </section>
     );
 }

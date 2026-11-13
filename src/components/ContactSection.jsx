@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, ArrowUpRight, ShieldCheck, AlertCircle, CheckCircle2, RotateCw } from 'lucide-react';
-import { supabase } from '../lib/supabase.js';
+import { getSupabase } from '../lib/supabase.js';
 import {
     sanitizeInput,
     isValidEmail,
@@ -108,6 +108,7 @@ export default function ContactSection({ onNotification }) {
         let errorMessage = '';
 
         try {
+            const supabase = await getSupabase();
             // 8-second timeout promise race for high reliability
             const insertPromise = supabase.from('contact_messages').insert({
                 name: sanitizedName,
@@ -180,7 +181,7 @@ export default function ContactSection({ onNotification }) {
                 {/* Left: Contact Info & Protocol Channels */}
                 <div className="contact-info-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-lime)' }} /> // 07 — TRANSMISSION & COLLABORATION
+                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-lime)' }} /> // 08 — TRANSMISSION & COLLABORATION
                     </span>
                     <h2 className="section-main-heading">
                         Have an idea <br />
@@ -208,8 +209,8 @@ export default function ContactSection({ onNotification }) {
                     </div>
 
                     {/* Security & Reliability SLA Assurance Pill */}
-                    <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-white/10 flex items-center gap-3 text-xs text-slate-500">
-                        <ShieldCheck size={16} className="text-lime" />
+                    <div className="mt-8 pt-6 border-t border-white/20 flex items-center gap-3 text-xs text-purple-200">
+                        <ShieldCheck size={16} className="text-white" />
                         <span>256-Bit Encrypted Uplink · Anti-Spam Guard · 24h Response Protocol</span>
                     </div>
                 </div>

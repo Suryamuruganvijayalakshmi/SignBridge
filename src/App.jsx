@@ -1,24 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import ProductPage from './pages/ProductPage.jsx';
+import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import NeatCursor from './components/NeatCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import DisciplinesMarquee from './components/DisciplinesMarquee.jsx';
 import CapabilitiesSection from './components/CapabilitiesSection.jsx';
-import SmartTableSection from './components/SmartTableSection.jsx';
+import ProductsSection from './components/products/ProductsSection.jsx';
 import ResearchSection from './components/ResearchSection.jsx';
 import ProcessTimeline from './components/ProcessTimeline.jsx';
-import TeamSection from './components/TeamSection.jsx';
 import VisionBanner from './components/VisionBanner.jsx';
-import ContactSection from './components/ContactSection.jsx';
 import FaqSection from './components/FaqSection.jsx';
+import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
-import ShowreelModal from './components/ShowreelModal.jsx';
-import ContactModal from './components/ContactModal.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
-import SignBridgeIntroStage from './components/ParticleGlobe/SignBridgeIntroStage.jsx';
 import AudioController from './components/AudioController.jsx';
+import CloudSky from './components/originkit/CloudSky.jsx';
+
+// Lazy-loaded heavy routes, modals, 3D WebGL stage, and GSAP card deck
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
+const CloudSkyPage = lazy(() => import('./pages/CloudSkyPage.jsx'));
+const AetherglintPage = lazy(() => import('./pages/AetherglintPage.jsx'));
+const TeamSection = lazy(() => import('./components/TeamSection.jsx'));
+const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
+const SignBridgeIntroStage = lazy(() => import('./components/ParticleGlobe/SignBridgeIntroStage.jsx'));
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -72,33 +76,53 @@ export const RIBBON_SPECTRUMS = [
     }
 ];
 
+function ScrollToHash() {
+    const { pathname, hash } = useLocation();
+
+    useEffect(() => {
+        if (hash) {
+            const id = hash.slice(1);
+            const timer = setTimeout(() => {
+                const target = document.getElementById(id);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 60);
+            return () => clearTimeout(timer);
+        }
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    }, [pathname, hash]);
+
+    return null;
+}
+
 export default function App() {
+    const { pathname } = useLocation();
+    const isAtmospherePreview = pathname === '/cloud-sky' || pathname === '/aetherglint';
+
     const [paletteIndex, setPaletteIndex] = useState(0);
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
-    const [showreelOpen, setShowreelOpen] = useState(false);
     const [contactOpen, setContactOpen] = useState(false);
-    // Globe animation is the definitive starter of the site on every opening
-    const [introComplete, setIntroComplete] = useState(false);
+    // Render main content immediately for instant FCP/LCP; 3D intro launches on demand
+    const [introComplete, setIntroComplete] = useState(true);
+    const [isMuted, setIsMuted] = useState(true);
 
     const activePalette = RIBBON_SPECTRUMS[paletteIndex];
     const toastTimerRef = useRef(null);
     const audioCtxRef = useRef(null);
+    const soundEnabled = !isMuted;
 
-    const handleReplayIntro = useCallback(() => {
-        try {
-            sessionStorage.removeItem('signbridge-intro-seen');
-        } catch (e) {}
-        setIntroComplete(false);
-        triggerToast('// REPLAYING CINEMATIC PARTICLE INTRO');
-        playSynthFeedback(660, 'sine');
+    const triggerToast = useCallback((msg) => {
+        setToastMessage(msg);
+        setToastVisible(true);
+        clearTimeout(toastTimerRef.current);
+        toastTimerRef.current = setTimeout(() => {
+            setToastVisible(false);
+        }, 2200);
     }, []);
 
-    const handleIntroFinished = useCallback(() => {
-        setIntroComplete(true);
-    }, []);
-
-    const playSynthFeedback = (freq = 520, type = 'sine') => {
+    const playSynthFeedback = useCallback((freq = 520, type = 'sine') => {
         if (!soundEnabled) return;
         try {
             if (!audioCtxRef.current) {
@@ -119,18 +143,19 @@ export default function App() {
         } catch (e) {
             // Audio ignore
         }
-    };
+    }, [soundEnabled]);
 
-    const triggerToast = (msg) => {
-        setToastMessage(msg);
-        setToastVisible(true);
-        clearTimeout(toastTimerRef.current);
-        toastTimerRef.current = setTimeout(() => {
-            setToastVisible(false);
-        }, 2200);
-    };
+    const handleReplayIntro = useCallback(() => {
+        setIntroComplete(false);
+        triggerToast('// LAUNCHING CINEMATIC PARTICLE INTRO');
+        playSynthFeedback(660, 'sine');
+    }, [triggerToast, playSynthFeedback]);
 
-    const handleShiftSpectrum = () => {
+    const handleIntroFinished = useCallback(() => {
+        setIntroComplete(true);
+    }, []);
+
+    const handleShiftSpectrum = useCallback(() => {
         setPaletteIndex((prev) => {
             const nextIdx = (prev + 1) % RIBBON_SPECTRUMS.length;
             const next = RIBBON_SPECTRUMS[nextIdx];
@@ -140,10 +165,7 @@ export default function App() {
             }
             return nextIdx;
         });
-    };
-
-    const [isMuted, setIsMuted] = useState(false);
-    const soundEnabled = !isMuted;
+    }, [triggerToast]);
 
     const handleToggleMute = useCallback(() => {
         setIsMuted((prev) => {
@@ -151,46 +173,62 @@ export default function App() {
             triggerToast(next ? '// SOUNDTRACK: MUTED' : '// SOUNDTRACK: AUDIO ON');
             return next;
         });
-    }, []);
+    }, [triggerToast]);
 
     // Spacebar shortcut to cycle spectrum
     useEffect(() => {
         const onKeyDown = (e) => {
-            if (e.code === 'Space' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+            if (e.code === 'Space' && !['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes(document.activeElement?.tagName)) {
                 e.preventDefault();
                 handleShiftSpectrum();
             }
         };
         window.addEventListener('keydown', onKeyDown);
         return () => window.removeEventListener('keydown', onKeyDown);
-    }, []);
+    }, [handleShiftSpectrum]);
 
     return (
         <div className="signbridge-app">
-            {/* Global Ambient Soundtrack Player with Autoplay & Mute Control */}
+            <ScrollToHash />
+
+            {/* Global Ambient Soundtrack Player */}
             <AudioController
                 isMuted={isMuted}
                 onToggleMute={handleToggleMute}
-                triggerToast={triggerToast}
             />
 
-            {/* 1. Ultra-Clean Luxury Neat Cursor (Active only when main website is visible) */}
+            {/* Precision Luxury Cursor */}
             {introComplete && <NeatCursor activePalette={activePalette} />}
 
-            {/* Subtle cyber grid texture on pure white background */}
+            {/* Fixed Static Cloud Sky Living Canvas in Originkit Preset */}
+            {!isAtmospherePreview && (
+                <div className="fixed-cloudsky-backdrop" aria-hidden="true">
+                    <CloudSky
+                        style={{
+                            position: 'fixed',
+                            inset: 0,
+                            width: '100vw',
+                            height: '100vh',
+                            pointerEvents: 'none',
+                        }}
+                    />
+                </div>
+            )}
+
+            {/* Subtle cyber grid texture on background */}
             <div className="cyber-grid-overlay" aria-hidden="true" />
 
             {/* Floating Spectrum HUD Toast */}
             <SpectrumToast message={toastMessage} visible={toastVisible} />
 
-            {/* 2. UI Content Layer - Hidden during intro starter, reveals seamlessly */}
+            {/* Main UI Layer */}
             <div
                 className="lumina-viewport"
                 style={{
                     opacity: introComplete ? 1 : 0,
                     visibility: introComplete ? 'visible' : 'hidden',
                     pointerEvents: introComplete ? 'auto' : 'none',
-                    transition: 'opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s'
+                    transition: 'opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
             >
                 <Navbar
@@ -200,61 +238,62 @@ export default function App() {
                     onReplayIntro={handleReplayIntro}
                 />
 
-                <Routes>
-                    <Route path="/" element={
-                        <>
-                            <Hero
-                                onOpenShowreel={() => setShowreelOpen(true)}
-                                onOpenContact={() => setContactOpen(true)}
-                            />
+                <Suspense fallback={<div style={{ minHeight: '60vh' }} aria-busy="true" />}>
+                    <Routes>
+                        <Route path="/" element={
+                            <>
+                                <Hero />
 
-                            <DisciplinesMarquee />
+                                <DisciplinesMarquee />
 
-                            <CapabilitiesSection />
+                                <CapabilitiesSection />
 
-                            <SmartTableSection
-                                onOpenShowreel={() => setShowreelOpen(true)}
-                                onOpenContact={() => setContactOpen(true)}
-                            />
+                                <ProductsSection />
 
-                            <ResearchSection onOpenContact={() => setContactOpen(true)} />
+                                <ResearchSection onOpenContact={() => setContactOpen(true)} />
 
-                            <ProcessTimeline />
+                                <ProcessTimeline />
 
-                            <TeamSection />
+                                <Suspense fallback={<div className="site-section" style={{ minHeight: '480px' }} />}>
+                                    <TeamSection />
+                                </Suspense>
 
-                            <VisionBanner />
+                                <VisionBanner />
 
-                            <FaqSection />
+                                <FaqSection />
 
-                            <ContactSection onNotification={triggerToast} />
-                        </>
-                    } />
-                    <Route path="/product" element={<ProductPage />} />
-                </Routes>
+                                <ContactSection onNotification={triggerToast} />
+                            </>
+                        } />
+                        <Route path="/products/:slug" element={<ProductDetailPage onNotification={triggerToast} />} />
+                        <Route path="/cloud-sky" element={<CloudSkyPage />} />
+                        <Route path="/aetherglint" element={<CloudSkyPage />} />
+                    </Routes>
+                </Suspense>
 
                 <Footer onReplayIntro={handleReplayIntro} />
             </div>
 
-            {/* 3. Top-Layer Dialog Modals */}
-            <ShowreelModal
-                isOpen={showreelOpen}
-                onClose={() => setShowreelOpen(false)}
-            />
+            {/* Lazy-loaded Top-Layer Modals */}
+            {contactOpen && (
+                <Suspense fallback={null}>
+                    <ContactModal
+                        isOpen={contactOpen}
+                        onClose={() => setContactOpen(false)}
+                        onNotification={triggerToast}
+                    />
+                </Suspense>
+            )}
 
-            <ContactModal
-                isOpen={contactOpen}
-                onClose={() => setContactOpen(false)}
-                onNotification={triggerToast}
-            />
-
-            {/* 4. Full-Screen Cinematic Particle Intro Animation (Visible first on entry) */}
+            {/* On-Demand Cinematic Particle Intro */}
             {!introComplete && (
-                <SignBridgeIntroStage
-                    onComplete={handleIntroFinished}
-                    isMuted={isMuted}
-                    onToggleMute={handleToggleMute}
-                />
+                <Suspense fallback={null}>
+                    <SignBridgeIntroStage
+                        onComplete={handleIntroFinished}
+                        isMuted={isMuted}
+                        onToggleMute={handleToggleMute}
+                    />
+                </Suspense>
             )}
         </div>
     );

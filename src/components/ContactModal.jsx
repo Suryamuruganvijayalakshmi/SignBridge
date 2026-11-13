@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Send, ShieldCheck, AlertCircle, CheckCircle2, RotateCw, ArrowUpRight } from 'lucide-react';
-import { supabase } from '../lib/supabase.js';
+import { getSupabase } from '../lib/supabase.js';
 import {
     sanitizeInput,
     isValidEmail,
@@ -114,6 +114,7 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
         let errorMessage = '';
 
         try {
+            const supabase = await getSupabase();
             const insertPromise = supabase.from('contact_messages').insert({
                 name: sanitizedName,
                 email: sanitizedEmail,

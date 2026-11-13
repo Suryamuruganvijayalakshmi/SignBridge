@@ -11,7 +11,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Founder & CEO',
         category: 'Leadership',
         badge: 'LEADERSHIP // FOUNDER',
-        image: '/assets/surya.jpeg',
+        image: '/assets/surya.webp',
         portfolio: 'https://surya.signbridge.click',
         bio: 'Directing spatial product architecture, core engineering systems, AI-powered automation pipelines, and executive vision from concept to production.',
         skills: ['Executive Leadership', 'Spatial Product Architecture', 'Full-Stack Systems', 'AI & Emerging Tech']
@@ -24,7 +24,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Data & Product Engineer',
         category: 'Product & Data',
         badge: 'DATA & PRODUCT',
-        image: '/assets/Surya s.jpeg',
+        image: '/assets/Surya s.webp',
         bio: 'Designing scalable data engineering pipelines, product telemetry systems, and turning complex metrics into high-impact product intelligence.',
         skills: ['Data Engineering', 'Product Analytics', 'ETL Pipelines', 'Data Modeling']
     },
@@ -35,7 +35,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Data & Product Engineer',
         category: 'Product & Data',
         badge: 'DATA & PRODUCT',
-        image: '/assets/gowshika.jpeg',
+        image: '/assets/gowshika.webp',
         bio: 'Driving data science integrations, statistical modelling, data warehouse optimizations, and user telemetry architecture.',
         skills: ['Product Intelligence', 'Statistical Modeling', 'Feature Engineering', 'Data Systems']
     },
@@ -47,7 +47,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Frontend Lead & Branding',
         category: 'Frontend & Brand',
         badge: 'FRONTEND // BRAND',
-        image: '/assets/Logesh.jpeg',
+        image: '/assets/Logesh.webp',
         bio: 'Spearheading modern frontend systems, brand design language, responsive motion architectures, and interactive client-facing experiences.',
         skills: ['Frontend Architecture', 'Brand Identity', 'Interactive Motion', 'Design Systems']
     },
@@ -59,7 +59,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Backend Developer',
         category: 'Backend',
         badge: 'BACKEND DEV',
-        image: '/assets/Gopal.jpeg',
+        image: '/assets/Gopal.webp',
         bio: 'Architecting high-throughput microservices, robust server-side APIs, and distributed cloud backend infrastructure.',
         skills: ['Microservices', 'Distributed Systems', 'API Engineering', 'System Architecture']
     },
@@ -70,7 +70,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Backend Developer',
         category: 'Backend',
         badge: 'BACKEND DEV',
-        image: '/assets/laksana.png',
+        image: '/assets/laksana.webp',
         bio: 'Engineering resilient transactional databases, distributed cloud functions, schema architectures, and real-time synchronization pipelines.',
         skills: ['Database Optimization', 'PostgreSQL', 'Cloud Functions', 'Data Security']
     },
@@ -81,7 +81,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'Backend Developer',
         category: 'Backend',
         badge: 'BACKEND DEV',
-        image: '/assets/sowbi.jpeg',
+        image: '/assets/sowbi.webp',
         bio: 'Developing scalable backend endpoints, secure enterprise authentication protocols, query optimizations, and robust API contracts.',
         skills: ['Server-Side Development', 'Auth Protocols', 'REST & GraphQL', 'Query Optimization']
     },
@@ -93,7 +93,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'DevOps & Cloud Engineer',
         category: 'DevOps & Cloud',
         badge: 'DEVOPS // CLOUD',
-        image: '/assets/Dhanusha.jpeg',
+        image: '/assets/Dhanusha.webp',
         bio: 'Automating multi-cloud deployment pipelines, container orchestration, continuous integration, and infrastructure security.',
         skills: ['CI/CD Automation', 'Cloud Architecture', 'Docker & Kubernetes', 'Infrastructure as Code']
     },
@@ -104,7 +104,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'DevOps & Cloud Engineer',
         category: 'DevOps & Cloud',
         badge: 'DEVOPS // CLOUD',
-        image: '/assets/kamalesh.jpeg',
+        image: '/assets/kamalesh.webp',
         bio: 'Deploying edge compute platforms, automated observability stacks, fault-tolerant clusters, and performance telemetry.',
         skills: ['Cloud Observability', 'Serverless Clusters', 'Edge Compute', 'DevSecOps']
     },
@@ -116,7 +116,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'UI/UX & Accessibility Lead',
         category: 'UI/UX & A11y',
         badge: 'UI/UX // A11Y LEAD',
-        image: '/assets/hariprasath.jpeg',
+        image: '/assets/hariprasath.webp',
         bio: 'Championing universal web accessibility (WCAG AAA), human-centered design heuristics, design systems, and barrier-free digital experiences.',
         skills: ['WCAG Compliance', 'Accessibility Audits', 'Human Factors Design', 'Design Systems']
     },
@@ -127,7 +127,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'UI/UX & Accessibility Engineer',
         category: 'UI/UX & A11y',
         badge: 'UI/UX // A11Y',
-        image: '/assets/guhan.jpeg',
+        image: '/assets/guhan.webp',
         bio: 'Crafting assistive technology interaction patterns, keyboard navigation flows, screen-reader ergonomics, and inclusive UI components.',
         skills: ['Assistive Tech UX', 'A11y Interaction', 'Rapid Prototyping', 'Component Usability']
     },
@@ -139,7 +139,7 @@ export const CORE_TECHNICAL_TEAM = [
         role: 'QA & Automation Engineer',
         category: 'QA & Automation',
         badge: 'QA // AUTOMATION',
-        image: '/assets/aswin.jpeg',
+        image: '/assets/aswin.webp',
         bio: 'Executing end-to-end automated regression suites, API test automation, performance profiling, and ensuring bulletproof software reliability.',
         skills: ['E2E Automation', 'Regression Testing', 'Performance Profiling', 'Quality Assurance']
     }
@@ -256,7 +256,7 @@ export default function TeamSection() {
                 {/* 1. Header & Department Filters */}
                 <div className="team-header-block mb-8">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-iris)' }} /> // 05 — CORE TECHNICAL TEAM
+                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-iris)' }} /> // 06 — CORE TECHNICAL TEAM
                     </span>
 
                     <h2 className="section-main-heading">
@@ -412,7 +412,10 @@ export default function TeamSection() {
                                                 src={member.image}
                                                 alt={member.name}
                                                 className="team-card-img"
+                                                width="380"
+                                                height="326"
                                                 loading="lazy"
+                                                decoding="async"
                                                 onError={(e) => {
                                                     // Fallback to high-contrast avatar placeholder if asset loading fails
                                                     e.currentTarget.style.display = 'none';

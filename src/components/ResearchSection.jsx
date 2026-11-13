@@ -7,14 +7,14 @@ export default function ResearchSection({ onOpenContact }) {
             <div className="section-frame">
                 <div className="section-header-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // 03 — R&D LAB
+                        <span className="eyebrow-pip" /> // 04 — R&D LAB
                     </span>
                     <h2 className="section-main-heading">
                         Exploring what <br />
                         <span className="text-lime">comes next.</span>
                     </h2>
                     <p className="section-lead-text">
-                        Our R&D work explores the intersection of software engineering, artificial intelligence, 
+                        Our R&D work explores the intersection of software engineering, artificial intelligence,
                         IoT, edge computing, and emerging spatial technologies.
                     </p>
                 </div>
@@ -24,10 +24,13 @@ export default function ResearchSection({ onOpenContact }) {
                     <article className="project-card">
                         <div className="project-visual-frame">
                             <img
-                                src="/assets/shopcart.png"
+                                src="/assets/shopcart.webp"
                                 alt="ShopCart student technology marketplace interface"
                                 className="project-img"
+                                width="960"
+                                height="544"
                                 loading="lazy"
+                                decoding="async"
                             />
                         </div>
                         <div className="project-info">
@@ -54,10 +57,13 @@ export default function ResearchSection({ onOpenContact }) {
                     <article className="project-card">
                         <div className="project-visual-frame">
                             <img
-                                src="/assets/salestracker.png"
+                                src="/assets/salestracker.webp"
                                 alt="IndianOil lubricant sales dashboard"
                                 className="project-img"
+                                width="960"
+                                height="540"
                                 loading="lazy"
+                                decoding="async"
                             />
                         </div>
                         <div className="project-info">
