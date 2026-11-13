@@ -344,10 +344,20 @@ export default function ProductDetailPage({ onNotification }) {
                         </div>
 
                         <div className="contact-form-card">
-                            <ProductEnquiryForm
-                                productName={product.name}
-                                onNotification={onNotification}
-                            />
+                            <div className="contact-card-header">
+                                <span className="window-dots">
+                                    <span className="w-dot red" />
+                                    <span className="w-dot yellow" />
+                                    <span className="w-dot green" />
+                                </span>
+                                <span className="contact-card-title">{product.name.toUpperCase()} // ENQUIRY FORM</span>
+                            </div>
+                            <div className="contact-card-body">
+                                <ProductEnquiryForm
+                                    productName={product.name}
+                                    onNotification={onNotification}
+                                />
+                            </div>
                         </div>
                     </div>
                 </section>

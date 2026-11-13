@@ -6,22 +6,24 @@ import ProductMockupVisual from './ProductMockupVisual.jsx';
 export default function ProductCard({ product }) {
     return (
         <article className="product-showcase-card">
-            {/* Top visual mockup */}
+            {/* 1. Window Header Bar */}
+            <div className="product-card-top-meta">
+                <span className="product-number-badge">PRODUCT // {product.number}</span>
+                <span className="product-family-pill">{product.family}</span>
+            </div>
+
+            {/* 2. Visual mockup preview */}
             <Link
                 to={`/products/${product.slug}`}
                 className="product-card-visual-link"
                 aria-label={`View ${product.name} details`}
             >
                 <div className="product-card-visual-wrap">
-                    <div className="product-card-top-meta">
-                        <span className="product-number-badge">PRODUCT // {product.number}</span>
-                        <span className="product-family-pill">{product.family}</span>
-                    </div>
                     <ProductMockupVisual type={product.visualType} />
                 </div>
             </Link>
 
-            {/* Card body */}
+            {/* 3. Card body */}
             <div className="product-card-body">
                 <div>
                     <span className="product-category-label">{product.category}</span>
@@ -38,18 +40,17 @@ export default function ProductCard({ product }) {
                         ))}
                     </ul>
                 </div>
+            </div>
 
-                {/* Card Footer Actions */}
-                <div className="product-card-actions">
-                    <Link
-                        to={`/products/${product.slug}`}
-                        className="product-view-btn"
-                        style={{ width: '100%', justifyContent: 'center' }}
-                    >
-                        <span>View Product Specifications</span>
-                        <ArrowRight size={15} aria-hidden="true" />
-                    </Link>
-                </div>
+            {/* 4. Window Footer Actions Bar */}
+            <div className="product-card-actions">
+                <Link
+                    to={`/products/${product.slug}`}
+                    className="product-view-btn"
+                >
+                    <span>View Product Specifications</span>
+                    <ArrowRight size={15} aria-hidden="true" />
+                </Link>
             </div>
         </article>
     );

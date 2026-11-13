@@ -217,6 +217,14 @@ export default function ContactSection({ onNotification }) {
 
                 {/* Right: Streamlined, Secure Contact Form */}
                 <div className="contact-form-card">
+                    <div className="contact-card-header">
+                        <span className="contact-header-badge">✉ TRANSMISSION PROTOCOL // DIRECT ENQUIRY</span>
+                        <div className="window-dots" aria-hidden="true">
+                            <span className="w-dot red" />
+                            <span className="w-dot yellow" />
+                            <span className="w-dot green" />
+                        </div>
+                    </div>
                     <form onSubmit={handleSubmit} className="contact-form" noValidate>
                         {/* Hidden Bot Honeypot Field */}
                         <div style={{ display: 'none', opacity: 0, position: 'absolute', left: '-9999px' }} aria-hidden="true">
