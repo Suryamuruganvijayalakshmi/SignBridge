@@ -12,8 +12,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f1f3f5;
-  background-image: radial-gradient(rgba(24, 24, 27, 0.12) 1.5px, transparent 1.5px);
+  background-color: #e8e8e8;
+  background-image: radial-gradient(rgba(38, 38, 38, 0.08) 1.2px, transparent 1.2px);
   background-size: 24px 24px;
   opacity: 1;
   visibility: visible;
@@ -52,39 +52,39 @@
   display: inline-block;
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   font-size: clamp(2.4rem, 6.5vw, 4.2rem);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.02em;
-  color: #0f172a;
+  color: #18181b;
   transform-origin: bottom center;
   animation: loaderLetterWave 2s ease-in-out infinite;
 }
 
-/* Staggered wave delays for the 10 letters of "SignBridge" */
-.loader-letter:nth-child(1) { animation-delay: 0.06s; --glow-color: #4f46e5; }
-.loader-letter:nth-child(2) { animation-delay: 0.13s; --glow-color: #6366f1; }
-.loader-letter:nth-child(3) { animation-delay: 0.20s; --glow-color: #7c3aed; }
-.loader-letter:nth-child(4) { animation-delay: 0.27s; --glow-color: #8b5cf6; }
-.loader-letter:nth-child(5) { animation-delay: 0.34s; --glow-color: #6366f1; } /* 'B' */
-.loader-letter:nth-child(6) { animation-delay: 0.41s; --glow-color: #3b82f6; }
-.loader-letter:nth-child(7) { animation-delay: 0.48s; --glow-color: #0ea5e9; }
-.loader-letter:nth-child(8) { animation-delay: 0.55s; --glow-color: #06b6d4; }
-.loader-letter:nth-child(9) { animation-delay: 0.62s; --glow-color: #10b981; }
-.loader-letter:nth-child(10) { animation-delay: 0.69s; --glow-color: #6366f1; }
+/* Harmonic wave delays for the 10 letters of "SignBridge" */
+.loader-letter:nth-child(1) { animation-delay: 0.06s; --glow-color: #e14e1d; }
+.loader-letter:nth-child(2) { animation-delay: 0.13s; --glow-color: #18181b; }
+.loader-letter:nth-child(3) { animation-delay: 0.20s; --glow-color: #262626; }
+.loader-letter:nth-child(4) { animation-delay: 0.27s; --glow-color: #e14e1d; }
+.loader-letter:nth-child(5) { animation-delay: 0.34s; --glow-color: #18181b; } /* 'B' */
+.loader-letter:nth-child(6) { animation-delay: 0.41s; --glow-color: #262626; }
+.loader-letter:nth-child(7) { animation-delay: 0.48s; --glow-color: #e14e1d; }
+.loader-letter:nth-child(8) { animation-delay: 0.55s; --glow-color: #18181b; }
+.loader-letter:nth-child(9) { animation-delay: 0.62s; --glow-color: #262626; }
+.loader-letter:nth-child(10) { animation-delay: 0.69s; --glow-color: #e14e1d; }
 
 @keyframes loaderLetterWave {
   0%, 100% {
     transform: translateY(0) scale(1);
-    color: #0f172a;
+    color: #18181b;
     text-shadow: none;
   }
   32% {
-    transform: translateY(-16px) scale(1.1);
-    color: var(--glow-color, #6366f1);
-    text-shadow: 0 10px 24px rgba(99, 102, 241, 0.4), 0 0 20px var(--glow-color, #6366f1);
+    transform: translateY(-16px) scale(1.08);
+    color: var(--glow-color, #18181b);
+    text-shadow: 2px 2px 0px #f4dbda;
   }
   64% {
     transform: translateY(0) scale(1);
-    color: #0f172a;
+    color: #18181b;
   }
 }
 
@@ -94,10 +94,11 @@
   max-width: 320px;
   height: 4px;
   border-radius: 9999px;
-  background: rgba(99, 102, 241, 0.12);
+  background: #d4d4d8;
   margin-top: 1.75rem;
   position: relative;
   overflow: hidden;
+  border: 1px solid #262626;
 }
 
 .loader-wrapper .loader::before {
@@ -108,9 +109,8 @@
   width: 50%;
   height: 100%;
   border-radius: 9999px;
-  background: linear-gradient(90deg, transparent, #4f46e5, #6366f1, #a855f7, #06b6d4, transparent);
+  background: #262626;
   animation: loaderScan 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  box-shadow: 0 0 16px rgba(99, 102, 241, 0.6);
 }
 
 @keyframes loaderScan {

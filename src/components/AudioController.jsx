@@ -96,9 +96,9 @@ export default function AudioController({ isMuted, onToggleMute }) {
             >
                 <div className="audio-icon-wrap">
                     {isMuted ? (
-                        <VolumeX size={15} className="hud-vol-icon text-slate-400" />
+                        <VolumeX size={15} className="hud-vol-icon" />
                     ) : (
-                        <Volume2 size={15} className="hud-vol-icon text-iris" />
+                        <Volume2 size={15} className="hud-vol-icon" />
                     )}
                 </div>
 

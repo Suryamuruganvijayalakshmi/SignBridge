@@ -24,9 +24,9 @@
 .family-summary-label {
     font-family: var(--font-mono);
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.2em;
-    color: var(--accent-iris, #6366f1);
+    color: #18181b;
     text-transform: uppercase;
 }
 
@@ -226,8 +226,8 @@
 /* ── Expandable Explore More Drawer ───────────────────────────────────────── */
 .product-explore-drawer {
     background: #f8fafc;
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 14px;
+    border: var(--neo-border);
+    border-radius: 12px;
     padding: 1.1rem;
     display: flex;
     flex-direction: column;
@@ -258,9 +258,9 @@
     gap: 0.35rem;
     font-family: var(--font-mono);
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.14em;
-    color: var(--accent-iris-glow);
+    color: #18181b;
 }
 
 .explore-drawer-text {
@@ -278,11 +278,12 @@
 
 .explore-audience-chip {
     font-size: 11.5px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.22rem 0.6rem;
-    border-radius: 9999px;
+    border-radius: 6px;
     background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.1);
+    border: var(--neo-border-thin);
+    box-shadow: 2px 2px 0px #262626;
     color: var(--text-pure);
 }
 
@@ -290,9 +291,11 @@
     font-size: 11px;
     padding: 0.2rem 0.55rem;
     border-radius: 6px;
-    background: rgba(99, 102, 241, 0.08);
-    color: #312e81;
-    font-weight: 500;
+    background: var(--bg-header-tint);
+    border: var(--neo-border-thin);
+    box-shadow: 2px 2px 0px #262626;
+    color: #18181b;
+    font-weight: 700;
 }
 
 /* ── Card Footer Actions ──────────────────────────────────────────────────── */
@@ -344,21 +347,22 @@
     justify-content: center;
     gap: 0.4rem;
     padding: 0.75rem 1rem;
-    border-radius: 12px;
+    border-radius: var(--neo-radius-sm);
     background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.14);
+    border: var(--neo-border);
+    box-shadow: var(--neo-shadow-xs);
     color: var(--text-pure);
     font-family: var(--font-body);
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .product-explore-btn:hover {
-    border-color: var(--accent-iris-glow);
-    color: var(--accent-iris-glow);
-    background: rgba(99, 102, 241, 0.04);
+    background: var(--bg-header-tint);
+    transform: translate(-1px, -1px);
+    box-shadow: var(--neo-shadow-sm);
 }
 
 /* ── Product-Specific Visual Mockups ──────────────────────────────────────── */
@@ -536,9 +540,10 @@
 .pmock-company-avatar {
     width: 26px;
     height: 26px;
-    border-radius: 8px;
-    background: rgba(99, 102, 241, 0.12);
-    color: var(--accent-iris-glow);
+    border-radius: 6px;
+    background: var(--bg-header-tint);
+    color: #18181b;
+    border: 1px solid #262626;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -548,9 +553,10 @@
 .pmock-person-avatar {
     width: 28px;
     height: 28px;
-    border-radius: 9999px;
-    background: rgba(14, 165, 233, 0.12);
-    color: #0284c7;
+    border-radius: 6px;
+    background: var(--bg-header-tint);
+    color: #18181b;
+    border: 1px solid #262626;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -560,21 +566,21 @@
 .pmock-ui-title {
     font-size: 10.5px;
     font-weight: 800;
-    color: #0f172a;
+    color: #18181b;
     line-height: 1.15;
 }
 
 .pmock-ui-sub {
     font-size: 8.5px;
-    color: #475569;
+    color: #52525b;
 }
 
 .pmock-ui-section-label {
     font-family: var(--font-mono);
     font-size: 7.5px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.12em;
-    color: #64748b;
+    color: #18181b;
 }
 
 .pmock-ui-chips {
@@ -588,11 +594,12 @@
     align-items: center;
     gap: 2px;
     font-size: 8px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.16rem 0.4rem;
-    border-radius: 5px;
-    background: #f1f5f9;
-    color: #334155;
+    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid #262626;
+    color: #18181b;
 }
 
 .pmock-ui-actions,
@@ -607,24 +614,25 @@
     align-items: center;
     gap: 3px;
     font-size: 8px;
-    font-weight: 600;
-    padding: 0.22rem 0.42rem;
-    border-radius: 6px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
+    font-weight: 700;
+    padding: 0.22rem 0.45rem;
+    border-radius: 5px;
+    background: #ffffff;
+    border: 1px solid #262626;
+    box-shadow: 1.5px 1.5px 0px #262626;
+    color: #18181b;
 }
 
 .pmock-ui-btn-primary {
-    background: #4f46e5;
-    border-color: #4f46e5;
+    background: #262626;
+    border-color: #262626;
     color: #ffffff;
 }
 
 .pmock-ui-btn-cyan {
-    background: #0284c7;
-    border-color: #0284c7;
-    color: #ffffff;
+    background: var(--bg-header-tint);
+    border-color: #262626;
+    color: #18181b;
 }
 
 .pmock-ui-cta-bar {
@@ -632,11 +640,12 @@
     align-items: center;
     justify-content: space-between;
     font-size: 8.5px;
-    font-weight: 700;
-    padding: 0.32rem 0.5rem;
-    border-radius: 7px;
-    background: #eef2ff;
-    color: #4338ca;
+    font-weight: 800;
+    padding: 0.35rem 0.55rem;
+    border-radius: 6px;
+    background: var(--bg-header-tint);
+    border: 1px solid #262626;
+    color: #18181b;
 }
 
 /* 2. NFC Personal Portfolio Card */
@@ -649,19 +658,21 @@
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.22rem 0.45rem;
-    border-radius: 6px;
-    background: #f1f5f9;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    background: #f4f4f5;
+    border: 1px solid #262626;
     font-family: var(--font-mono);
     font-size: 7.5px;
-    color: #334155;
+    font-weight: 700;
+    color: #18181b;
 }
 
 .pmock-url-dot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: #0ea5e9;
+    background: #e14e1d;
 }
 
 .pmock-id-badge {
@@ -790,7 +801,8 @@
 .pmock-fc-panel-head small {
     font-family: var(--font-mono);
     font-size: 7.5px;
-    color: #047857;
+    font-weight: 800;
+    color: #18181b;
 }
 
 .pmock-fc-bars {
@@ -813,17 +825,19 @@
 .pmock-fc-bar-col span {
     width: 100%;
     border-radius: 4px 4px 2px 2px;
-    background: #a7f3d0;
+    background: #d4d4d8;
+    border: 1px solid #262626;
 }
 
 .pmock-fc-bar-col.is-peak span {
-    background: #059669;
+    background: var(--bg-header-tint);
+    border: 1.5px solid #262626;
 }
 
 .pmock-fc-bar-col small {
     font-family: var(--font-mono);
     font-size: 7px;
-    color: #64748b;
+    color: #52525b;
 }
 
 .pmock-fc-side {
@@ -833,9 +847,9 @@
 }
 
 .pmock-fc-mini {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 9px;
+    background: #ffffff;
+    border: 1px solid #262626;
+    border-radius: 6px;
     padding: 0.45rem 0.5rem;
     display: flex;
     flex-direction: column;
@@ -855,7 +869,8 @@
     width: 100%;
     height: 6px;
     border-radius: 9999px;
-    background: #e2e8f0;
+    background: #e4e4e7;
+    border: 1px solid #262626;
     overflow: hidden;
 }
 
@@ -864,14 +879,14 @@
     width: 68%;
     height: 100%;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #10b981, #059669);
+    background: #262626;
 }
 
 .pmock-fc-status {
     font-family: var(--font-mono);
     font-size: 8px;
-    font-weight: 600;
-    color: #047857;
+    font-weight: 800;
+    color: #18181b;
 }
 
 .pmock-fc-footer {

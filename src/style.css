@@ -12,73 +12,73 @@
 }
 
 :root {
-    /* Color Palette — Neo-Brutalist Clean Architecture */
-    --bg-base: #f1f3f5;             /* Soft neutral canvas background */
-    --bg-surface: #ffffff;          /* Pure white card interiors */
-    --bg-subtle: #f8fafc;
+    /* Color Palette — Refined Neo-Brutalist Harmonic Architecture (Sampled from Reference) */
+    --bg-base: #e8e8e8;             /* Neutral warm architectural paper-gray */
+    --bg-surface: #ffffff;          /* Pure crisp white card interiors */
+    --bg-subtle: #f4f4f5;
     --bg-card: #ffffff;
-    --bg-glass: rgba(255, 255, 255, 0.95);
+    --bg-glass: #ffffff;
 
-    /* Window Card Pastel Bar (from reference image HTML window header) */
-    --bg-header-tint: #fee2e2;       /* Soft pastel blush/peach window header bar */
-    --bg-footer-tint: #fee2e2;       /* Matching pastel footer bar */
-    --bg-header-tint-hover: #fecaca;
+    /* Window Card Muted Dusty Rose / Soft Blush Tint (Exact #f4dbda from Reference Image) */
+    --bg-header-tint: #f4dbda;       /* Soft dusty rose / muted peach window header bar */
+    --bg-footer-tint: #f4dbda;       /* Matching dusty rose footer bar */
+    --bg-header-tint-hover: #ecd0cf;
 
-    /* High-Contrast Neo-Brutalist Borders & Hard Shadows */
-    --neo-border-color: #18181b;
-    --neo-border: 2px solid #18181b;
-    --neo-border-thin: 1.5px solid #18181b;
-    --neo-border-thick: 3px solid #18181b;
+    /* High-Contrast Architectural Neo-Brutalist Borders & Ink Shadows (Exact #262626) */
+    --neo-border-color: #262626;
+    --neo-border: 2px solid #262626;
+    --neo-border-thin: 1.5px solid #262626;
+    --neo-border-thick: 3px solid #262626;
 
-    --neo-shadow-xs: 2px 2px 0px #18181b;
-    --neo-shadow-sm: 3px 3px 0px #18181b;
-    --neo-shadow-md: 4px 4px 0px #18181b;
-    --neo-shadow-lg: 5px 5px 0px #18181b;
-    --neo-shadow-xl: 8px 8px 0px #18181b;
+    --neo-shadow-xs: 2px 2px 0px #262626;
+    --neo-shadow-sm: 3px 3px 0px #262626;
+    --neo-shadow-md: 4px 4px 0px #262626;
+    --neo-shadow-lg: 5px 5px 0px #262626;
+    --neo-shadow-xl: 7px 7px 0px #262626;
 
     --neo-radius: 12px;
     --neo-radius-sm: 8px;
     --neo-radius-lg: 14px;
     --neo-radius-pill: 9999px;
 
-    /* Theme Primary Accents */
-    --accent-primary: #18181b;
-    --accent-primary-hover: #27272a;
-    --accent-brand: #4f46e5;         /* Executive Royal Indigo signature */
-    --accent-iris: #4f46e5;
-    --accent-iris-glow: #4f46e5;
-    --accent-iris-deep: #4338ca;
-    --accent-iris-light: #818cf8;
-    --accent-iris-subtle: #eef2ff;
-    --accent-violet: #7c3aed;
+    /* Unified Theme Ink Accents (No Clashing Colors) */
+    --accent-primary: #262626;
+    --accent-primary-hover: #18181b;
+    --accent-brand: #262626;
+    --accent-iris: #262626;
+    --accent-iris-glow: #262626;
+    --accent-iris-deep: #18181b;
+    --accent-iris-light: #52525b;
+    --accent-iris-subtle: #f4dbda;
+    --accent-violet: #262626;
 
-    /* Theme Adoption Aliases */
-    --accent-lime: #4f46e5;
-    --accent-magenta: #7c3aed;
-    --accent-cyan: #0284c7;
-    --accent-electric: #4f46e5;
+    /* Harmonized Aliases */
+    --accent-lime: #262626;
+    --accent-magenta: #262626;
+    --accent-cyan: #262626;
+    --accent-electric: #262626;
 
     /* High-Contrast Corporate Typography Hierarchy */
-    --text-pure: #18181b;       /* Slate 900 / Crisp Charcoal Ink */
-    --text-primary: #18181b;    /* Slate 900 */
-    --text-60: #334155;         /* Slate 700 */
-    --text-50: #475569;         /* Slate 600 */
-    --text-30: #64748b;         /* Slate 500 */
-    --text-15: #94a3b8;         /* Slate 400 */
+    --text-pure: #18181b;       /* Rich Charcoal Ink */
+    --text-primary: #18181b;
+    --text-60: #4b5563;         /* Slate 600 */
+    --text-50: #6b7280;         /* Slate 500 */
+    --text-30: #9ca3af;         /* Slate 400 */
+    --text-15: #d1d5db;         /* Slate 300 */
 
     /* Clean Borders & Cards */
     --glass-bg: #ffffff;
     --glass-bg-hover: #ffffff;
-    --glass-bg-active: #fee2e2;
-    --glass-border: 2px solid #18181b;
-    --glass-border-subtle: 1.5px solid #18181b;
-    --glass-border-lime: 2px solid #18181b;
-    --glass-border-iris: 2px solid #18181b;
-    --glass-border-magenta: 2px solid #18181b;
-    --glass-border-cyan: 2px solid #18181b;
+    --glass-bg-active: #f4dbda;
+    --glass-border: 2px solid #262626;
+    --glass-border-subtle: 1.5px solid #262626;
+    --glass-border-lime: 2px solid #262626;
+    --glass-border-iris: 2px solid #262626;
+    --glass-border-magenta: 2px solid #262626;
+    --glass-border-cyan: 2px solid #262626;
     --glass-blur: none;
     --glass-blur-deep: none;
-    --border-color: #18181b;
+    --border-color: #262626;
 
     /* Typography */
     --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -87,12 +87,12 @@
 
     /* Crisp Tactile Shadows */
     --glow-text: none;
-    --glow-iris: 3px 3px 0px #18181b;
-    --glow-iris-strong: 5px 5px 0px #18181b;
-    --glow-lime: 3px 3px 0px #18181b;
-    --glow-lime-strong: 5px 5px 0px #18181b;
-    --glow-magenta: 3px 3px 0px #18181b;
-    --glow-cyan: 3px 3px 0px #18181b;
+    --glow-iris: 3px 3px 0px #262626;
+    --glow-iris-strong: 5px 5px 0px #262626;
+    --glow-lime: 3px 3px 0px #262626;
+    --glow-lime-strong: 5px 5px 0px #262626;
+    --glow-magenta: 3px 3px 0px #262626;
+    --glow-cyan: 3px 3px 0px #262626;
 
     /* Transitions */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -307,19 +307,32 @@ dialog {
 
 .text-lime,
 .text-iris,
-.text-accent {
-    color: var(--accent-primary);
-    text-shadow: none !important;
-}
-
-.text-magenta {
-    color: #7c3aed;
-    text-shadow: none !important;
-}
-
+.text-accent,
+.text-magenta,
 .text-cyan {
-    color: #0284c7;
+    color: var(--accent-primary) !important;
     text-shadow: none !important;
+}
+
+/* Harmonious Highlighted Badges in Section Headings */
+.section-main-heading .text-accent,
+.section-main-heading .text-lime,
+.section-main-heading .text-iris,
+.section-main-heading .text-cyan,
+.pd-section-heading .text-lime,
+.pd-main-title .text-lime,
+.hero-heading .line-two {
+    display: inline-block;
+    color: #18181b !important;
+    background: var(--bg-header-tint) !important;
+    padding: 0.04em 0.3em;
+    border-radius: 8px;
+    border: var(--neo-border);
+    box-shadow: 3px 3px 0px var(--neo-border-color);
+    line-height: 1.05;
+    margin: 0.1em 0.05em;
+    text-shadow: none !important;
+    vertical-align: middle;
 }
 
 .text-glow {
@@ -774,6 +787,9 @@ dialog {
 /* Primary Button: Peach/Blush with Hard Shadow */
 .btn-primary-action,
 .btn-primary-lime,
+/* Primary Button: Solid Charcoal Ink with Dusty Rose Offset Shadow */
+.btn-primary-action,
+.btn-primary-lime,
 .btn-primary-iris {
     display: inline-flex;
     align-items: center;
@@ -781,15 +797,15 @@ dialog {
     gap: 0.6rem;
     padding: 0.85rem 2.2rem;
     border-radius: var(--neo-radius-sm);
-    background-color: var(--bg-header-tint);
-    color: var(--text-pure);
+    background-color: #262626;
+    color: #ffffff !important;
     font-family: var(--font-body);
     font-size: 15px;
     font-weight: 800;
     text-decoration: none;
     border: var(--neo-border);
     cursor: pointer;
-    box-shadow: var(--neo-shadow-md);
+    box-shadow: 4px 4px 0px var(--bg-header-tint);
     transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out;
 }
 
@@ -797,21 +813,22 @@ dialog {
 .btn-primary-lime:hover,
 .btn-primary-iris:hover {
     transform: translate(-2px, -2px);
-    box-shadow: var(--neo-shadow-lg);
-    background-color: var(--bg-header-tint-hover);
-    color: var(--text-pure);
+    box-shadow: 6px 6px 0px var(--bg-header-tint);
+    background-color: #18181b;
+    color: #ffffff !important;
 }
 
 .btn-primary-action:active,
 .btn-primary-lime:active,
 .btn-primary-iris:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px var(--neo-border-color);
+    box-shadow: 1px 1px 0px var(--bg-header-tint);
 }
 
 .btn-primary-action .btn-arrow,
 .btn-primary-lime .btn-arrow {
     transition: transform 0.15s ease;
+    color: #ffffff;
 }
 
 .btn-primary-action:hover .btn-arrow,
@@ -842,7 +859,7 @@ dialog {
 
 .btn-secondary-action:hover,
 .btn-secondary-glass:hover {
-    background-color: #f8fafc;
+    background-color: var(--bg-header-tint);
     color: var(--text-pure);
     transform: translate(-2px, -2px);
     box-shadow: var(--neo-shadow-lg);
@@ -2514,12 +2531,10 @@ select.form-control option {
     text-decoration: underline;
 }
 
-.footer-link--magenta:hover {
-    color: #7c3aed;
-}
-
+.footer-link--magenta:hover,
 .footer-link--cyan:hover {
-    color: #0284c7;
+    color: var(--text-pure);
+    text-decoration: underline;
 }
 
 /* ── Bottom: Brand wordmark + copyright ── */
@@ -2767,7 +2782,7 @@ select.form-control option {
 
 .audio-bar {
     width: 2.5px;
-    background: var(--accent-iris, #6366f1);
+    background: #18181b;
     border-radius: 2px;
     height: 3px;
     transition: height 0.2s ease, background 0.2s ease;

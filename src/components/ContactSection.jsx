@@ -193,24 +193,24 @@ export default function ContactSection({ onNotification }) {
 
                     <div className="direct-channels">
                         <a href="mailto:signbridge.aiauto@gmail.com" className="channel-link">
-                            <Mail size={18} className="channel-icon text-lime" />
+                            <Mail size={18} className="channel-icon" />
                             <span>signbridge.aiauto@gmail.com</span>
                             <ArrowUpRight size={14} className="channel-arrow" />
                         </a>
                         <a href="tel:+919842253267" className="channel-link">
-                            <Phone size={18} className="channel-icon text-cyan" />
+                            <Phone size={18} className="channel-icon" />
                             <span>+91 98422 53267</span>
                             <ArrowUpRight size={14} className="channel-arrow" />
                         </a>
                         <div className="channel-link" style={{ cursor: 'default' }}>
-                            <MapPin size={18} className="channel-icon text-magenta" />
+                            <MapPin size={18} className="channel-icon" />
                             <span>Tamil Nadu, India // Global Deployment</span>
                         </div>
                     </div>
 
                     {/* Security & Reliability SLA Assurance Pill */}
-                    <div className="mt-8 pt-6 border-t border-slate-200 flex items-center gap-3 text-xs text-slate-500 font-medium">
-                        <ShieldCheck size={16} className="text-indigo-600" />
+                    <div className="mt-8 pt-6 border-t border-zinc-300 flex items-center gap-3 text-xs text-zinc-600 font-bold">
+                        <ShieldCheck size={16} />
                         <span>256-Bit Encrypted Uplink · Anti-Spam Guard · 24h Response Protocol</span>
                     </div>
                 </div>

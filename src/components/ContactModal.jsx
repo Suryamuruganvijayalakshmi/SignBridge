@@ -335,8 +335,8 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
                         )}
 
                         {/* Security Assurance Tag */}
-                        <div className="flex items-center gap-2 text-[11px] text-slate-400 py-1 font-mono">
-                            <ShieldCheck size={14} className="text-lime" />
+                        <div className="flex items-center gap-2 text-[11px] text-zinc-600 py-1 font-mono">
+                            <ShieldCheck size={14} />
                             <span>Encrypted transmission · Anti-spam protected</span>
                         </div>
 

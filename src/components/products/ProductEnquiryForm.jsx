@@ -281,8 +281,8 @@ export default function ProductEnquiryForm({ productName, onNotification }) {
                 </div>
             )}
 
-            <div className="flex items-center gap-2 text-[11px] text-slate-500 font-mono">
-                <ShieldCheck size={14} className="text-iris" />
+            <div className="flex items-center gap-2 text-[11px] text-zinc-600 font-mono">
+                <ShieldCheck size={14} />
                 <span>Encrypted transmission · Direct SignBridge studio response</span>
             </div>
 

@@ -56,9 +56,9 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                     title={soundEnabled ? 'Mute Soundtrack (M)' : 'Unmute Soundtrack (M)'}
                 >
                     {soundEnabled ? (
-                        <Volume2 size={16} className="text-iris" />
+                        <Volume2 size={16} />
                     ) : (
-                        <VolumeX size={16} className="text-slate-500" />
+                        <VolumeX size={16} />
                     )}
                 </button>
 

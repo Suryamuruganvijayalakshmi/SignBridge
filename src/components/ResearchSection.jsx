@@ -101,10 +101,10 @@ export default function ResearchSection({ onOpenContact }) {
                         </div>
                         <div className="project-visual-frame cyber-graphic-frame">
                             <div className="eco-waveform-visual">
-                                <Activity className="waveform-icon text-lime" size={48} />
+                                <Activity className="waveform-icon" size={48} />
                                 <div className="chip-badge">
                                     <span>ESP32</span>
-                                    <strong className="text-lime">TinyML Edge</strong>
+                                    <strong>TinyML Edge</strong>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@ export default function ResearchSection({ onOpenContact }) {
                         <div className="project-visual-frame cyber-graphic-frame">
                             <div className="space-orbital-visual">
                                 <div className="orbit-ring-graphic" />
-                                <Satellite className="satellite-icon text-cyan" size={44} />
+                                <Satellite className="satellite-icon" size={44} />
                             </div>
                         </div>
                         <div className="project-info">

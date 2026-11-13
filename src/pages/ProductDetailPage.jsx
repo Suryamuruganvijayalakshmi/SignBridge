@@ -135,7 +135,7 @@ export default function ProductDetailPage({ onNotification }) {
                     <div className="pd-problem-solution-grid">
                         <div className="pd-ps-card pd-problem-card">
                             <div className="pd-ps-head">
-                                <AlertTriangle size={18} className="text-amber-600" aria-hidden="true" />
+                                <AlertTriangle size={18} aria-hidden="true" />
                                 <span>THE PROBLEM STATEMENT</span>
                             </div>
                             <h2>Why traditional workflows fall short</h2>
@@ -144,7 +144,7 @@ export default function ProductDetailPage({ onNotification }) {
 
                         <div className="pd-ps-card pd-solution-card">
                             <div className="pd-ps-head">
-                                <Sparkles size={18} className="text-iris" aria-hidden="true" />
+                                <Sparkles size={18} aria-hidden="true" />
                                 <span>OUR SOLUTION</span>
                             </div>
                             <h2>How {product.name} solves it</h2>
@@ -237,7 +237,7 @@ export default function ProductDetailPage({ onNotification }) {
                         <div className="nfc-compare-grid">
                             <div className={`nfc-compare-col ${product.id === 'nfc-business-card' ? 'is-current-offering' : ''}`}>
                                 <div className="nfc-compare-col-head">
-                                    <Briefcase size={17} className="text-iris" aria-hidden="true" />
+                                    <Briefcase size={17} aria-hidden="true" />
                                     <div>
                                         <span className="nfc-compare-code">
                                             PRODUCT 01 {product.id === 'nfc-business-card' ? '· CURRENTLY VIEWING' : ''}
@@ -262,7 +262,7 @@ export default function ProductDetailPage({ onNotification }) {
 
                             <div className={`nfc-compare-col ${product.id === 'nfc-portfolio-card' ? 'is-current-offering' : ''}`}>
                                 <div className="nfc-compare-col-head">
-                                    <UserCheck size={17} className="text-cyan" aria-hidden="true" />
+                                    <UserCheck size={17} aria-hidden="true" />
                                     <div>
                                         <span className="nfc-compare-code">
                                             PRODUCT 02 {product.id === 'nfc-portfolio-card' ? '· CURRENTLY VIEWING' : ''}
@@ -306,7 +306,7 @@ export default function ProductDetailPage({ onNotification }) {
                         <div className="pd-audience-grid">
                             {product.targetAudience.map((group) => (
                                 <div key={group} className="pd-audience-card">
-                                    <Users size={16} className="text-iris shrink-0" aria-hidden="true" />
+                                    <Users size={16} className="shrink-0" aria-hidden="true" />
                                     <span>{group}</span>
                                 </div>
                             ))}
@@ -331,12 +331,12 @@ export default function ProductDetailPage({ onNotification }) {
 
                             <div className="direct-channels">
                                 <a href="mailto:signbridge.aiauto@gmail.com" className="channel-link">
-                                    <Mail size={18} className="channel-icon text-iris" />
+                                    <Mail size={18} className="channel-icon" />
                                     <span>signbridge.aiauto@gmail.com</span>
                                     <ArrowUpRight size={14} className="channel-arrow" />
                                 </a>
                                 <a href="tel:+919842253267" className="channel-link">
-                                    <Phone size={18} className="channel-icon text-cyan" />
+                                    <Phone size={18} className="channel-icon" />
                                     <span>+91 98422 53267</span>
                                     <ArrowUpRight size={14} className="channel-arrow" />
                                 </a>
