@@ -15,14 +15,14 @@ import Footer from './components/Footer.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
 import AudioController from './components/AudioController.jsx';
 import CloudSky from './components/originkit/CloudSky.jsx';
+import UiverseLoader from './components/UiverseLoader.jsx';
 
-// Lazy-loaded heavy routes, modals, 3D WebGL stage, and GSAP card deck
+// Lazy-loaded heavy routes, modals, and GSAP card deck
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
 const CloudSkyPage = lazy(() => import('./pages/CloudSkyPage.jsx'));
 const AetherglintPage = lazy(() => import('./pages/AetherglintPage.jsx'));
 const TeamSection = lazy(() => import('./components/TeamSection.jsx'));
 const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
-const SignBridgeIntroStage = lazy(() => import('./components/ParticleGlobe/SignBridgeIntroStage.jsx'));
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -104,8 +104,8 @@ export default function App() {
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
     const [contactOpen, setContactOpen] = useState(false);
-    // Render main content immediately for instant FCP/LCP; 3D intro launches on demand
-    const [introComplete, setIntroComplete] = useState(true);
+    // Starting animation: Uiverse spinning words loader shows on initial site visit
+    const [introComplete, setIntroComplete] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
 
     const activePalette = RIBBON_SPECTRUMS[paletteIndex];
@@ -147,7 +147,7 @@ export default function App() {
 
     const handleReplayIntro = useCallback(() => {
         setIntroComplete(false);
-        triggerToast('// LAUNCHING CINEMATIC PARTICLE INTRO');
+        triggerToast('// REPLAYING INTRO LOADER');
         playSynthFeedback(660, 'sine');
     }, [triggerToast, playSynthFeedback]);
 
@@ -285,15 +285,9 @@ export default function App() {
                 </Suspense>
             )}
 
-            {/* On-Demand Cinematic Particle Intro */}
+            {/* Starting animation: Uiverse spinning words loader */}
             {!introComplete && (
-                <Suspense fallback={null}>
-                    <SignBridgeIntroStage
-                        onComplete={handleIntroFinished}
-                        isMuted={isMuted}
-                        onToggleMute={handleToggleMute}
-                    />
-                </Suspense>
+                <UiverseLoader onComplete={handleIntroFinished} />
             )}
         </div>
     );

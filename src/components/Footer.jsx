@@ -82,9 +82,9 @@ export default function Footer({ onReplayIntro }) {
                                     fontFamily: 'inherit',
                                     fontSize: '0.85rem'
                                 }}
-                                title="Launch cinematic particle globe intro"
+                                title="Replay starting loader animation"
                             >
-                                ↺ Launch Cinematic Particle Intro
+                                ↺ Replay Starting Loader
                             </button>
                         )}
                         <span>BEYOND DIGITAL // INNOVATION STUDIO</span>

@@ -67,8 +67,8 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                     type="button"
                     onClick={onReplayIntro}
                     className="sound-toggle-btn replay-intro-nav-btn"
-                    aria-label="Launch Cinematic Particle Intro"
-                    title="Launch Cinematic Particle Intro"
+                    aria-label="Replay Starting Loader"
+                    title="Replay Starting Loader"
                 >
                     <Sparkles size={16} />
                 </button>
@@ -136,7 +136,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                         style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: '#4f46e5' }}
                     >
                         <Sparkles size={16} />
-                        <span>// PARTICLE INTRO</span>
+                        <span>// INTRO LOADER</span>
                     </button>
                     <button
                         type="button"
