@@ -3,10 +3,10 @@ import '../styles/uiverseLoader.css';
 
 /**
  * UiverseLoader
- * Created from Uiverse.io by kennyotsu
- * Modern spinning word loader used as the starting animation for SignBridge.
+ * From Uiverse.io by dexter-st
+ * Animated letter-wave & glowing laser-track loader for SignBridge.
  */
-export default function UiverseLoader({ onComplete, autoDismissMs = 3800 }) {
+export default function UiverseLoader({ onComplete, autoDismissMs = 3200 }) {
     const [isFading, setIsFading] = useState(false);
     const [hasEnded, setHasEnded] = useState(false);
 
@@ -56,18 +56,20 @@ export default function UiverseLoader({ onComplete, autoDismissMs = 3800 }) {
             aria-label="Loading SignBridge..."
             tabIndex={0}
         >
-            {/* From Uiverse.io by kennyotsu */}
-            <div className="card">
-                <div className="loader">
-                    <p>loading</p>
-                    <div className="words">
-                        <span className="word">buttons</span>
-                        <span className="word">forms</span>
-                        <span className="word">switches</span>
-                        <span className="word">cards</span>
-                        <span className="word">buttons</span>
-                    </div>
-                </div>
+            {/* From Uiverse.io by dexter-st */}
+            <div className="loader-wrapper">
+                <span className="loader-letter">S</span>
+                <span className="loader-letter">i</span>
+                <span className="loader-letter">g</span>
+                <span className="loader-letter">n</span>
+                <span className="loader-letter">B</span>
+                <span className="loader-letter">r</span>
+                <span className="loader-letter">i</span>
+                <span className="loader-letter">d</span>
+                <span className="loader-letter">g</span>
+                <span className="loader-letter">e</span>
+
+                <div className="loader"></div>
             </div>
 
             <div className="uiverse-loader-skip-hint" aria-hidden="true">
@@ -76,4 +78,3 @@ export default function UiverseLoader({ onComplete, autoDismissMs = 3800 }) {
         </div>
     );
 }
-
