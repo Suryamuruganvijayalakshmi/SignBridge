@@ -92,6 +92,34 @@ To preview the production build locally:
 npm run preview
 ```
 
+## Cloudflare Deployment
+
+This repository is pre-configured for seamless deployment to **Cloudflare Pages** and **Cloudflare Workers**.
+
+### Option A: Cloudflare Pages (Recommended via Git)
+
+1. Go to the [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+2. Select repository: `Suryamuruganvijayalakshmi/SignBridge`.
+3. Configure build settings:
+   - **Framework preset**: `Vite` (or `None`)
+   - **Build command**: `npm run build`
+   - **Build output directory**: `dist`
+   - **Root directory**: `/` (leave empty or `/`)
+4. Click **Save and Deploy**.
+   - Cloudflare Pages will automatically read `.nvmrc` (Node 20), build the project, process `_redirects` (SPA 200 rewrites), and serve the site with optimal cache headers from `_headers`.
+
+### Option B: Cloudflare CLI (Wrangler)
+
+Deploy directly from terminal:
+
+```bash
+# Deploy to Cloudflare Pages
+npm run deploy:pages
+
+# Or deploy to Cloudflare Workers (Static Assets)
+npm run deploy
+```
+
 ## Special Features
 
 - **Spectrum Shifting**: The application features a dynamic color palette system. Pressing the `Spacebar` cycles through different neon spectrum themes (e.g., Electric Iris, Cyber Violet, Deep Indigo, Vibrant Amber).
