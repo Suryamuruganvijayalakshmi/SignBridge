@@ -181,7 +181,7 @@ export default function ContactSection({ onNotification }) {
                 {/* Left: Contact Info & Protocol Channels */}
                 <div className="contact-info-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-lime)' }} /> // 08 — TRANSMISSION & COLLABORATION
+                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-lime)' }} /> // 07 — TRANSMISSION & COLLABORATION
                     </span>
                     <h2 className="section-main-heading">
                         Have an idea <br />

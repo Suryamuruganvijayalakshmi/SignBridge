@@ -7,7 +7,6 @@ const NAV_ITEMS = [
     { label: '// PRODUCTS', hash: '#products' },
     { label: '// R&D LAB', hash: '#research' },
     { label: '// PROCESS', hash: '#process' },
-    { label: '// TEAM', hash: '#team' },
     { label: '// CONTACT', hash: '#contact' },
 ];
 

@@ -16,9 +16,8 @@ import SpectrumToast from './components/SpectrumToast.jsx';
 import AudioController from './components/AudioController.jsx';
 import UiverseLoader from './components/UiverseLoader.jsx';
 
-// Lazy-loaded heavy routes, modals, and GSAP card deck
+// Lazy-loaded heavy routes and modals
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
-const TeamSection = lazy(() => import('./components/TeamSection.jsx'));
 const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
 
 export const RIBBON_SPECTRUMS = [
@@ -232,10 +231,6 @@ export default function App() {
                                 <ResearchSection onOpenContact={() => setContactOpen(true)} />
 
                                 <ProcessTimeline />
-
-                                <Suspense fallback={<div className="site-section" style={{ minHeight: '480px' }} />}>
-                                    <TeamSection />
-                                </Suspense>
 
                                 <VisionBanner />
 
