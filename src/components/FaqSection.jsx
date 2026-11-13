@@ -32,11 +32,11 @@ export default function FaqSection() {
             <div className="section-frame faq-grid-layout !grid !grid-cols-1 lg:!grid-cols-2 !gap-12">
                 <div className="faq-header-column">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // 06 — PROTOCOL FAQ
+                        <span className="eyebrow-pip" /> Frequently Asked Questions
                     </span>
                     <h2 className="section-main-heading">
                         Good to <br />
-                        <span className="text-lime">know.</span>
+                        <span className="text-accent">know.</span>
                     </h2>
                     <p className="section-lead-text">
                         Clear answers on technical capability, collaboration workflows, and product deployment.

@@ -6,12 +6,12 @@ export default function VisionBanner() {
             <div className="section-frame">
                 <div className="vision-box">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // THE SIGNAL
+                        <span className="eyebrow-pip" /> Our Vision
                     </span>
                     <h2 className="vision-title">
                         Technology should <br />
-                        <span className="text-white">not just work.</span> <br />
-                        <span className="text-lime text-glow">It should move things forward.</span>
+                        <span className="vision-highlight">not just work.</span> <br />
+                        <span className="text-accent">It should move things forward.</span>
                     </h2>
                     <div className="vision-pillars-row">
                         <span>Software</span>

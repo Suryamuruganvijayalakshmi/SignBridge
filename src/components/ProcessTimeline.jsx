@@ -19,11 +19,11 @@ export default function ProcessTimeline() {
             <div className="section-frame">
                 <div className="section-header-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // 05 — OUR PROCESS
+                        <span className="eyebrow-pip" /> Our Process
                     </span>
                     <h2 className="section-main-heading">
                         From idea to <br />
-                        <span className="text-lime">deployment.</span>
+                        <span className="text-accent">deployment.</span>
                     </h2>
                     <p className="section-lead-text">
                         A systematic engineering process for transforming complex requirements into production-ready digital and hardware products.

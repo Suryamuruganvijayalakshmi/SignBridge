@@ -271,11 +271,11 @@ export default function CapabilitiesSection() {
                 <div className="section-header-block capabilities-header-flex">
                     <div>
                         <span className="section-eyebrow">
-                            <span className="eyebrow-pip" /> // 02 — CAPABILITIES &amp; JOURNEY
+                            <span className="eyebrow-pip" /> Capabilities &amp; Journey
                         </span>
                         <h2 className="section-main-heading">
                             Technology that <br />
-                            <span className="text-lime">builds the bridge.</span>
+                            <span className="text-accent">builds the bridge.</span>
                         </h2>
                         <p className="section-lead-text">
                             A multidisciplinary engineering stack designed to move products from concept to deployment.

@@ -38,8 +38,8 @@ export default function Footer({ onReplayIntro }) {
                             <h3 className="footer-col-label">Expertise</h3>
                             <Link to="/#capabilities" className="footer-link">Software Engineering</Link>
                             <Link to="/#capabilities" className="footer-link">Artificial Intelligence</Link>
-                            <Link to="/#capabilities" className="footer-link">Cloud &amp; IoT</Link>
-                            <Link to="/cloud-sky" className="footer-link" style={{ color: '#c084fc' }}>Cloud Sky Atmosphere</Link>
+                            <Link to="/#capabilities" className="footer-link">Cloud &amp; IoT Systems</Link>
+                            <Link to="/#process" className="footer-link">Rapid Prototyping &amp; MVPs</Link>
                         </div>
                         <div className="footer-link-col">
                             <h3 className="footer-col-label">Socials</h3>

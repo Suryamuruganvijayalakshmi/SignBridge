@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 export default function NeatCursor() {
     const canvasRef = useRef(null);
 
-    const babyPink = '#ff75a0';
-    const softBabyPink = '#fbcfe8';
+    const cursorAccent = '#4f46e5';
+    const cursorSoft = '#c7d2fe';
 
     useEffect(() => {
         const isTouch =
@@ -139,9 +139,9 @@ export default function NeatCursor() {
                 ctx.beginPath();
                 ctx.moveTo(p0.x, p0.y);
                 ctx.lineTo(p1.x, p1.y);
-                ctx.strokeStyle = i < 7 ? babyPink : softBabyPink;
-                ctx.lineWidth = Math.max(0.8, (1 - progress) * 4.0);
-                ctx.globalAlpha = (1 - progress) * 0.78;
+                ctx.strokeStyle = i < 7 ? cursorAccent : cursorSoft;
+                ctx.lineWidth = Math.max(0.8, (1 - progress) * 3.5);
+                ctx.globalAlpha = (1 - progress) * 0.65;
                 ctx.stroke();
             }
             ctx.restore();
@@ -151,7 +151,7 @@ export default function NeatCursor() {
             ctx.beginPath();
             const dotRadius = isClicking ? 2.8 : isHovered ? 5.0 : 3.8;
             ctx.arc(mouse.x, mouse.y, dotRadius, 0, Math.PI * 2);
-            ctx.fillStyle = babyPink;
+            ctx.fillStyle = cursorAccent;
             ctx.fill();
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 1.4;

@@ -10,11 +10,11 @@ export default function ProductsSection() {
                 <div className="section-header-block products-header-layout">
                     <div>
                         <span className="section-eyebrow">
-                            <span className="eyebrow-pip" /> // 03 — PRODUCTS &amp; PLATFORMS
+                            <span className="eyebrow-pip" /> Products &amp; Platforms
                         </span>
                         <h2 id="products-heading" className="section-main-heading">
                             Built for <br />
-                            <span className="text-lime">real-world scale.</span>
+                            <span className="text-accent">real-world scale.</span>
                         </h2>
                         <p className="section-lead-text">
                             Three focused SignBridge products engineered across smart contactless NFC digital identity and data-driven agricultural procurement intelligence.

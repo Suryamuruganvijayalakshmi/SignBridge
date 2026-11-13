@@ -181,11 +181,11 @@ export default function ContactSection({ onNotification }) {
                 {/* Left: Contact Info & Protocol Channels */}
                 <div className="contact-info-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" style={{ backgroundColor: 'var(--accent-lime)' }} /> // 07 — TRANSMISSION & COLLABORATION
+                        <span className="eyebrow-pip" /> Contact &amp; Collaboration
                     </span>
                     <h2 className="section-main-heading">
                         Have an idea <br />
-                        <span className="text-lime">worth building?</span>
+                        <span className="text-accent">worth building?</span>
                     </h2>
                     <p className="section-lead-text">
                         Tell us what you are building, automating, or scaling. We will review your architecture and engineer the next milestone.

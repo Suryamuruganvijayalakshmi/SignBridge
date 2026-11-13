@@ -3,11 +3,11 @@ import { Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom';
 
 const NAV_ITEMS = [
-    { label: '// CAPABILITIES', hash: '#capabilities' },
-    { label: '// PRODUCTS', hash: '#products' },
-    { label: '// R&D LAB', hash: '#research' },
-    { label: '// PROCESS', hash: '#process' },
-    { label: '// CONTACT', hash: '#contact' },
+    { label: 'Capabilities', hash: '#capabilities' },
+    { label: 'Products', hash: '#products' },
+    { label: 'R&D Lab', hash: '#research' },
+    { label: 'Process', hash: '#process' },
+    { label: 'Contact', hash: '#contact' },
 ];
 
 export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onReplayIntro }) {

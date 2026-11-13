@@ -7,11 +7,11 @@ export default function ResearchSection({ onOpenContact }) {
             <div className="section-frame">
                 <div className="section-header-block">
                     <span className="section-eyebrow">
-                        <span className="eyebrow-pip" /> // 04 — R&D LAB
+                        <span className="eyebrow-pip" /> R&D Lab
                     </span>
                     <h2 className="section-main-heading">
                         Exploring what <br />
-                        <span className="text-lime">comes next.</span>
+                        <span className="text-accent">comes next.</span>
                     </h2>
                     <p className="section-lead-text">
                         Our R&D work explores the intersection of software engineering, artificial intelligence,
