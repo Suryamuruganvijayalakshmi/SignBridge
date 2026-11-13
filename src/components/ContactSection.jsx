@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, ArrowUpRight, ShieldCheck, AlertCircle, CheckCircle2, RotateCw } from 'lucide-react';
-import InteractiveDock from './InteractiveDock.jsx';
 import { getSupabase } from '../lib/supabase.js';
 import {
     sanitizeInput,
@@ -208,9 +207,6 @@ export default function ContactSection({ onNotification }) {
                             <span>Tamil Nadu, India // Global Deployment</span>
                         </div>
                     </div>
-
-                    {/* Interactive macOS Magnification Navigation Dock */}
-                    <InteractiveDock />
 
                     {/* Security & Reliability SLA Assurance Pill */}
                     <div className="mt-8 pt-6 border-t border-slate-200 flex items-center gap-3 text-xs text-slate-500 font-medium">

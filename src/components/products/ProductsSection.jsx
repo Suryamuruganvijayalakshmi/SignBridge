@@ -1,8 +1,6 @@
 import React from 'react';
 import { PRODUCTS_DATA } from '../../data/products.js';
 import ProductCard from './ProductCard.jsx';
-import NfcInteractiveCard from './NfcInteractiveCard.jsx';
-import '../../styles/luminousCard.css';
 
 export default function ProductsSection() {
     return (
@@ -29,9 +27,6 @@ export default function ProductsSection() {
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
-
-                {/* Interactive Physical NFC Smart Card Showcase */}
-                <NfcInteractiveCard />
             </div>
         </section>
     );
