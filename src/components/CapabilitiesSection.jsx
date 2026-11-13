@@ -51,9 +51,6 @@ export default function CapabilitiesSection() {
     const containerRef = useRef(null);
     const pathRef = useRef(null);
     const beaconGroupRef = useRef(null);
-    const progressFillRef = useRef(null);
-    const percentRef = useRef(null);
-    const statusRef = useRef(null);
     const cardRefs = useRef([]);
 
     // Cached layout metrics (never queried during scroll)
@@ -133,22 +130,7 @@ export default function CapabilitiesSection() {
                 ? 1
                 : Math.min(1, Math.max(0, currentDistance / totalDistance));
 
-            const pct = Math.round(progress * 100);
-
-            if (progressFillRef.current) {
-                progressFillRef.current.style.width = `${pct}%`;
-            }
-            if (percentRef.current) {
-                percentRef.current.textContent = `${pct}%`;
-            }
-
             const nextActiveIdx = Math.min(CAPABILITIES.length - 1, Math.floor(progress * CAPABILITIES.length));
-            if (statusRef.current) {
-                statusRef.current.textContent =
-                    progress >= 1
-                        ? 'COMPLETE // 06'
-                        : `ACTIVE // NODE 0${Math.max(1, nextActiveIdx + 1)}`;
-            }
 
             if (pathRef.current) {
                 if (!m.pathLength) {
@@ -298,19 +280,6 @@ export default function CapabilitiesSection() {
                         <p className="section-lead-text">
                             A multidisciplinary engineering stack designed to move products from concept to deployment.
                         </p>
-                    </div>
-
-                    <div className="journey-telemetry-hud" aria-label="Journey Progress">
-                        <div className="hud-metric">
-                            <span className="hud-label">CONNECTOR PROTOCOL</span>
-                            <div className="hud-val-row">
-                                <span ref={percentRef} className="hud-percent text-lime">0%</span>
-                                <span ref={statusRef} className="hud-status">ACTIVE // NODE 01</span>
-                            </div>
-                        </div>
-                        <div className="hud-progress-bar">
-                            <div ref={progressFillRef} className="hud-progress-fill" style={{ width: '0%' }} />
-                        </div>
                     </div>
                 </div>
 

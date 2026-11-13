@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, ChevronDown, ChevronUp, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import ProductMockupVisual from './ProductMockupVisual.jsx';
 
 export default function ProductCard({ product }) {
-    const [expanded, setExpanded] = useState(false);
-
     return (
-        <article className={`product-showcase-card ${expanded ? 'is-expanded' : ''}`}>
+        <article className="product-showcase-card">
             {/* Top visual mockup */}
             <Link
                 to={`/products/${product.slug}`}
@@ -41,65 +39,18 @@ export default function ProductCard({ product }) {
                     </ul>
                 </div>
 
-                {/* Expandable Explore More panel */}
-                {expanded && (
-                    <div className="product-explore-drawer" id={`explore-${product.id}`}>
-                        <div className="explore-drawer-block">
-                            <span className="explore-drawer-label">FULL CAPABILITY OVERVIEW</span>
-                            <p className="explore-drawer-text">{product.description}</p>
-                        </div>
-
-                        <div className="explore-drawer-block">
-                            <span className="explore-drawer-label">
-                                <Users size={12} aria-hidden="true" /> TARGET AUDIENCE
-                            </span>
-                            <div className="explore-audience-chips">
-                                {product.targetAudience.map((aud) => (
-                                    <span key={aud} className="explore-audience-chip">
-                                        {aud}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="explore-drawer-block">
-                            <span className="explore-drawer-label">
-                                ALL INCLUDED CAPABILITIES ({product.features.length})
-                            </span>
-                            <div className="explore-features-mini">
-                                {product.features.map((f) => (
-                                    <span key={f} className="explore-feature-tag">
-                                        {f}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                )}
-
                 {/* Card Footer Actions */}
                 <div className="product-card-actions">
                     <Link
                         to={`/products/${product.slug}`}
                         className="product-view-btn"
+                        style={{ width: '100%', justifyContent: 'center' }}
                     >
-                        <span>View Product</span>
+                        <span>View Product Specifications</span>
                         <ArrowRight size={15} aria-hidden="true" />
                     </Link>
-
-                    <button
-                        type="button"
-                        className="product-explore-btn"
-                        onClick={() => setExpanded((prev) => !prev)}
-                        aria-expanded={expanded}
-                        aria-controls={`explore-${product.id}`}
-                    >
-                        <span>{expanded ? 'Show Less' : 'Explore More'}</span>
-                        {expanded ? <ChevronUp size={15} aria-hidden="true" /> : <ChevronDown size={15} aria-hidden="true" />}
-                    </button>
                 </div>
             </div>
         </article>
     );
 }
-

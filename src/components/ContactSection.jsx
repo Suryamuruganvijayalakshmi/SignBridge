@@ -209,8 +209,8 @@ export default function ContactSection({ onNotification }) {
                     </div>
 
                     {/* Security & Reliability SLA Assurance Pill */}
-                    <div className="mt-8 pt-6 border-t border-white/20 flex items-center gap-3 text-xs text-purple-200">
-                        <ShieldCheck size={16} className="text-white" />
+                    <div className="mt-8 pt-6 border-t border-slate-200 flex items-center gap-3 text-xs text-slate-500 font-medium">
+                        <ShieldCheck size={16} className="text-indigo-600" />
                         <span>256-Bit Encrypted Uplink · Anti-Spam Guard · 24h Response Protocol</span>
                     </div>
                 </div>
