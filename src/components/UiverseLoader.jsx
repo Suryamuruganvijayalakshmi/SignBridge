@@ -5,8 +5,9 @@ import '../styles/uiverseLoader.css';
  * UiverseLoader
  * From Uiverse.io by dexter-st
  * Animated letter-wave & glowing laser-track loader for SignBridge.
+ * Clean, borderless floating presentation with vibrant colors.
  */
-export default function UiverseLoader({ onComplete, autoDismissMs = 3200 }) {
+export default function UiverseLoader({ onComplete, autoDismissMs = 2600 }) {
     const [isFading, setIsFading] = useState(false);
     const [hasEnded, setHasEnded] = useState(false);
 
@@ -23,7 +24,7 @@ export default function UiverseLoader({ onComplete, autoDismissMs = 3200 }) {
             if (onCompleteRef.current) {
                 onCompleteRef.current();
             }
-        }, 600);
+        }, 500);
     }, [isFading, hasEnded]);
 
     useEffect(() => {
@@ -54,26 +55,23 @@ export default function UiverseLoader({ onComplete, autoDismissMs = 3200 }) {
             role="status"
             aria-live="polite"
             aria-label="Loading SignBridge..."
-            tabIndex={0}
         >
-            {/* From Uiverse.io by dexter-st */}
+            {/* From Uiverse.io by dexter-st — frameless, pure floating letters & colored bar */}
             <div className="loader-wrapper">
-                <span className="loader-letter">S</span>
-                <span className="loader-letter">i</span>
-                <span className="loader-letter">g</span>
-                <span className="loader-letter">n</span>
-                <span className="loader-letter">B</span>
-                <span className="loader-letter">r</span>
-                <span className="loader-letter">i</span>
-                <span className="loader-letter">d</span>
-                <span className="loader-letter">g</span>
-                <span className="loader-letter">e</span>
+                <div className="loader-letters">
+                    <span className="loader-letter">S</span>
+                    <span className="loader-letter">i</span>
+                    <span className="loader-letter">g</span>
+                    <span className="loader-letter">n</span>
+                    <span className="loader-letter">B</span>
+                    <span className="loader-letter">r</span>
+                    <span className="loader-letter">i</span>
+                    <span className="loader-letter">d</span>
+                    <span className="loader-letter">g</span>
+                    <span className="loader-letter">e</span>
+                </div>
 
                 <div className="loader"></div>
-            </div>
-
-            <div className="uiverse-loader-skip-hint" aria-hidden="true">
-                Click or press ESC to enter
             </div>
         </div>
     );
