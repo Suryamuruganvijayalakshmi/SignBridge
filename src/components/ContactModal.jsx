@@ -305,13 +305,12 @@ export default function ContactModal({ isOpen, onClose, onNotification }) {
                         {/* Status Feedback */}
                         {status.text && (
                             <div
-                                className={`form-status p-3 rounded-lg text-xs font-mono flex items-start gap-2.5 ${
-                                    status.type === 'error'
+                                className={`form-status p-3 rounded-lg text-xs font-mono flex items-start gap-2.5 ${status.type === 'error'
                                         ? 'bg-rose-50 text-rose-700 border border-rose-200'
                                         : status.type === 'success'
-                                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                        : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                                }`}
+                                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                            : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                                    }`}
                                 role="status"
                             >
                                 {status.type === 'error' && <AlertCircle size={16} className="shrink-0 mt-0.5 text-rose-600" />}
