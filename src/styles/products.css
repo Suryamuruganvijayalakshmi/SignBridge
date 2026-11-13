@@ -26,7 +26,7 @@
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #e9d5ff;
+    color: var(--accent-iris, #6366f1);
     text-transform: uppercase;
 }
 
@@ -42,14 +42,14 @@
     gap: 0.45rem;
     padding: 0.45rem 0.9rem;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.22);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--accent-iris, #6366f1);
 }
 
 /* ── Product Cards Grid (3 Offerings) ─────────────────────────────────────── */
@@ -1063,24 +1063,26 @@
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    color: #ffffff;
+    color: var(--text-60, #475569);
     font-weight: 700;
     text-decoration: none;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    text-shadow: none;
+    transition: color 0.2s ease;
 }
 
 .breadcrumb-back-link:hover {
     text-decoration: underline;
-    color: #f5d0fe;
+    color: var(--accent-iris, #6366f1);
 }
 
 .breadcrumb-sep {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-30, #94a3b8);
 }
 
 .breadcrumb-current {
-    color: #f1f5f9;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: var(--text-pure, #09090b);
+    text-shadow: none;
+    font-weight: 600;
 }
 
 .product-detail-hero {
@@ -1115,9 +1117,9 @@
     font-size: 10.5px;
     font-weight: 600;
     letter-spacing: 0.1em;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: var(--accent-iris, #6366f1);
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.22);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 0.3rem 0.75rem;
@@ -1130,8 +1132,8 @@
     font-weight: 900;
     line-height: 0.98;
     letter-spacing: -0.04em;
-    color: #ffffff;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    color: var(--text-pure, #09090b);
+    text-shadow: none;
     text-transform: uppercase;
     margin-bottom: 0.85rem;
 }
@@ -1140,16 +1142,16 @@
     font-family: var(--font-mono);
     font-size: 1rem;
     font-weight: 700;
-    color: #f5d0fe;
-    text-shadow: 0 0 20px rgba(245, 208, 254, 0.5);
+    color: var(--accent-iris, #6366f1);
+    text-shadow: none;
     margin-bottom: 1.15rem;
 }
 
 .pd-description {
     font-size: 1.05rem;
     line-height: 1.7;
-    color: #f1f5f9;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: var(--text-50, #475569);
+    text-shadow: none;
     margin-bottom: 1.85rem;
 }
 
@@ -1198,8 +1200,8 @@
     font-weight: 900;
     line-height: 1.04;
     letter-spacing: -0.03em;
-    color: #ffffff;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    color: var(--text-pure, #09090b);
+    text-shadow: none;
     text-transform: uppercase;
 }
 

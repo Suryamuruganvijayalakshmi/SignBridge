@@ -47,9 +47,10 @@
 
 .loader {
   color: #64748b;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 25px;
+  font-family: 'Plus Jakarta Sans', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.02em;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   height: 40px;
@@ -59,12 +60,14 @@
   display: flex;
   align-items: center;
   border-radius: 8px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .loader p {
   margin: 0;
   line-height: 40px;
   color: #64748b;
+  font-weight: 500;
 }
 
 .words {
