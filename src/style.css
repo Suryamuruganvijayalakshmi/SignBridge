@@ -90,8 +90,8 @@
 html, body {
     width: 100%;
     min-height: 100%;
-    background-color: #8100FF !important;
-    background: #8100FF !important;
+    background-color: #070414 !important;
+    background: #070414 !important;
     color: var(--text-50);
     font-family: var(--font-body);
     font-size: 16px;

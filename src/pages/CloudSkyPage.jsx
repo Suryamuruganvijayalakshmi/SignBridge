@@ -5,8 +5,56 @@ import CloudSky, { OriginkitBase_CloudSky } from '../components/originkit/CloudS
 
 const PRESETS = [
     {
+        id: 'dark-nocturnal',
+        name: 'Dark Nocturnal Void (Default)',
+        bg: '#070414',
+        horizon: '#150a2e',
+        cloud: '#3e2d61',
+        sunGlow: 'rgba(180, 195, 255, 0.35)',
+        sunX: 85,
+        sunY: 90,
+        density: 95,
+        speed: 46,
+        size: 135,
+        cirrus: 50,
+        shadow: 115,
+        softness: 190,
+    },
+    {
+        id: 'cyber-noir-storm',
+        name: 'Cyber Noir Storm',
+        bg: '#06070a',
+        horizon: '#10141d',
+        cloud: '#262d3d',
+        sunGlow: 'rgba(56, 189, 248, 0.35)',
+        sunX: 80,
+        sunY: 88,
+        density: 100,
+        speed: 50,
+        size: 140,
+        cirrus: 40,
+        shadow: 120,
+        softness: 180,
+    },
+    {
+        id: 'deep-indigo-nebula',
+        name: 'Deep Indigo Nebula',
+        bg: '#07061a',
+        horizon: '#131138',
+        cloud: '#312e6b',
+        sunGlow: 'rgba(147, 130, 250, 0.4)',
+        sunX: 90,
+        sunY: 92,
+        density: 90,
+        speed: 42,
+        size: 130,
+        cirrus: 60,
+        shadow: 100,
+        softness: 200,
+    },
+    {
         id: 'originkit-preset',
-        name: 'Originkit Preset (Electric Violet)',
+        name: 'Originkit Daylight (Electric Violet)',
         bg: '#8100FF',
         horizon: '#B4D2F0',
         cloud: '#FFFFFF',
@@ -19,63 +67,15 @@ const PRESETS = [
         cirrus: 100,
         shadow: 70,
         softness: 200,
-    },
-    {
-        id: 'originkit-default',
-        name: 'Originkit Azure Blue',
-        bg: '#0075FF',
-        horizon: '#B4D2F0',
-        cloud: '#FFFFFF',
-        sunGlow: 'rgba(232, 243, 255, 0.9)',
-        sunX: 78,
-        sunY: 92,
-        density: 100,
-        speed: 64,
-        size: 130,
-        cirrus: 45,
-        shadow: 100,
-        softness: 100,
-    },
-    {
-        id: 'signbridge-iris',
-        name: 'SignBridge Deep Iris',
-        bg: '#4f46e5',
-        horizon: '#c7d2fe',
-        cloud: '#ffffff',
-        sunGlow: '#a5b4fc',
-        sunX: 85,
-        sunY: 90,
-        density: 90,
-        speed: 55,
-        size: 140,
-        cirrus: 80,
-        shadow: 80,
-        softness: 180,
-    },
-    {
-        id: 'cyber-sunset',
-        name: 'Cyber Violet Nebula',
-        bg: '#7000df',
-        horizon: '#f0abfc',
-        cloud: '#ffffff',
-        sunGlow: '#fdf4ff',
-        sunX: 95,
-        sunY: 95,
-        density: 100,
-        speed: 70,
-        size: 150,
-        cirrus: 100,
-        shadow: 65,
-        softness: 220,
     }
 ];
 
 export default function CloudSkyPage() {
     const [presetIndex, setPresetIndex] = useState(0);
-    const [speed, setSpeed] = useState(64);
-    const [density, setDensity] = useState(100);
-    const [size, setSize] = useState(130);
-    const [cirrus, setCirrus] = useState(100);
+    const [speed, setSpeed] = useState(46);
+    const [density, setDensity] = useState(95);
+    const [size, setSize] = useState(135);
+    const [cirrus, setCirrus] = useState(50);
     const [hudOpen, setHudOpen] = useState(false);
 
     const active = PRESETS[presetIndex];
@@ -167,7 +167,7 @@ export default function CloudSkyPage() {
                         gap: '0.5rem',
                         padding: '0.55rem 1.15rem',
                         borderRadius: '9999px',
-                        background: hudOpen ? '#8100FF' : 'rgba(15, 23, 42, 0.85)',
+                        background: hudOpen ? '#6366f1' : 'rgba(15, 23, 42, 0.85)',
                         backdropFilter: 'blur(16px)',
                         WebkitBackdropFilter: 'blur(16px)',
                         border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -238,8 +238,8 @@ export default function CloudSkyPage() {
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'space-between',
-                                            background: isSelected ? 'rgba(129, 0, 255, 0.35)' : 'rgba(255, 255, 255, 0.05)',
-                                            border: isSelected ? '1px solid #8100FF' : '1px solid rgba(255, 255, 255, 0.1)',
+                                            background: isSelected ? 'rgba(99, 102, 241, 0.35)' : 'rgba(255, 255, 255, 0.05)',
+                                            border: isSelected ? '1px solid #6366f1' : '1px solid rgba(255, 255, 255, 0.1)',
                                             color: isSelected ? '#ffffff' : '#cbd5e1',
                                             fontSize: '12px',
                                             cursor: 'pointer',
@@ -266,7 +266,7 @@ export default function CloudSkyPage() {
                                 max={100}
                                 value={speed}
                                 onChange={(e) => setSpeed(Number(e.target.value))}
-                                style={{ width: '100%', accentColor: '#8100FF' }}
+                                style={{ width: '100%', accentColor: '#6366f1' }}
                             />
                         </div>
 
@@ -281,7 +281,7 @@ export default function CloudSkyPage() {
                                 max={100}
                                 value={density}
                                 onChange={(e) => setDensity(Number(e.target.value))}
-                                style={{ width: '100%', accentColor: '#8100FF' }}
+                                style={{ width: '100%', accentColor: '#6366f1' }}
                             />
                         </div>
 
@@ -296,7 +296,7 @@ export default function CloudSkyPage() {
                                 max={250}
                                 value={size}
                                 onChange={(e) => setSize(Number(e.target.value))}
-                                style={{ width: '100%', accentColor: '#8100FF' }}
+                                style={{ width: '100%', accentColor: '#6366f1' }}
                             />
                         </div>
 
@@ -311,7 +311,7 @@ export default function CloudSkyPage() {
                                 max={100}
                                 value={cirrus}
                                 onChange={(e) => setCirrus(Number(e.target.value))}
-                                style={{ width: '100%', accentColor: '#8100FF' }}
+                                style={{ width: '100%', accentColor: '#6366f1' }}
                             />
                         </div>
                     </div>

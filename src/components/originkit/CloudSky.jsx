@@ -218,12 +218,12 @@ const POINTER_DEFAULTS = { parallax: 100, wind: 100, damping: 20 };
 export function OriginkitBase_CloudSky(props) {
     const {
         style,
-        background = "#8100FF",
-        baseColor = "#B4D2F0",
-        accentColor = "#FFFFFF",
-        density = 100,
-        speed = 64,
-        size = 130,
+        background = "#070414",
+        baseColor = "#150a2e",
+        accentColor = "#3e2d61",
+        density = 95,
+        speed = 46,
+        size = 135,
         clouds,
         sun,
         pointer,
@@ -416,21 +416,26 @@ export function OriginkitBase_CloudSky(props) {
 }
 
 export const ORIGINKIT_PRESET_PROPS = {
-    background: "#8100FF",
+    background: "#070414",
+    baseColor: "#150a2e",
+    accentColor: "#3e2d61",
+    density: 95,
+    speed: 46,
+    size: 135,
     clouds: {
-        cirrus: 100,
-        shadow: 70,
-        softness: 200,
+        cirrus: 50,
+        shadow: 115,
+        softness: 190,
     },
     sun: {
-        x: 100,
-        y: 100,
-        glow: "#FFFFFF",
+        x: 85,
+        y: 90,
+        glow: "rgba(180, 195, 255, 0.35)",
     },
     pointer: {
-        wind: 300,
-        damping: 50,
-        parallax: 300,
+        wind: 280,
+        damping: 45,
+        parallax: 260,
     },
 };
 

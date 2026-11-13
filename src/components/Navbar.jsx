@@ -121,7 +121,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                         to="/cloud-sky"
                         className="mobile-nav-link"
                         onClick={() => setMobileOpen(false)}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8100FF' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#6366f1' }}
                     >
                         <Cloud size={16} />
                         <span>// CLOUD SKY ATMOSPHERE</span>
