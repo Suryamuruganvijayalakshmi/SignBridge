@@ -14,13 +14,10 @@ import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
 import AudioController from './components/AudioController.jsx';
-import CloudSky from './components/originkit/CloudSky.jsx';
 import UiverseLoader from './components/UiverseLoader.jsx';
 
 // Lazy-loaded heavy routes, modals, and GSAP card deck
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
-const CloudSkyPage = lazy(() => import('./pages/CloudSkyPage.jsx'));
-const AetherglintPage = lazy(() => import('./pages/AetherglintPage.jsx'));
 const TeamSection = lazy(() => import('./components/TeamSection.jsx'));
 const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
 
@@ -97,9 +94,6 @@ function ScrollToHash() {
 }
 
 export default function App() {
-    const { pathname } = useLocation();
-    const isAtmospherePreview = pathname === '/cloud-sky' || pathname === '/aetherglint';
-
     const [paletteIndex, setPaletteIndex] = useState(0);
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
@@ -200,21 +194,6 @@ export default function App() {
             {/* Precision Luxury Cursor */}
             {introComplete && <NeatCursor activePalette={activePalette} />}
 
-            {/* Fixed Static Cloud Sky Living Canvas in Originkit Preset */}
-            {!isAtmospherePreview && (
-                <div className="fixed-cloudsky-backdrop" aria-hidden="true">
-                    <CloudSky
-                        style={{
-                            position: 'fixed',
-                            inset: 0,
-                            width: '100vw',
-                            height: '100vh',
-                            pointerEvents: 'none',
-                        }}
-                    />
-                </div>
-            )}
-
             {/* Subtle cyber grid texture on background */}
             <div className="cyber-grid-overlay" aria-hidden="true" />
 
@@ -266,8 +245,6 @@ export default function App() {
                             </>
                         } />
                         <Route path="/products/:slug" element={<ProductDetailPage onNotification={triggerToast} />} />
-                        <Route path="/cloud-sky" element={<CloudSkyPage />} />
-                        <Route path="/aetherglint" element={<CloudSkyPage />} />
                     </Routes>
                 </Suspense>
 

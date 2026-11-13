@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles, Cloud } from 'lucide-react';
+import { Volume2, VolumeX, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const NAV_ITEMS = [
@@ -47,7 +47,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                 ))}
             </nav>
 
-            {/* Right: Sound Toggle, Particle Intro & Contact CTA */}
+            {/* Right: Sound Toggle, Intro Loader & Contact CTA */}
             <div className="header-actions">
                 <button
                     type="button"
@@ -72,15 +72,6 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                 >
                     <Sparkles size={16} />
                 </button>
-
-                <Link
-                    to="/cloud-sky"
-                    className="sound-toggle-btn cloudsky-nav-btn"
-                    aria-label="Cloud Sky Atmospheric Experience"
-                    title="Cloud Sky (Originkit)"
-                >
-                    <Cloud size={16} />
-                </Link>
 
                 <button
                     type="button"
@@ -117,15 +108,6 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                             {item.label}
                         </Link>
                     ))}
-                    <Link
-                        to="/cloud-sky"
-                        className="mobile-nav-link"
-                        onClick={() => setMobileOpen(false)}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#6366f1' }}
-                    >
-                        <Cloud size={16} />
-                        <span>// CLOUD SKY ATMOSPHERE</span>
-                    </Link>
                     <button
                         type="button"
                         onClick={() => {
