@@ -2,6 +2,7 @@ import React from 'react';
 import { PRODUCTS_DATA } from '../../data/products.js';
 import ProductCard from './ProductCard.jsx';
 import NfcInteractiveCard from './NfcInteractiveCard.jsx';
+import '../../styles/luminousCard.css';
 
 export default function ProductsSection() {
     return (
