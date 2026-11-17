@@ -9,20 +9,19 @@ const PASSAGE_WORDS = [
     'SIGNBRIDGE'
 ];
 
-// 450ms hold + 800ms tween duration = 1250ms per word cycle
-const WORD_INTERVAL_MS = 1250;
-// 4 transitions to reach SIGNBRIDGE (5000ms) + 1200ms grand hold = 6200ms total
-const TOTAL_PASSAGE_DURATION_MS = 6200;
+// Silky smooth transition timing: 400ms hold + 1000ms transition = 1400ms per word
+const HOLD_MS = 400;
+const DURATION_S = 1.0;
+// 4 transitions to reach SIGNBRIDGE (5600ms) + 1400ms grand hold = 7000ms total
+const TOTAL_DURATION_MS = 7000;
 
 /**
- * InfinitePassageLoader
- * Powered by Originkit Infinite Text Passage (ZoomTextTunnel) in pure White Theme.
- * Every word executes its full tunnel zoom animation, concluding with a grand hold on SIGNBRIDGE.
+ * InfinitePassageLoader — Ultra-Minimal & Silky Smooth White Loader
+ * Only the zooming word is visible. Completely distraction-free pure studio aesthetic.
  */
-export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTAL_PASSAGE_DURATION_MS }) {
+export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTAL_DURATION_MS }) {
     const [isFading, setIsFading] = useState(false);
     const [hasEnded, setHasEnded] = useState(false);
-    const [currentStep, setCurrentStep] = useState(0);
 
     const onCompleteRef = useRef(onComplete);
     useEffect(() => {
@@ -37,23 +36,10 @@ export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTA
             if (onCompleteRef.current) {
                 onCompleteRef.current();
             }
-        }, 650);
+        }, 750);
     }, [isFading, hasEnded]);
 
-    // Track active word in real time
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentStep((prev) => {
-                if (prev < PASSAGE_WORDS.length - 1) return prev + 1;
-                clearInterval(interval);
-                return prev;
-            });
-        }, WORD_INTERVAL_MS);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    // Dismiss only after EVERY word has completed its full entrance and SIGNBRIDGE has held
+    // Automatically transition smoothly after all words have played and SIGNBRIDGE held
     useEffect(() => {
         if (autoDismissMs > 0) {
             const timer = setTimeout(handleDismiss, autoDismissMs);
@@ -61,7 +47,7 @@ export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTA
         }
     }, [autoDismissMs, handleDismiss]);
 
-    // Keyboard shortcuts to skip (Esc, Enter, Space)
+    // Invisible click or keyboard listener to enter immediately
     useEffect(() => {
         const onKeyDown = (e) => {
             if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
@@ -83,50 +69,24 @@ export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTA
             aria-live="polite"
             aria-label="Loading SignBridge..."
         >
-            {/* Ambient Background Glow in Warm Sunset Peach */}
+            {/* Soft Ambient Radial Peach Glow matching Hero 64 */}
             <div className="infinite-loader-glow" aria-hidden="true" />
 
-            {/* Top Brand & Word Phase Bar */}
-            <header className="infinite-loader-topbar">
-                <div className="infinite-loader-brand">
-                    <img
-                        src="/signbridge-emblem.webp"
-                        alt="SignBridge Logo"
-                        className="infinite-loader-emblem"
-                        width="28"
-                        height="18"
-                    />
-                    <span className="infinite-loader-brand-text">SignBridge<sup>®</sup></span>
-                </div>
-
-                <div className="infinite-loader-step-pill">
-                    <div className="infinite-loader-dots" aria-hidden="true">
-                        {PASSAGE_WORDS.map((w, idx) => (
-                            <span
-                                key={w}
-                                className={`infinite-step-dot ${currentStep >= idx ? 'active' : ''}`}
-                            />
-                        ))}
-                    </div>
-                    <span>0{currentStep + 1} // {PASSAGE_WORDS[currentStep]}</span>
-                </div>
-            </header>
-
-            {/* Central Tunnel Stage with ZoomTextTunnel */}
+            {/* Purely the Central Tunnel Stage — Only the loader word is visible */}
             <main className="infinite-loader-stage">
                 <ZoomTextTunnel
                     texts={PASSAGE_WORDS}
                     color="#18181b"
-                    hold={450}
-                    maxScale={34}
+                    hold={HOLD_MS}
+                    maxScale={28}
                     transition={{
                         type: 'tween',
-                        duration: 0.8,
-                        ease: [0.7, 0, 0.25, 1],
+                        duration: DURATION_S,
+                        ease: [0.25, 0.1, 0.25, 1],
                     }}
                     font={{
                         fontFamily: '"Instrument Serif", Georgia, serif',
-                        fontSize: 'clamp(2.8rem, 8.5vw, 6.8rem)',
+                        fontSize: 'clamp(3.5rem, 10vw, 7.5rem)',
                         fontWeight: 400,
                         letterSpacing: '-0.02em',
                         textAlign: 'center',
@@ -134,13 +94,6 @@ export default function InfinitePassageLoader({ onComplete, autoDismissMs = TOTA
                     }}
                 />
             </main>
-
-            {/* Subtle Skip Hint */}
-            <footer className="infinite-loader-footer" aria-hidden="true">
-                <span className="infinite-loader-skip-pill">
-                    CLICK ANYWHERE OR PRESS <b>ESC</b> TO ENTER
-                </span>
-            </footer>
         </aside>
     );
 }
