@@ -2,7 +2,16 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Footer({ onReplayIntro }) {
+export default function Footer({ onReplayIntro, onOpenContact }) {
+    const handleFooterNav = (id) => (e) => {
+        const el = document.getElementById(id);
+        if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth' });
+            window.history.pushState(null, '', `/#${id}`);
+        }
+    };
+
     return (
         <footer className="site-footer" style={{ pointerEvents: 'auto' }}>
             <div className="footer-inner">
@@ -18,12 +27,20 @@ export default function Footer({ onReplayIntro }) {
                             We transform ambitious ideas into intelligent, scalable digital products
                             through software engineering and AI.
                         </p>
-                        <a
-                            href="mailto:signbridge.aiauto@gmail.com"
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (onOpenContact) {
+                                    onOpenContact();
+                                } else {
+                                    window.location.href = "mailto:signbridge.aiauto@gmail.com";
+                                }
+                            }}
                             className="footer-cta-btn"
                         >
-                            Start a Project <ArrowUpRight size={18} aria-hidden="true" />
-                        </a>
+                            <span>Start a Project</span>
+                            <ArrowUpRight size={18} aria-hidden="true" />
+                        </button>
                     </div>
 
                     {/* Right: Link columns */}
@@ -36,10 +53,10 @@ export default function Footer({ onReplayIntro }) {
                         </div>
                         <div className="footer-link-col">
                             <h3 className="footer-col-label">Expertise</h3>
-                            <Link to="/#capabilities" className="footer-link">Software Engineering</Link>
-                            <Link to="/#capabilities" className="footer-link">Artificial Intelligence</Link>
-                            <Link to="/#capabilities" className="footer-link">Cloud &amp; IoT Systems</Link>
-                            <Link to="/#process" className="footer-link">Rapid Prototyping &amp; MVPs</Link>
+                            <Link to="/#capabilities" onClick={handleFooterNav('capabilities')} className="footer-link">Software Engineering</Link>
+                            <Link to="/#capabilities" onClick={handleFooterNav('capabilities')} className="footer-link">Artificial Intelligence</Link>
+                            <Link to="/#capabilities" onClick={handleFooterNav('capabilities')} className="footer-link">Cloud &amp; IoT Systems</Link>
+                            <Link to="/#process" onClick={handleFooterNav('process')} className="footer-link">Rapid Prototyping &amp; MVPs</Link>
                         </div>
                         <div className="footer-link-col">
                             <h3 className="footer-col-label">Socials</h3>

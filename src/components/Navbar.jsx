@@ -13,6 +13,24 @@ const NAV_ITEMS = [
 export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onReplayIntro }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
+    const handleNavClick = (hash) => (e) => {
+        const id = hash.replace('#', '');
+        const target = document.getElementById(id);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+            window.history.pushState(null, '', `/${hash}`);
+        }
+    };
+
+    const handleLogoClick = (e) => {
+        if (window.location.pathname === '/' || window.location.pathname === '') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.history.pushState(null, '', '/');
+        }
+    };
+
     useEffect(() => {
         if (!mobileOpen) return;
         const onKeyDown = (e) => {
@@ -25,7 +43,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
     return (
         <header className="lumina-header" role="banner">
             {/* Left: SignBridge Logo */}
-            <Link to="/" className="logo-container" aria-label="SIGNBRIDGE home">
+            <Link to="/" onClick={handleLogoClick} className="logo-container" aria-label="SIGNBRIDGE home">
                 <img
                     src="/signbridge-emblem.webp"
                     alt="SignBridge Logo"
@@ -40,7 +58,12 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
             {/* Center: Desktop Links */}
             <nav className="nav-links-center" aria-label="Primary Navigation">
                 {NAV_ITEMS.map((item) => (
-                    <Link key={item.label} to={`/${item.hash}`} className="nav-link">
+                    <Link
+                        key={item.label}
+                        to={`/${item.hash}`}
+                        onClick={handleNavClick(item.hash)}
+                        className="nav-link"
+                    >
                         {item.label}
                     </Link>
                 ))}
@@ -102,7 +125,10 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                             key={item.label}
                             to={`/${item.hash}`}
                             className="mobile-nav-link"
-                            onClick={() => setMobileOpen(false)}
+                            onClick={(e) => {
+                                setMobileOpen(false);
+                                handleNavClick(item.hash)(e);
+                            }}
                         >
                             {item.label}
                         </Link>

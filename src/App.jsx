@@ -220,7 +220,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={
                             <>
-                                <Hero />
+                                <Hero onOpenContact={() => setContactOpen(true)} />
 
                                 <DisciplinesMarquee />
 
@@ -243,7 +243,10 @@ export default function App() {
                     </Routes>
                 </Suspense>
 
-                <Footer onReplayIntro={handleReplayIntro} />
+                <Footer
+                    onReplayIntro={handleReplayIntro}
+                    onOpenContact={() => setContactOpen(true)}
+                />
             </div>
 
             {/* Lazy-loaded Top-Layer Modals */}

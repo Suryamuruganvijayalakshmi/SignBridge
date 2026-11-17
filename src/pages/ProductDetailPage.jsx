@@ -115,7 +115,15 @@ export default function ProductDetailPage({ onNotification }) {
                                 <span>{product.ctaLabel}</span>
                                 <ArrowUpRight size={16} aria-hidden="true" />
                             </button>
-                            <a href="#how-it-works" className="btn-secondary-glass">
+                            <a
+                                href="#how-it-works"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const target = document.getElementById('how-it-works');
+                                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="btn-secondary-glass"
+                            >
                                 <span>How It Works</span>
                             </a>
                         </div>
