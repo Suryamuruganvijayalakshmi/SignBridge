@@ -326,3 +326,4 @@ const __originkitPresetProps = {
 export default function MagneticCarousel(props: Record<string, unknown>) {
   return <__OriginkitBase_MagneticCarousel {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
 }
+
