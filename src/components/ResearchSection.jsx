@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUpRight, Activity, Satellite } from 'lucide-react';
+import { ArrowUpRight, Activity, Satellite, Sparkles } from 'lucide-react';
+import MagneticCarousel from './originkit/magneticcarousel';
 
 export default function ResearchSection({ onOpenContact }) {
     return (
@@ -17,6 +18,27 @@ export default function ResearchSection({ onOpenContact }) {
                         Our R&D work explores the intersection of software engineering, artificial intelligence,
                         IoT, edge computing, and emerging spatial technologies.
                     </p>
+                </div>
+
+                {/* Interactive R&D Magnetic Visualizer */}
+                <div className="rd-carousel-showcase">
+                    <div className="rd-carousel-header">
+                        <div className="flex items-center gap-2">
+                            <span className="rd-carousel-badge">INTERACTIVE PROTOTYPE GALLERY // SPATIAL & INTERFACE EXPLORATION</span>
+                        </div>
+                        <span className="rd-carousel-hint">Hover to magnify · Click to expand preview</span>
+                    </div>
+                    <div className="rd-carousel-container">
+                        <MagneticCarousel
+                            collapsedWidth={75}
+                            hoverWidth={170}
+                            collapsedHeight={300}
+                            hoverHeight={360}
+                            openSize={460}
+                            gap={14}
+                            influence={180}
+                        />
+                    </div>
                 </div>
 
                 <div className="project-grid !grid !grid-cols-1 md:!grid-cols-2 lg:!grid-cols-2 xl:!grid-cols-3 3xl:!grid-cols-4 !gap-6">

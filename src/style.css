@@ -1762,8 +1762,8 @@ select.form-control option {
 
 .capability-card {
     background: #ffffff;
-    border: 2px solid #262626;
-    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -1772,20 +1772,21 @@ select.form-control option {
     min-height: 290px;
     position: relative;
     overflow: hidden;
-    box-shadow: 5px 5px 0px #262626;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .capability-card:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px #262626;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
 }
 
 /* Window Header Bar */
 .cap-card-header {
-    background: #f4dbda;
-    border-bottom: 2px solid #262626;
-    padding: 12px 18px;
+    background: #faf8f5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1797,38 +1798,37 @@ select.form-control option {
     align-items: center;
     gap: 0.4rem;
     padding: 0.25rem 0.75rem;
-    border-radius: 6px;
+    border-radius: 9999px;
     background: #ffffff;
-    border: 1.5px solid #262626;
-    box-shadow: 1.5px 1.5px 0px #262626;
-    font-family: var(--font-mono);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    font-family: var(--font-body);
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.1em;
-    color: #18181b;
+    color: #6c6c6c;
     text-transform: uppercase;
 }
 
 .cap-icon-box {
-    width: 34px;
-    height: 34px;
-    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
     background: #ffffff;
-    border: 1.5px solid #262626;
-    box-shadow: 1.5px 1.5px 0px #262626;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #18181b;
-    transition: transform 0.15s ease, background-color 0.15s ease;
+    color: #000000;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .capability-card:hover .cap-icon-box {
-    transform: translate(-1px, -1px);
-    background-color: #e14e1d;
+    transform: scale(1.08);
+    background-color: #000000;
     color: #ffffff;
-    border-color: #262626;
-    box-shadow: 2.5px 2.5px 0px #262626;
+    border-color: #000000;
 }
 
 /* Card Body */
@@ -1852,16 +1852,16 @@ select.form-control option {
 
 .cap-desc {
     font-size: 14.5px;
-    color: #52525b;
+    color: #6c6c6c;
     line-height: 1.65;
     font-weight: 400;
 }
 
 /* Window Footer Bar */
 .cap-card-footer {
-    background: #f4dbda;
-    border-top: 2px solid #262626;
-    padding: 12px 18px;
+    background: #faf8f5;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px 20px;
 }
 
 .cap-tags-list {
@@ -1872,26 +1872,74 @@ select.form-control option {
 
 .cap-tag-chip {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     padding: 0.25rem 0.65rem;
-    border-radius: 6px;
+    border-radius: 9999px;
     background: #ffffff;
-    border: 1.5px solid #262626;
-    box-shadow: 1.5px 1.5px 0px #262626;
-    color: #18181b;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    color: #6c6c6c;
     transition: all 0.15s ease;
 }
 
 .capability-card:hover .cap-tag-chip {
-    background: #ffffff;
-    color: #000000;
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
 }
 
 /* ==========================================================================
-   03 — R&D LAB PROJECTS GRID (Editorial Card Style)
+   03 — R&D LAB (Interactive Magnetic Carousel & Project Cards)
    ========================================================================== */
+
+.rd-carousel-showcase {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    margin-bottom: 2.75rem;
+    padding: 0;
+}
+
+.rd-carousel-header {
+    background: #faf8f5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rd-carousel-badge {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #6c6c6c;
+    text-transform: uppercase;
+}
+
+.rd-carousel-hint {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: #929292;
+    font-weight: 500;
+}
+
+.rd-carousel-container {
+    padding: 2.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    position: relative;
+    overflow: visible;
+}
 
 .project-grid {
     display: grid;
@@ -1901,24 +1949,25 @@ select.form-control option {
 
 .project-card {
     background: #ffffff;
-    border: 2px solid #262626;
-    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 0px #262626;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     text-align: left;
 }
 
 .project-card:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px #262626;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
 }
 
 .project-card-header {
-    background: #f4dbda;
-    border-bottom: 2px solid #262626;
+    background: #faf8f5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     padding: 12px 18px;
     display: flex;
     align-items: center;
@@ -1926,26 +1975,26 @@ select.form-control option {
 }
 
 .project-domain {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 600;
     letter-spacing: 0.1em;
-    color: #18181b;
+    color: #6c6c6c;
     background: #ffffff;
-    border: 1.5px solid #262626;
-    box-shadow: 1.5px 1.5px 0px #262626;
-    border-radius: 6px;
-    padding: 2px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    border-radius: 9999px;
+    padding: 0.2rem 0.65rem;
     text-transform: uppercase;
 }
 
 .project-visual-frame {
     width: 100%;
     aspect-ratio: 16 / 10;
-    background: #ffffff;
+    background: #faf8f5;
     overflow: hidden;
     position: relative;
-    border-bottom: 2px solid #262626;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .project-img {
@@ -1976,16 +2025,16 @@ select.form-control option {
 
 .chip-badge {
     padding: 0.35rem 0.8rem;
-    border-radius: 6px;
-    background: #ffffff;
-    border: 1.5px solid #262626;
-    box-shadow: 1.5px 1.5px 0px #262626;
-    font-family: var(--font-mono);
+    border-radius: 9999px;
+    background: #faf8f5;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    font-family: var(--font-body);
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     display: flex;
     gap: 0.5rem;
-    color: #18181b;
+    color: #6c6c6c;
 }
 
 .space-orbital-visual {
@@ -2000,7 +2049,7 @@ select.form-control option {
 .orbit-ring-graphic {
     position: absolute;
     inset: 0;
-    border: 1.5px dashed rgba(0, 0, 0, 0.25);
+    border: 1.5px dashed rgba(0, 0, 0, 0.15);
     border-radius: 50%;
     animation: orbit-spin 18s linear infinite;
 }
@@ -2032,7 +2081,7 @@ select.form-control option {
 
 .project-tagline {
     font-size: 14px;
-    color: #52525b;
+    color: #6c6c6c;
     line-height: 1.6;
     margin-bottom: 1.25rem;
 }
@@ -2045,20 +2094,21 @@ select.form-control option {
 }
 
 .project-tags .tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.04em;
     padding: 0.25rem 0.65rem;
-    border-radius: 6px;
-    background: #f4dbda;
-    border: 1px solid #262626;
-    color: #18181b;
+    border-radius: 9999px;
+    background: #faf8f5;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    color: #6c6c6c;
 }
 
 .project-card-footer {
-    background: #f4dbda;
-    border-top: 2px solid #262626;
+    background: #faf8f5;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     padding: 14px 18px;
 }
 
@@ -2068,24 +2118,24 @@ select.form-control option {
     justify-content: center;
     gap: 0.45rem;
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 1rem;
     border-radius: 9999px;
-    background: #262626;
-    border: 2px solid #262626;
-    box-shadow: 2px 2px 0px #262626;
+    background: #000000;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     font-family: var(--font-body);
-    font-size: 13.5px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 500;
     color: #ffffff !important;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.15s ease-out;
+    transition: all 0.2s ease;
 }
 
 .project-link:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0px #262626;
-    background: #18181b;
+    background: #1f1f1f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
     color: #ffffff !important;
 }
 
