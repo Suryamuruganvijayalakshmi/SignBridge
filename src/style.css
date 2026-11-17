@@ -247,8 +247,8 @@ textarea,
 }
 
 /* ==========================================================================
-   ORIGINKIT INFINITE TEXT PASSAGE SITE LOADER
-   Cinematic full-screen dark tunnel loading experience
+   ORIGINKIT INFINITE TEXT PASSAGE SITE LOADER (WHITE STUDIO THEME)
+   Cinematic full-screen white tunnel loading experience matching Hero 64
    ========================================================================== */
 
 .infinite-loader-overlay {
@@ -261,8 +261,8 @@ textarea,
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #050505;
-    background: radial-gradient(circle at center, #141414 0%, #050505 100%);
+    background-color: #ffffff;
+    background: radial-gradient(circle at center, #ffffff 0%, #faf8f5 100%);
     opacity: 1;
     visibility: visible;
     transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
@@ -279,12 +279,12 @@ textarea,
 
 .infinite-loader-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 720px;
+    height: 720px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(248, 185, 164, 0.14) 0%, rgba(255, 217, 168, 0.05) 45%, transparent 70%);
+    background: radial-gradient(circle, rgba(248, 185, 164, 0.22) 0%, rgba(255, 217, 168, 0.08) 45%, transparent 70%);
     pointer-events: none;
-    filter: blur(40px);
+    filter: blur(50px);
 }
 
 .infinite-loader-stage {
@@ -315,20 +315,21 @@ textarea,
     gap: 0.5rem;
     padding: 0.45rem 1.15rem;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.6);
+    color: #6c6c6c;
     text-transform: uppercase;
 }
 
 .infinite-loader-skip-pill b {
-    color: #ffffff;
+    color: #000000;
     font-weight: 700;
 }
 
@@ -439,26 +440,26 @@ dialog {
 }
 
 /* ==========================================================================
-   NAVIGATION HEADER — Refined Floating Studio Pill (Hero 64 Editorial Theme)
+   NAVIGATION HEADER — Studio Pill with Crisp Neo-Editorial Outline (Exact Match)
    ========================================================================== */
 
 .lumina-header {
     width: 100%;
-    max-width: 1360px;
-    margin: 1.25rem auto;
-    padding: 0.75rem 1.75rem;
+    max-width: 1240px;
+    margin: 1rem auto;
+    padding: 0.5rem 1.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 1rem;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.75px solid #18181b;
     border-radius: 9999px;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 3.5px 0 #18181b;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -473,7 +474,7 @@ dialog {
     .lumina-header {
         margin: 0.5rem 0.75rem;
         width: calc(100% - 1.5rem);
-        padding: 0.65rem 1.15rem;
+        padding: 0.5rem 1rem;
         border-radius: 9999px;
     }
 }
@@ -512,30 +513,40 @@ dialog {
 }
 
 .logo-text {
-    font-family: var(--font-display);
+    font-family: var(--font-display, "Instrument Serif", Georgia, serif);
     font-weight: 400;
-    font-size: 1.85rem;
-    letter-spacing: -0.02em;
-    color: #000000;
+    font-size: 1.75rem;
+    letter-spacing: -0.01em;
+    color: #18181b;
     text-transform: none;
     line-height: 1;
+    display: inline-flex;
+    align-items: center;
 }
 
 .logo-text sup {
-    font-size: 0.38em;
-    line-height: 0;
-    vertical-align: 0.35em;
-    margin-left: 0.1em;
+    font-size: 0.42em;
+    line-height: 1;
+    vertical-align: 0.4em;
+    margin-left: 0.25em;
     letter-spacing: 0;
-    font-weight: 500;
-    color: #888888;
+    font-weight: 600;
+    color: #2563eb;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    border-radius: 9999px;
+    background: #e0f2fe;
+    border: 1px solid #7dd3fc;
 }
 
 /* Center: Desktop-only links */
 .nav-links-center {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    gap: 1.85rem;
 }
 
 @media (max-width: 960px) {
@@ -545,89 +556,90 @@ dialog {
 }
 
 .nav-link {
-    font-family: var(--font-body);
+    font-family: var(--font-body, system-ui, -apple-system, sans-serif);
     font-size: 13.5px;
     font-weight: 500;
-    color: #6c6c6c;
+    color: #27272a;
     text-decoration: none;
     position: relative;
-    padding: 0.45rem 1rem;
+    padding: 0.35rem 0.65rem;
     border-radius: 9999px;
     transition: color 0.15s ease, background 0.15s ease;
 }
 
 .nav-link:hover {
     color: #000000;
-    background: rgba(0, 0, 0, 0.04);
+    background: rgba(0, 0, 0, 0.05);
 }
 
-/* Right: Pill-shaped 'Start a Project' button */
+/* Right: Pill-shaped 'Start a Project' button & Round Action Icons */
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
 }
 
 .sound-toggle-btn {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 9999px;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #52525b;
+    border: 1.5px solid #18181b;
+    color: #18181b;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 0 #18181b;
     transition: all 0.15s ease;
 }
 
 .sound-toggle-btn:hover {
-    background: #000000;
-    color: #ffffff;
-    border-color: #000000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    background: #f4f4f5;
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #18181b;
+    color: #000000;
 }
 
 .sound-toggle-btn:active {
-    transform: translateY(0);
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #18181b;
 }
 
 .btn-get-in-touch {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.65rem 1.45rem;
+    padding: 0.5rem 1.25rem;
     border-radius: 9999px;
-    background: #000000;
-    border: 1px solid #000000;
-    font-family: var(--font-body);
+    background: #f4dbda;
+    border: 1.5px solid #18181b;
+    font-family: var(--font-body, system-ui, -apple-system, sans-serif);
     font-size: 13px;
-    font-weight: 500;
-    color: #ffffff !important;
+    font-weight: 600;
+    color: #18181b !important;
     text-decoration: none;
     cursor: pointer;
     letter-spacing: 0.01em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.2s ease;
+    box-shadow: 0 2.5px 0 #18181b;
+    transition: all 0.15s ease;
 }
 
 .btn-get-in-touch:hover {
-    background: #1f1f1f;
-    border-color: #1f1f1f;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-    color: #ffffff !important;
+    background: #ebd2d1;
+    transform: translateY(1px);
+    box-shadow: 0 1.5px 0 #18181b;
+    color: #18181b !important;
 }
 
 .btn-get-in-touch:active {
-    transform: translateY(0);
+    transform: translateY(2.5px);
+    box-shadow: 0 0 0 #18181b;
 }
 
 .btn-get-in-touch svg {
     transition: transform 0.15s ease;
+    color: #18181b;
 }
 
 .btn-get-in-touch:hover svg {
@@ -637,13 +649,13 @@ dialog {
 /* Mobile Navigation Hamburger & Responsive Drawer */
 .mobile-menu-btn {
     display: none;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 9999px;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    color: var(--text-pure);
+    border: 1.5px solid #18181b;
+    box-shadow: 0 2px 0 #18181b;
+    color: #18181b;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -651,8 +663,14 @@ dialog {
 }
 
 .mobile-menu-btn:hover {
-    background: rgba(0, 0, 0, 0.04);
-    transform: translateY(-1px);
+    background: #f4f4f5;
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #18181b;
+}
+
+.mobile-menu-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #18181b;
 }
 
 @media (max-width: 960px) {
@@ -746,12 +764,10 @@ dialog {
     top: calc(100% + 8px);
     left: 1rem;
     right: 1rem;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(99, 102, 241, 0.22);
-    border-radius: 20px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(99, 102, 241, 0.1);
+    background: #ffffff;
+    border: 1.75px solid #18181b;
+    border-radius: 24px;
+    box-shadow: 0 4px 0 #18181b, 0 16px 36px rgba(0, 0, 0, 0.08);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;

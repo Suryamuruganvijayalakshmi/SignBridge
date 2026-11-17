@@ -114,10 +114,10 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                             onReplayIntro?.();
                         }}
                         className="mobile-nav-link"
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: '#4f46e5' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: '#18181b' }}
                     >
                         <Sparkles size={16} />
-                        <span>// INTRO LOADER</span>
+                        <span>Intro Loader</span>
                     </button>
                     <button
                         type="button"
@@ -125,10 +125,10 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                             onToggleSound?.();
                         }}
                         className="mobile-nav-link"
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: soundEnabled ? '#4f46e5' : '#475569' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', color: soundEnabled ? '#18181b' : '#71717a' }}
                     >
                         {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
-                        <span>{soundEnabled ? '// AMBIENT SOUND ON' : '// AMBIENT SOUND MUTED'}</span>
+                        <span>{soundEnabled ? 'Ambient Sound: On' : 'Ambient Sound: Muted'}</span>
                     </button>
                     <button
                         type="button"
@@ -136,10 +136,10 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                             setMobileOpen(false);
                             onOpenContact();
                         }}
-                        className="btn-primary-lime"
-                        style={{ width: '100%', marginTop: '0.5rem' }}
+                        className="btn-get-in-touch"
+                        style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}
                     >
-                        <span>Start a Project</span>
+                        <span>Start a project</span>
                         <ArrowUpRight size={16} />
                     </button>
                 </div>

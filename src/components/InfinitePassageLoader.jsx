@@ -3,11 +3,10 @@ import ZoomTextTunnel from './originkit/ui/infinite-text-passage';
 
 /**
  * InfinitePassageLoader
- * Powered by Originkit Infinite Text Passage (ZoomTextTunnel).
- * Cinematic full-screen dark tunnel loading sequence that journeys through
- * foundational concepts and culminates with "SIGNBRIDGE" before revealing the site.
+ * Powered by Originkit Infinite Text Passage (ZoomTextTunnel) in pure White Theme.
+ * Cycles through foundational concepts and culminates with "SIGNBRIDGE" before revealing the site.
  */
-export default function InfinitePassageLoader({ onComplete, autoDismissMs = 4800 }) {
+export default function InfinitePassageLoader({ onComplete, autoDismissMs = 5200 }) {
     const [isFading, setIsFading] = useState(false);
     const [hasEnded, setHasEnded] = useState(false);
 
@@ -56,19 +55,25 @@ export default function InfinitePassageLoader({ onComplete, autoDismissMs = 4800
             aria-live="polite"
             aria-label="Loading SignBridge..."
         >
-            {/* Ambient Background Glow */}
+            {/* Ambient Background Glow in Warm Sunset Peach */}
             <div className="infinite-loader-glow" aria-hidden="true" />
 
             {/* Central Tunnel Stage */}
             <div className="infinite-loader-stage">
                 <ZoomTextTunnel
-                    texts={['EXPLORE', 'INNOVATE', 'CREATE', 'SIGNBRIDGE']}
-                    color="#FFFFFF"
-                    hold={520}
+                    texts={[
+                        'EXPLORE',
+                        'SOFTWARE',
+                        'INTELLIGENCE',
+                        'HARDWARE',
+                        'SIGNBRIDGE'
+                    ]}
+                    color="#000000"
+                    hold={500}
                     maxScale={32}
                     transition={{
                         type: 'tween',
-                        duration: 0.95,
+                        duration: 0.9,
                         ease: [0.7, 0, 0.25, 1],
                     }}
                     font={{
