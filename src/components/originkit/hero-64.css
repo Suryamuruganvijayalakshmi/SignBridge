@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap");
+
+.hero-64 {
+  --ink: #000;
+  --muted: #6c6c6c;
+  --sub: #7f7f7f;
+  --link: #929292;
+  --pad-x: 5.1vw;
+  background: #fff;
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Measured from the reference frame (3240 x 1862): horizontal sizes in vw, vertical gaps in vh. */
+
+.hero-64,
+.hero-64 * {
+  box-sizing: border-box;
+}
+.hero-64 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-64 .hero {
+  position: relative;
+  min-height: max(var(--ok-design-h, 100vh), 560px);
+  overflow: hidden;
+}
+
+.hero-64 .nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--ok-design-h, 100vh) * 0.0285) var(--pad-x) 0;
+  font-size: clamp(13px, 1vw, 40px);
+}
+.hero-64 .logo {
+  display: inline-block;
+  margin-left: 0.5vw;
+  font-family: "Instrument Serif", serif;
+  font-size: 2em;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transform: scaleX(0.82);
+  transform-origin: left center;
+}
+.hero-64 .logo sup {
+  font-size: 0.3em;
+  line-height: 0;
+  vertical-align: 0.25em;
+  margin-left: 0.08em;
+  letter-spacing: 0;
+}
+.hero-64 .links {
+  display: flex;
+  gap: 2.4vw;
+  color: var(--link);
+}
+.hero-64 .links .active {
+  color: #3a3e3a;
+  font-weight: 500;
+}
+
+.hero-64 .btn {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.hero-64 .btn-sm {
+  padding: 0.85em 1.9em;
+}
+.hero-64 .btn-lg {
+  font-size: clamp(12px, 0.85vw, 36px);
+  padding: 1.25em 2.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.hero-64 .btn-lg span {
+  margin-left: 0.5em;
+  letter-spacing: 0;
+}
+
+.hero-64 .copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4vw;
+  text-align: center;
+  padding: clamp(40px, calc(var(--ok-design-h, 100vh) * 0.09), 7vw) var(--pad-x)
+    0;
+}
+.hero-64 .copy h1 {
+  margin: 0;
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.2vw, 220px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.hero-64 .copy h1 span {
+  color: var(--muted);
+}
+.hero-64 .copy p {
+  margin: 0;
+  max-width: 38em;
+  text-wrap: balance;
+  font-size: clamp(14px, 1.05vw, 44px);
+  line-height: 1.6;
+  color: var(--sub);
+}
+.hero-64 .copy .btn-lg {
+  margin-top: 0.6vw;
+}
+
+.hero-64 .scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 58%;
+  z-index: 1;
+}
+.hero-64 .fade {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 42%;
+  background: linear-gradient(#fff, rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+/* Portrait screens: let the meadow fill the space under the copy. */
+@media (orientation: portrait) {
+  .hero-64 .scene {
+    height: 66%;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-64 .nav {
+    padding-top: 16px;
+  }
+  .hero-64 .links {
+    display: none;
+  }
+  .hero-64 .copy {
+    gap: 5vw;
+  }
+  .hero-64 .copy h1 {
+    white-space: normal;
+    font-size: 11vw;
+  }
+}

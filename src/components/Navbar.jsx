@@ -30,11 +30,11 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                     src="/signbridge-emblem.webp"
                     alt="SignBridge Logo"
                     className="logo-emblem-img"
-                    width="48"
-                    height="18"
+                    width="32"
+                    height="20"
                     decoding="async"
                 />
-                <span className="logo-text">SIGNBRIDGE</span>
+                <span className="logo-text">SignBridge<sup>®</sup></span>
             </Link>
 
             {/* Center: Desktop Links */}
@@ -78,7 +78,7 @@ export default function Navbar({ soundEnabled, onToggleSound, onOpenContact, onR
                     className="btn-get-in-touch"
                     aria-haspopup="dialog"
                 >
-                    <span>Start a Project</span>
+                    <span>Start a project</span>
                     <ArrowUpRight size={14} aria-hidden="true" />
                 </button>
 

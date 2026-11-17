@@ -12,8 +12,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #e8e8e8;
-  background-image: radial-gradient(rgba(38, 38, 38, 0.08) 1.2px, transparent 1.2px);
+  background-color: #ffffff;
+  background-image: none;
   background-size: 24px 24px;
   opacity: 1;
   visibility: visible;

@@ -1,6 +1,6 @@
 import React from 'react';
-import Hero19 from './originkit/hero-19';
+import Hero64 from './originkit/hero-64';
 
 export default function Hero() {
-    return <Hero19 />;
+    return <Hero64 />;
 }
