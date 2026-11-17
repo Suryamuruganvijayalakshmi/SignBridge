@@ -14,7 +14,7 @@ import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
 import AudioController from './components/AudioController.jsx';
-import InfinitePassageLoader from './components/InfinitePassageLoader.jsx';
+import PixelLedLoader from './components/PixelLedLoader.jsx';
 
 // Lazy-loaded heavy routes and modals
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
@@ -257,9 +257,9 @@ export default function App() {
                 </Suspense>
             )}
 
-            {/* Starting animation: Originkit Infinite Text Passage loader */}
+            {/* Starting animation: Originkit Pixel LED Display loader (light theme) */}
             {!introComplete && (
-                <InfinitePassageLoader onComplete={handleIntroFinished} />
+                <PixelLedLoader onComplete={handleIntroFinished} />
             )}
         </div>
     );

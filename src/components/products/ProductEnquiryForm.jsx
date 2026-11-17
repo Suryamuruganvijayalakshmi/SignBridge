@@ -15,7 +15,6 @@ import {
 export default function ProductEnquiryForm({ productName, onNotification }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [organization, setOrganization] = useState('');
     const [message, setMessage] = useState('');
     const [honeypot, setHoneypot] = useState('');
     const [loading, setLoading] = useState(false);
@@ -53,7 +52,6 @@ export default function ProductEnquiryForm({ productName, onNotification }) {
             });
             setName('');
             setEmail('');
-            setOrganization('');
             setMessage('');
             return;
         }
@@ -79,11 +77,8 @@ export default function ProductEnquiryForm({ productName, onNotification }) {
 
         const cleanName = sanitizeInput(name);
         const cleanEmail = sanitizeInput(email);
-        const cleanOrg = sanitizeInput(organization);
         const cleanMsg = sanitizeInput(message);
-        const fullMessage = cleanOrg
-            ? `[Organization/Role: ${cleanOrg}]\n${cleanMsg}`
-            : cleanMsg;
+        const fullMessage = cleanMsg;
 
         setLoading(true);
         setStatus({
@@ -212,20 +207,6 @@ export default function ProductEnquiryForm({ productName, onNotification }) {
                     className={`form-control ${errors.email ? 'border-rose-500' : ''}`}
                     disabled={loading}
                     autoComplete="email"
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="pd-org">ORGANIZATION / ROLE (OPTIONAL)</label>
-                <input
-                    id="pd-org"
-                    type="text"
-                    maxLength={100}
-                    placeholder="Company, institution, or student / developer role"
-                    value={organization}
-                    onChange={(e) => setOrganization(e.target.value)}
-                    className="form-control"
-                    disabled={loading}
                 />
             </div>
 

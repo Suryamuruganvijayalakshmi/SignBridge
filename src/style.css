@@ -247,6 +247,261 @@ textarea,
 }
 
 /* ==========================================================================
+   ORIGINKIT PIXEL LED DISPLAY SITE LOADER (WHITE STUDIO THEME)
+   Full-screen architectural LED matrix boot sequence for SignBridge
+   ========================================================================== */
+
+.pixel-led-loader-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    background: radial-gradient(circle at center, #ffffff 0%, #faf8f5 100%);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s ease;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 2.25rem 2.5rem;
+}
+
+.pixel-led-loader-overlay.is-exiting {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.pixel-led-loader-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(248, 185, 164, 0.28) 0%, rgba(255, 217, 168, 0.1) 45%, transparent 70%);
+    pointer-events: none;
+    filter: blur(60px);
+}
+
+.pixel-led-loader-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.pixel-loader-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.pixel-loader-emblem {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+}
+
+.pixel-loader-brand-text {
+    font-family: var(--font-display, "Instrument Serif", Georgia, serif);
+    font-size: 1.65rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #18181b;
+}
+
+.pixel-loader-brand-text sup {
+    font-size: 0.42em;
+    vertical-align: 0.4em;
+    margin-left: 0.2em;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.pixel-loader-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.95rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1.5px solid #18181b;
+    box-shadow: 0 2px 0 #18181b;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #18181b;
+    text-transform: uppercase;
+}
+
+.pixel-loader-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulseDot 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.pixel-led-stage {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    text-align: center;
+}
+
+.pixel-led-ticker-wrap {
+    width: 100%;
+    height: 240px;
+    max-height: 38vh;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1.75px solid #18181b;
+    box-shadow: 0 4px 0 #18181b;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.pixel-led-subtitle {
+    margin-top: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #71717a;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+}
+
+.pixel-led-subtitle b {
+    color: #d4d4d8;
+}
+
+.pixel-led-loader-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.pixel-progress-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pixel-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #18181b;
+    text-transform: uppercase;
+}
+
+.pixel-progress-value {
+    font-family: monospace;
+    font-weight: 700;
+    color: #18181b;
+}
+
+.pixel-progress-track {
+    width: 100%;
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(24, 24, 27, 0.08);
+    border: 1px solid rgba(24, 24, 27, 0.15);
+    overflow: hidden;
+}
+
+.pixel-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: #18181b;
+    transition: width 0.08s linear;
+}
+
+.pixel-loader-skip-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1.5px solid #18181b;
+    box-shadow: 0 2px 0 #18181b;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #52525b;
+    text-transform: uppercase;
+}
+
+.pixel-loader-skip-pill b {
+    color: #18181b;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .pixel-led-loader-overlay {
+        padding: 1.5rem 1.15rem;
+    }
+
+    .pixel-led-ticker-wrap {
+        height: 170px;
+        border-radius: 16px;
+    }
+
+    .pixel-loader-brand-text {
+        font-size: 1.35rem;
+    }
+
+    .pixel-led-subtitle {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        gap: 0.5rem;
+    }
+}
+
+/* ==========================================================================
    ORIGINKIT INFINITE TEXT PASSAGE SITE LOADER (WHITE STUDIO THEME)
    Cinematic full-screen white tunnel loading experience matching Hero 64
    ========================================================================== */
@@ -2278,92 +2533,86 @@ select.form-control option {
 }
 
 /* ==========================================================================
-   05 — VISION BANNER (Master Window Frame)
+   05 — VISION BANNER (Clean Editorial Studio Manifesto)
    ========================================================================== */
 
 .vision-banner-section {
     width: 100%;
-    padding: 6rem 2rem;
+    padding: 7rem 2rem;
     position: relative;
     z-index: 10;
-}
-
-.vision-box {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 24px;
-    box-shadow: 0 10px 36px -6px rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    padding: 0;
+}
+
+.vision-editorial-container {
+    max-width: 1100px;
+    margin: 0 auto;
     text-align: center;
-}
-
-.vision-box-header {
-    background: #fbf9f6;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.vision-header-badge {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #6c6c6c;
-    text-transform: uppercase;
-}
-
-.vision-box-body {
-    padding: 4.5rem 2.5rem;
-    background: #ffffff;
+    position: relative;
+    padding: 3rem 1.5rem;
 }
 
 .vision-title {
-    font-family: var(--font-display) !important;
-    font-size: clamp(2.5rem, 5.5vw, 4.8rem) !important;
+    font-family: var(--font-display, "Instrument Serif", Georgia, serif) !important;
+    font-size: clamp(2.8rem, 6vw, 5.2rem) !important;
     font-weight: 400 !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.015em !important;
-    color: #000000 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    color: #18181b !important;
     text-transform: none !important;
-    margin: 0;
+    margin: 0 auto 1.5rem;
+    max-width: 900px;
 }
 
 .vision-highlight {
-    color: #6c6c6c;
+    color: #71717a;
     font-style: italic;
+}
+
+.vision-editorial-desc {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: clamp(15px, 1.2vw, 19px);
+    line-height: 1.7;
+    color: #52525b;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    text-wrap: balance;
+}
+
+.vision-editorial-pills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.vision-pillar-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1.5px solid #18181b;
+    box-shadow: 0 2px 0 #18181b;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #18181b;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vision-pillar-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #18181b;
 }
 
 .text-white {
     color: var(--text-pure);
     text-shadow: none;
-}
-
-.vision-box-footer {
-    background: var(--bg-footer-tint);
-    border-top: var(--neo-border);
-    padding: 14px 20px;
-}
-
-.vision-pillars-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    color: var(--text-pure);
-    text-transform: uppercase;
-}
-
-.vision-pillars-row b {
-    color: #ef4444;
 }
 
 /* ==========================================================================
