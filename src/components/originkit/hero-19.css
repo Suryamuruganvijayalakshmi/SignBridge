@@ -1,0 +1,27 @@
+/* hero-19 — Visionary wellness partner hero (from diip3sh/sections section-26) */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&display=swap");
+
+@theme {
+  --font-instrument-serif: "Instrument Serif", Georgia, serif;
+  --font-tight: "Inter Tight", Inter, ui-sans-serif, sans-serif;
+  --animate-logo-marquee: logo-marquee 28s linear infinite;
+}
+
+@keyframes logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes logo-marquee {
+    from,
+    to {
+      transform: none;
+    }
+  }
+}

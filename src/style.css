@@ -2,6 +2,8 @@
    LUMINA // CYBER-BRUTALIST x GLASSMORPHISM DESIGN SYSTEM
    ========================================================================== */
 @import "tailwindcss";
+@import "./app/originkit-section-themes.css";
+@source "./components/originkit";
 
 @theme {
   --breakpoint-md: 768px;

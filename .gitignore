@@ -8,3 +8,4 @@ Thumbs.db
 *.local
 .vscode/
 .wrangler/
+.originkit/
