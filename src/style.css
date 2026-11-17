@@ -16,93 +16,93 @@
 }
 
 :root {
-    /* Color Palette — Clean Neo-Brutalist Light Canvas with Peach-Rose Tint */
-    --bg-base: #e8e8e8;             /* Clean neutral gray canvas matching reference card image */
+    /* Color Palette — Clean Studio Light Canvas with Sunset Meadow Accents (Hero 64 Theme) */
+    --bg-base: #ffffff;             /* Pure crisp studio white canvas */
     --bg-surface: #ffffff;          /* Pure crisp white card body */
-    --bg-subtle: #f0f0f0;          /* Soft secondary tone */
+    --bg-subtle: #fbf9f6;          /* Warm airy meadow paper tone */
     --bg-card: #ffffff;
     --bg-glass: rgba(255, 255, 255, 0.98);
 
     /* Card Header & Footer Bar Accents (sampled directly from image #f4dbda) */
-    --bg-header-tint: #f4dbda;       /* Soft blush peach-pink header bar */
-    --bg-footer-tint: #f4dbda;       /* Matching blush peach-pink footer bar */
-    --bg-header-tint-hover: #edd1d0; /* Deeper blush on hover */
+    --bg-header-tint: #faf8f5;       /* Warm editorial card header surface */
+    --bg-footer-tint: #faf8f5;       /* Matching refined card footer bar */
+    --bg-header-tint-hover: #f3efe9; /* Subtle warm hover */
 
-    /* Crisp Dark Borders & Solid Offset Shadows */
-    --neo-border-color: #262626;
-    --neo-border: 2px solid #262626;
-    --neo-border-thin: 1.5px solid #262626;
-    --neo-border-thick: 2.5px solid #262626;
+    /* Refined Architectural Hairline Borders & Soft Luxury Shadows */
+    --neo-border-color: rgba(0, 0, 0, 0.08);
+    --neo-border: 1px solid rgba(0, 0, 0, 0.08);
+    --neo-border-thin: 1px solid rgba(0, 0, 0, 0.06);
+    --neo-border-thick: 1.5px solid rgba(0, 0, 0, 0.12);
 
-    --neo-shadow-xs: 2px 2px 0px #262626;
-    --neo-shadow-sm: 3px 3px 0px #262626;
-    --neo-shadow-md: 5px 5px 0px #262626;
-    --neo-shadow-lg: 7px 7px 0px #262626;
-    --neo-shadow-xl: 10px 10px 0px #262626;
+    --neo-shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.02);
+    --neo-shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.04);
+    --neo-shadow-md: 0 4px 18px -2px rgba(0, 0, 0, 0.05);
+    --neo-shadow-lg: 0 10px 28px -4px rgba(0, 0, 0, 0.06);
+    --neo-shadow-xl: 0 18px 40px -6px rgba(0, 0, 0, 0.08);
 
-    --neo-radius: 14px;
+    --neo-radius: 18px;
     --neo-radius-sm: 8px;
-    --neo-radius-lg: 18px;
+    --neo-radius-lg: 24px;
     --neo-radius-pill: 9999px;
 
-    /* Accents from image */
+    /* Hero 64 Ink & Sunset Accents */
     --accent-badge: #e14e1d;         /* Vibrant HTML5 Orange badge accent */
-    --accent-primary: #262626;
-    --accent-primary-hover: #18181b;
-    --accent-brand: #e14e1d;
-    --accent-iris: #262626;
-    --accent-iris-glow: #262626;
-    --accent-iris-deep: #18181b;
-    --accent-iris-light: #52525b;
-    --accent-iris-subtle: #f4dbda;
-    --accent-violet: #262626;
+    --accent-primary: #000000;
+    --accent-primary-hover: #1f1f1f;
+    --accent-brand: #000000;
+    --accent-iris: #000000;
+    --accent-iris-glow: #000000;
+    --accent-iris-deep: #111111;
+    --accent-iris-light: #6c6c6c;
+    --accent-iris-subtle: #fbf9f6;
+    --accent-violet: #000000;
 
-    /* Sunset peach & orange accents */
-    --accent-sunset-peach: #f4dbda;
-    --accent-sunset-glow: #e14e1d;
-    --accent-sunset-subtle: #fbf0ee;
+    /* Sunset peach & meadow accents */
+    --accent-sunset-peach: #f8b9a4;
+    --accent-sunset-glow: #ffd9a8;
+    --accent-sunset-subtle: #fff5f2;
 
     /* Harmonized Aliases */
-    --accent-lime: #262626;
-    --accent-magenta: #262626;
-    --accent-cyan: #262626;
-    --accent-electric: #262626;
+    --accent-lime: #000000;
+    --accent-magenta: #000000;
+    --accent-cyan: #000000;
+    --accent-electric: #000000;
 
-    /* Typography Hierarchy */
-    --text-pure: #18181b;
-    --text-primary: #27272a;
-    --text-60: #52525b;
-    --text-50: #71717a;
-    --text-30: #a1a1aa;
-    --text-15: #d4d4d8;
+    /* Hero 64 Editorial Typography Hierarchy */
+    --text-pure: #000000;       /* Solid Ink */
+    --text-primary: #111111;
+    --text-60: #6c6c6c;         /* Refined studio muted */
+    --text-50: #7f7f7f;         /* Studio subtext */
+    --text-30: #929292;         /* Studio link color */
+    --text-15: #eaeaea;
 
     /* Cards & Borders */
     --glass-bg: #ffffff;
-    --glass-bg-hover: #f4dbda;
-    --glass-bg-active: #edd1d0;
-    --glass-border: 2px solid #262626;
-    --glass-border-subtle: 1.5px solid #262626;
-    --glass-border-lime: 2px solid #262626;
-    --glass-border-iris: 2px solid #262626;
-    --glass-border-magenta: 2px solid #262626;
-    --glass-border-cyan: 2px solid #262626;
+    --glass-bg-hover: #faf8f5;
+    --glass-bg-active: #f3efe9;
+    --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+    --glass-border-subtle: 1px solid rgba(0, 0, 0, 0.06);
+    --glass-border-lime: 1px solid rgba(0, 0, 0, 0.08);
+    --glass-border-iris: 1px solid rgba(0, 0, 0, 0.08);
+    --glass-border-magenta: 1px solid rgba(0, 0, 0, 0.08);
+    --glass-border-cyan: 1px solid rgba(0, 0, 0, 0.08);
     --glass-blur: none;
     --glass-blur-deep: none;
-    --border-color: #262626;
+    --border-color: rgba(0, 0, 0, 0.08);
 
     /* Typography */
     --font-display: "Instrument Serif", Georgia, serif;
     --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-    /* Solid Shadows */
+    /* Soft Diffuse Shadows */
     --glow-text: none;
-    --glow-iris: 5px 5px 0px #262626;
-    --glow-iris-strong: 7px 7px 0px #262626;
-    --glow-lime: 5px 5px 0px #262626;
-    --glow-lime-strong: 7px 7px 0px #262626;
-    --glow-magenta: 5px 5px 0px #262626;
-    --glow-cyan: 5px 5px 0px #262626;
+    --glow-iris: 0 4px 18px -2px rgba(0, 0, 0, 0.06);
+    --glow-iris-strong: 0 10px 28px -4px rgba(0, 0, 0, 0.08);
+    --glow-lime: 0 4px 18px -2px rgba(0, 0, 0, 0.06);
+    --glow-lime-strong: 0 10px 28px -4px rgba(0, 0, 0, 0.08);
+    --glow-magenta: 0 4px 18px -2px rgba(0, 0, 0, 0.06);
+    --glow-cyan: 0 4px 18px -2px rgba(0, 0, 0, 0.06);
 
     /* Transitions */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -353,7 +353,7 @@ dialog {
 }
 
 /* ==========================================================================
-   NAVIGATION HEADER — Clean Neo-Brutalist Floating Window Bar
+   NAVIGATION HEADER — Refined Floating Studio Pill (Hero 64 Editorial Theme)
    ========================================================================== */
 
 .lumina-header {
@@ -367,10 +367,12 @@ dialog {
     position: sticky;
     top: 1rem;
     z-index: 50;
-    background: #ffffff;
-    border: 2px solid #262626;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 9999px;
-    box-shadow: 4px 4px 0px #262626;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -458,19 +460,19 @@ dialog {
 
 .nav-link {
     font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    color: #3f3f46;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #6c6c6c;
     text-decoration: none;
     position: relative;
-    padding: 0.4rem 0.85rem;
+    padding: 0.45rem 1rem;
     border-radius: 9999px;
     transition: color 0.15s ease, background 0.15s ease;
 }
 
 .nav-link:hover {
     color: #000000;
-    background: #f4dbda;
+    background: rgba(0, 0, 0, 0.04);
 }
 
 /* Right: Pill-shaped 'Start a Project' button */
@@ -485,51 +487,65 @@ dialog {
     height: 38px;
     border-radius: 9999px;
     background: #ffffff;
-    border: 1.5px solid #262626;
-    color: #18181b;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #52525b;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 2px 2px 0px #262626;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     transition: all 0.15s ease;
 }
 
 .sound-toggle-btn:hover {
-    background: #f4dbda;
-    color: #18181b;
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0px #262626;
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.sound-toggle-btn:active {
+    transform: translateY(0);
 }
 
 .btn-get-in-touch {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.65rem 1.6rem;
+    padding: 0.65rem 1.45rem;
     border-radius: 9999px;
-    background: #f4dbda;
-    border: 2px solid #262626;
+    background: #000000;
+    border: 1px solid #000000;
     font-family: var(--font-body);
     font-size: 13px;
-    font-weight: 700;
-    color: #18181b;
+    font-weight: 500;
+    color: #ffffff !important;
     text-decoration: none;
     cursor: pointer;
-    letter-spacing: 0.02em;
-    box-shadow: 3px 3px 0px #262626;
-    transition: all 0.15s ease;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
 }
 
 .btn-get-in-touch:hover {
-    background: #edd1d0;
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px #262626;
+    background: #1f1f1f;
+    border-color: #1f1f1f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    color: #ffffff !important;
 }
 
 .btn-get-in-touch:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px #262626;
+    transform: translateY(0);
+}
+
+.btn-get-in-touch svg {
+    transition: transform 0.15s ease;
+}
+
+.btn-get-in-touch:hover svg {
+    transform: translate(2px, -2px);
 }
 
 /* Mobile Navigation Hamburger & Responsive Drawer */
@@ -539,8 +555,8 @@ dialog {
     height: 38px;
     border-radius: 9999px;
     background: #ffffff;
-    border: 2px solid #262626;
-    box-shadow: 2px 2px 0px #262626;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     color: var(--text-pure);
     align-items: center;
     justify-content: center;
@@ -549,9 +565,8 @@ dialog {
 }
 
 .mobile-menu-btn:hover {
-    background: #f4dbda;
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0px #262626;
+    background: rgba(0, 0, 0, 0.04);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 960px) {
