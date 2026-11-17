@@ -246,6 +246,92 @@ textarea,
     display: none !important;
 }
 
+/* ==========================================================================
+   ORIGINKIT INFINITE TEXT PASSAGE SITE LOADER
+   Cinematic full-screen dark tunnel loading experience
+   ========================================================================== */
+
+.infinite-loader-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #050505;
+    background: radial-gradient(circle at center, #141414 0%, #050505 100%);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.infinite-loader-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.infinite-loader-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(248, 185, 164, 0.14) 0%, rgba(255, 217, 168, 0.05) 45%, transparent 70%);
+    pointer-events: none;
+    filter: blur(40px);
+}
+
+.infinite-loader-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.infinite-loader-footer {
+    position: absolute;
+    bottom: 2.75rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.infinite-loader-skip-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.infinite-loader-skip-pill b {
+    color: #ffffff;
+    font-weight: 700;
+}
+
 /* Neo-Brutalist Window Controls & Dots */
 .window-dots {
     display: inline-flex;

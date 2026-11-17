@@ -14,7 +14,7 @@ import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
 import SpectrumToast from './components/SpectrumToast.jsx';
 import AudioController from './components/AudioController.jsx';
-import UiverseLoader from './components/UiverseLoader.jsx';
+import InfinitePassageLoader from './components/InfinitePassageLoader.jsx';
 
 // Lazy-loaded heavy routes and modals
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
@@ -257,9 +257,9 @@ export default function App() {
                 </Suspense>
             )}
 
-            {/* Starting animation: Uiverse spinning words loader */}
+            {/* Starting animation: Originkit Infinite Text Passage loader */}
             {!introComplete && (
-                <UiverseLoader onComplete={handleIntroFinished} />
+                <InfinitePassageLoader onComplete={handleIntroFinished} />
             )}
         </div>
     );
