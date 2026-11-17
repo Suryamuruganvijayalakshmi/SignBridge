@@ -1891,55 +1891,8 @@ select.form-control option {
 }
 
 /* ==========================================================================
-   03 — R&D LAB (Interactive Magnetic Carousel & Project Cards)
+   03 — R&D LAB PROJECTS GRID (Editorial Card Style)
    ========================================================================== */
-
-.rd-carousel-showcase {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 24px;
-    box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
-    margin-bottom: 2.75rem;
-    padding: 0;
-}
-
-.rd-carousel-header {
-    background: #faf8f5;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.rd-carousel-badge {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #6c6c6c;
-    text-transform: uppercase;
-}
-
-.rd-carousel-hint {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: #929292;
-    font-weight: 500;
-}
-
-.rd-carousel-container {
-    padding: 2.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 420px;
-    position: relative;
-    overflow: visible;
-}
 
 .project-grid {
     display: grid;
