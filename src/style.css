@@ -503,7 +503,7 @@ textarea,
 
 /* ==========================================================================
    ORIGINKIT INFINITE TEXT PASSAGE SITE LOADER (WHITE STUDIO THEME)
-   Ultra-clean, distraction-free: Only the zooming word on a soft white glow
+   Ultra-clean, 60fps hardware-accelerated: Only the zooming word on a soft white glow
    ========================================================================== */
 
 .infinite-loader-overlay {
@@ -519,10 +519,13 @@ textarea,
     background: radial-gradient(circle at center, #ffffff 0%, #faf8f5 100%);
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.75s ease;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
     user-select: none;
     cursor: pointer;
     overflow: hidden;
+    contain: strict;
+    will-change: opacity;
+    transform: translateZ(0);
 }
 
 .infinite-loader-overlay.fade-out {
@@ -535,13 +538,12 @@ textarea,
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
+    transform: translate(-50%, -50%) translateZ(0);
+    width: 700px;
+    height: 700px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(248, 185, 164, 0.28) 0%, rgba(255, 217, 168, 0.1) 45%, transparent 70%);
+    background: radial-gradient(circle, rgba(248, 185, 164, 0.22) 0%, rgba(255, 217, 168, 0.06) 45%, transparent 70%);
     pointer-events: none;
-    filter: blur(60px);
 }
 
 .infinite-loader-stage {
@@ -554,6 +556,8 @@ textarea,
     justify-content: center;
     z-index: 2;
     pointer-events: none;
+    contain: layout paint;
+    transform: translateZ(0);
 }
 
 /* Neo-Brutalist Window Controls & Dots */
