@@ -108,3 +108,4 @@ export default function ReportsView({ metrics, orders }) {
         </div>
     );
 }
+

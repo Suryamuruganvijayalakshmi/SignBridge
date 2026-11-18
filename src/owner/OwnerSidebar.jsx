@@ -89,3 +89,4 @@ export default function OwnerSidebar({ activeTab, onSelectTab }) {
         </aside>
     );
 }
+

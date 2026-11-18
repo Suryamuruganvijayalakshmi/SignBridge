@@ -366,3 +366,4 @@ export function recordEdgeOrder(orderData) {
     edgeDB.orders.unshift(newOrder);
     return newOrder;
 }
+

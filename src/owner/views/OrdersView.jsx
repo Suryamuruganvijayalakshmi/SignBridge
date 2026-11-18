@@ -268,3 +268,4 @@ export default function OrdersView({ orders, onSelectOrder }) {
         </div>
     );
 }
+

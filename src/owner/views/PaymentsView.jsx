@@ -132,3 +132,4 @@ export default function PaymentsView({ orders }) {
         </div>
     );
 }
+
