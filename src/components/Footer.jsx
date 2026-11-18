@@ -47,8 +47,7 @@ export default function Footer({ onReplayIntro, onOpenContact }) {
                     <div className="footer-link-columns">
                         <div className="footer-link-col">
                             <h3 className="footer-col-label">Products</h3>
-                            <Link to="/products/nfc-business-card" className="footer-link">NFC Business Card</Link>
-                            <Link to="/products/nfc-portfolio-card" className="footer-link">NFC Portfolio Card</Link>
+                            <Link to="/products/nfc-smart-card" className="footer-link">NFC Smart Card</Link>
                             <Link to="/products/farmcargo" className="footer-link">FarmCargo</Link>
                         </div>
                         <div className="footer-link-col">

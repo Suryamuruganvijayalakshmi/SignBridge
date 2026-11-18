@@ -1,144 +1,78 @@
 export const PRODUCTS_DATA = [
     {
-        id: 'nfc-business-card',
+        id: 'nfc-smart-card',
         number: '01',
-        slug: 'nfc-business-card',
+        slug: 'nfc-smart-card',
         family: 'NFC Digital Identity',
-        name: 'NFC Digital Business Card',
-        category: 'Digital Identity Solutions',
-        tagline: 'Your Business. One Tap Away.',
+        name: 'NFC Smart Card',
+        category: 'Digital Identity Solutions | Business & Personal',
+        tagline: 'One tap. Every connection.',
+        badge: 'For Business & Personal Use · Coming Soon',
         shortDescription:
-            'A smart NFC-powered digital business identity solution that enables entrepreneurs, companies, freelancers, and professionals to share their business profile instantly through a physical NFC card.',
+            'A unified contactless NFC identity card engineered for both business networking and personal portfolios. Share company branding, services, and enquiry forms—or your projects, skills, and resume with a single tap.',
         description:
-            'A smart NFC-powered digital business identity solution that allows entrepreneurs, companies, freelancers, and professionals to share their business information instantly through a physical NFC card. Users can tap their NFC card against a compatible smartphone to open their personalized digital business profile.',
+            'SignBridge NFC Smart Card bridges physical interaction with instant digital connectivity. Engineered with an ultra-responsive contactless NFC chip and custom finish, one single card powers both your professional business profile and your personal portfolio. Tap against any compatible smartphone to share your services, products, resume, contact channels, and portfolio instantly—with zero apps required.',
         problemStatement:
-            'Traditional paper visiting cards are easily lost, cannot showcase products or services dynamically, require costly reprints whenever contact information changes, and provide no immediate way for prospects to message or submit an enquiry.',
+            'Carrying traditional paper visiting cards and sharing multiple fragmented links (resumes, LinkedIn, GitHub, portfolios, WhatsApp) creates friction, leads to lost connections, and requires costly reprints whenever contact information or offerings change.',
         ourSolution:
-            'SignBridge pairs a custom-branded physical NFC business card with a responsive digital company profile and management dashboard. A single tap opens your business identity, branding, services, WhatsApp, email, website, and enquiry capture directly in the visitor’s mobile browser—no app download required.',
+            'SignBridge NFC Smart Card unifies your complete professional and personal presence into one physical contactless card backed by dual-mode digital profiles. Seamlessly toggle between your Company Business Profile and your Personal Career Portfolio from a single intuitive dashboard, and share everything with a single tap—no app download needed.',
         highlightedFeatures: [
-            'Personalized NFC business cards',
-            'Digital company profile & branding',
-            'WhatsApp, email & website integration',
-            'Business enquiry & lead capture'
+            'For Business & Personal Use (Dual-Mode)',
+            'One tap contactless NFC & unique URL',
+            'Company branding, services & lead capture',
+            'Personal portfolio, projects & resume download'
         ],
         features: [
-            'Personalized NFC business cards',
-            'Digital company profile',
-            'Business logo and branding',
-            'Products and services showcase',
-            'Contact information',
-            'WhatsApp and email integration',
-            'Social media links',
-            'Website integration',
-            'Business enquiry and lead capture',
-            'Customizable profile management dashboard'
+            'Personalized contactless NFC Smart Card with premium finish',
+            'Dual-mode profile: Switch between Business & Personal modes',
+            'Digital company profile with logo, branding & services showcase',
+            'Personal portfolio with projects, technical skills & achievements',
+            'One-tap resume (PDF) download for recruiters & clients',
+            'Direct WhatsApp, email & phone quick-action triggers',
+            'Social & developer links (LinkedIn, GitHub, Instagram, Web)',
+            'Business enquiry and lead capture form',
+            'Unique personal and business profile URLs (e.g., signbridge.click/u/...)',
+            'Real-time cloud profile management dashboard for instant updates'
         ],
         howItWorks: [
             {
                 step: '01',
-                title: 'Configure Company Profile',
-                desc: 'Add your business logo, brand styling, products and services, website, and contact channels in the profile management dashboard.'
+                title: 'Configure Your Profiles',
+                desc: 'Set up your Business profile (branding, services, lead capture) and Personal portfolio (projects, skills, resume) in the dashboard.'
             },
             {
                 step: '02',
-                title: 'Tap Card to Smartphone',
-                desc: 'Hold your personalized NFC business card near any compatible smartphone during meetings, conferences, or client visits.'
+                title: 'Tap Card to Any Smartphone',
+                desc: 'Hold your NFC Smart Card to the back of any modern iPhone or Android smartphone during meetings, networking, or interviews.'
             },
             {
                 step: '03',
                 title: 'Instant Profile Experience',
-                desc: 'Your digital company profile opens immediately in the recipient’s mobile browser with zero app installation required.'
+                desc: 'Your tailored digital profile opens instantly in their mobile browser with zero app installation required.'
             },
             {
                 step: '04',
-                title: 'Connect & Capture Leads',
-                desc: 'Prospects browse your offerings, save contact details, reach you on WhatsApp or email, or submit an enquiry directly.'
+                title: 'Connect & Convert',
+                desc: 'Visitors browse your offerings, message on WhatsApp, download your resume, save contact details, or submit enquiries directly.'
             }
         ],
         targetAudience: [
-            'Entrepreneurs',
-            'Startups',
-            'Companies',
-            'Freelancers',
-            'Business Professionals'
+            'Entrepreneurs & Startups',
+            'Business Professionals & Sales Teams',
+            'Freelancers & Consultants',
+            'Developers & Designers',
+            'College Students & Job Seekers',
+            'Content Creators & Agencies'
         ],
-        visualType: 'nfc-business',
-        accentColor: '#6366f1',
-        ctaLabel: 'Request Business NFC Card'
-    },
-    {
-        id: 'nfc-portfolio-card',
-        number: '02',
-        slug: 'nfc-portfolio-card',
-        family: 'NFC Digital Identity',
-        name: 'NFC Personal Portfolio Card',
-        category: 'Personal Digital Identity',
-        tagline: 'Your Identity. One Tap Away.',
-        shortDescription:
-            'A personalized NFC-powered portfolio solution designed for students, developers, designers, creators, and job seekers to share their complete digital identity through a single tap.',
-        description:
-            'A personalized NFC-powered portfolio solution designed for students, developers, designers, creators, job seekers, and professionals. Users can share their complete digital identity through a single tap instead of sharing multiple links or traditional visiting cards.',
-        problemStatement:
-            'Sharing separate links for resumes, GitHub repositories, LinkedIn profiles, and project portfolios during interviews, campus placements, or networking sessions creates friction and makes it harder for recruiters or clients to review your work.',
-        ourSolution:
-            'SignBridge unites your personal introduction, education, technical skills, projects, achievements, downloadable resume, and social profiles behind a personalized NFC identity card and unique personal profile URL—managed securely from one dashboard.',
-        highlightedFeatures: [
-            'Personalized NFC identity card & unique URL',
-            'Projects, technical skills & achievements',
-            'One-tap resume download',
-            'GitHub, LinkedIn & social integration'
-        ],
-        features: [
-            'Personalized NFC identity card',
-            'Digital personal portfolio',
-            'Profile picture and introduction',
-            'Education and qualifications',
-            'Technical skills',
-            'Projects and achievements',
-            'Resume download',
-            'GitHub and LinkedIn integration',
-            'Social media links',
-            'Contact information',
-            'Unique personal profile URL',
-            'Secure profile management dashboard'
-        ],
-        howItWorks: [
-            {
-                step: '01',
-                title: 'Build Your Digital Identity',
-                desc: 'Add your photo, introduction, education, technical skills, projects, achievements, and resume via the secure dashboard.'
-            },
-            {
-                step: '02',
-                title: 'Link Card & Unique URL',
-                desc: 'Your personalized NFC identity card pairs directly with your unique personal profile URL.'
-            },
-            {
-                step: '03',
-                title: 'One-Tap Portfolio Share',
-                desc: 'Tap your card against a recruiter’s, collaborator’s, or client’s smartphone to launch your portfolio instantly.'
-            },
-            {
-                step: '04',
-                title: 'Review Work & Download Resume',
-                desc: 'Visitors inspect your projects, download your resume, and connect through GitHub, LinkedIn, or direct contact.'
-            }
-        ],
-        targetAudience: [
-            'College Students',
-            'Developers',
-            'Designers',
-            'Job Seekers',
-            'Freelancers',
-            'Creators'
-        ],
-        visualType: 'nfc-portfolio',
-        accentColor: '#0ea5e9',
-        ctaLabel: 'Request Personal Portfolio Card'
+        visualType: 'nfc-smart-card',
+        image: '/assets/nfc-smart-card.webp',
+        accentColor: '#2563eb',
+        ctaLabel: 'Join Waitlist (Coming Soon)',
+        isComingSoon: true
     },
     {
         id: 'farmcargo',
-        number: '03',
+        number: '02',
         slug: 'farmcargo',
         family: 'Agricultural Procurement Intelligence',
         name: 'FarmCargo',
@@ -214,13 +148,13 @@ export const PRODUCTS_DATA = [
 export const NFC_COMPARISON_ROWS = [
     {
         dimension: 'Primary Purpose',
-        business: 'Share a company identity, products/services showcase, and capture business enquiries.',
+        business: 'Share company identity, products/services catalog, and capture business enquiries.',
         portfolio: 'Showcase personal qualifications, technical skills, projects, achievements, and resume.'
     },
     {
         dimension: 'Profile Content',
         business: 'Business logo & branding, services catalog, company contact, website & enquiry form.',
-        portfolio: 'Profile photo & intro, education, technical skills, project portfolio & downloadable resume.'
+        portfolio: 'Profile photo & bio, education, technical skills, project portfolio & downloadable resume.'
     },
     {
         dimension: 'Key Integrations',
@@ -229,17 +163,19 @@ export const NFC_COMPARISON_ROWS = [
     },
     {
         dimension: 'Management Experience',
-        business: 'Customizable profile management dashboard tailored for brand & service updates.',
-        portfolio: 'Secure profile management dashboard tailored for career, project & CV updates.'
+        business: 'Customizable dashboard tailored for corporate brand, services & team updates.',
+        portfolio: 'Secure profile dashboard tailored for career, project & CV updates.'
     },
     {
-        dimension: 'Ideal Users',
-        business: 'Entrepreneurs, startups, companies, freelancers, and business professionals.',
-        portfolio: 'College students, developers, designers, job seekers, freelancers, and creators.'
+        dimension: 'Ideal Scenarios',
+        business: 'Client meetings, corporate conferences, product demos, vendor partnerships.',
+        portfolio: 'Interviews, campus placements, tech meetups, hackathons, freelance proposals.'
     }
 ];
 
 export function getProductBySlug(slug) {
+    if (slug === 'nfc-business-card' || slug === 'nfc-portfolio-card') {
+        return PRODUCTS_DATA.find((product) => product.id === 'nfc-smart-card');
+    }
     return PRODUCTS_DATA.find((product) => product.slug === slug);
 }
-

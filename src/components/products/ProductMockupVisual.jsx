@@ -33,6 +33,35 @@ function LinkedInMark() {
 }
 
 export default function ProductMockupVisual({ type, detailed = false }) {
+    if (type === 'nfc-smart-card') {
+        return (
+            <div className={`pmock pmock-nfc-smart ${detailed ? 'pmock-detailed' : ''}`} aria-hidden="true">
+                <div className="pmock-smart-card-container">
+                    <div className="pmock-smart-card-glow" />
+                    <div className="pmock-smart-poster-frame">
+                        <img
+                            src="/assets/nfc-smart-card.webp"
+                            alt="SignBridge NFC Smart Card - One tap. Every connection. For business & personal use."
+                            className="pmock-smart-card-img"
+                            loading={detailed ? 'eager' : 'lazy'}
+                        />
+                        <div className="pmock-smart-shine" />
+                    </div>
+
+                    <div className="pmock-smart-card-badge-row">
+                        <span className="pmock-smart-badge-pill">
+                            <Wifi size={12} className="pmock-smart-nfc-icon" />
+                            <span>ONE TAP · EVERY CONNECTION</span>
+                        </span>
+                        <span className="pmock-smart-badge-tag">
+                            FOR BUSINESS &amp; PERSONAL USE
+                        </span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     if (type === 'nfc-business') {
         return (
             <div className={`pmock pmock-nfc-business ${detailed ? 'pmock-detailed' : ''}`} aria-hidden="true">

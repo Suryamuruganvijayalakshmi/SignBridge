@@ -51,23 +51,20 @@
     color: #6c6c6c;
 }
 
-/* ── Product Cards Grid (3 Offerings) ─────────────────────────────────────── */
+/* ── Product Cards Grid (2 Offerings: NFC Smart Card & FarmCargo) ─────────── */
 .products-showcase-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem;
     align-items: stretch;
+    max-width: 1080px;
+    margin: 0 auto;
 }
 
-@media (max-width: 1120px) {
-    .products-showcase-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 720px) {
+@media (max-width: 960px) {
     .products-showcase-grid {
         grid-template-columns: 1fr;
+        max-width: 580px;
     }
 }
 
@@ -381,6 +378,133 @@
 .pmock.pmock-detailed {
     min-height: 290px;
     padding: 1rem 0.5rem;
+}
+
+/* 0. NFC Smart Card Unified Poster Showcase */
+.pmock-nfc-smart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.pmock-smart-card-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.pmock-smart-card-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(245, 158, 11, 0.12) 50%, transparent 70%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.pmock-smart-poster-frame {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #02235c;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 14px 32px -6px rgba(15, 23, 42, 0.18),
+                0 4px 10px -2px rgba(15, 23, 42, 0.06);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.product-showcase-card:hover .pmock-smart-poster-frame {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 42px -6px rgba(37, 99, 235, 0.25),
+                0 6px 14px -2px rgba(15, 23, 42, 0.1);
+}
+
+.pmock-smart-card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.pmock-detailed .pmock-smart-card-container {
+    max-width: 440px;
+}
+
+.pmock-detailed .pmock-smart-poster-frame {
+    max-width: 360px;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    box-shadow: 0 24px 50px -10px rgba(15, 23, 42, 0.22);
+}
+
+.pmock-smart-card-badge-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pmock-smart-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background: #0f172a;
+    color: #ffffff;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.pmock-smart-nfc-icon {
+    color: #38bdf8;
+}
+
+.pmock-smart-badge-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nfc-mode-badge-footer {
+    margin-top: 1.25rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px dashed rgba(0, 0, 0, 0.12);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #475569;
+    text-align: center;
 }
 
 /* 1. NFC Business Card + Smartphone Tap */

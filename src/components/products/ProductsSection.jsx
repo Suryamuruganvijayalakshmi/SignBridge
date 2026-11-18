@@ -16,12 +16,12 @@ export default function ProductsSection() {
                             <span className="text-accent">real-world scale.</span>
                         </h2>
                         <p className="section-lead-text">
-                            Three focused SignBridge products engineered across smart contactless NFC digital identity and data-driven agricultural procurement intelligence.
+                            Two focused SignBridge products engineered across smart contactless NFC digital identity and data-driven agricultural procurement intelligence.
                         </p>
                     </div>
                 </div>
 
-                {/* 3 Product Offerings Grid */}
+                {/* 2 Product Offerings Grid */}
                 <div className="products-showcase-grid">
                     {PRODUCTS_DATA.map((product) => (
                         <ProductCard key={product.id} product={product} />

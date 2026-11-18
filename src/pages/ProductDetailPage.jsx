@@ -46,7 +46,7 @@ export default function ProductDetailPage({ onNotification }) {
                             Product not <span className="text-lime">found.</span>
                         </h1>
                         <p className="section-lead-text">
-                            The requested SignBridge product page could not be found. Explore our three core offerings below.
+                            The requested SignBridge product page could not be found. Explore our core offerings below.
                         </p>
                         <div className="mt-6 flex flex-wrap gap-3">
                             <Link to="/#products" className="btn-primary-lime">
@@ -227,30 +227,30 @@ export default function ProductDetailPage({ onNotification }) {
                     </div>
                 </section>
 
-                {/* NFC Family Comparison (shown for both NFC products) */}
+                {/* NFC Dual Mode Architecture (Business Mode + Personal Mode) */}
                 {isNfcProduct && (
                     <section className="pd-section-block" aria-labelledby="pd-nfc-compare-title">
                         <div className="pd-sub-header">
                             <span className="section-eyebrow">
-                                <span className="eyebrow-pip" /> // NFC DIGITAL IDENTITY FAMILY
+                                <span className="eyebrow-pip" /> // DUAL-MODE ARCHITECTURE
                             </span>
                             <h2 id="pd-nfc-compare-title" className="pd-section-heading">
-                                Business Card vs. <span className="text-lime">Personal Portfolio</span>
+                                One Card. <span className="text-lime">Two Powerful Modes.</span>
                             </h2>
                             <p className="section-lead-text">
-                                Both offerings share SignBridge’s contactless NFC tap experience, tailored to distinct business and personal identity workflows.
+                                Why carry separate cards? SignBridge NFC Smart Card unites enterprise business networking and personal career identity into a single contactless card with instant cloud switching.
                             </p>
                         </div>
 
                         <div className="nfc-compare-grid">
-                            <div className={`nfc-compare-col ${product.id === 'nfc-business-card' ? 'is-current-offering' : ''}`}>
+                            <div className="nfc-compare-col is-current-offering">
                                 <div className="nfc-compare-col-head">
                                     <Briefcase size={17} aria-hidden="true" />
                                     <div>
                                         <span className="nfc-compare-code">
-                                            PRODUCT 01 {product.id === 'nfc-business-card' ? '· CURRENTLY VIEWING' : ''}
+                                            MODE 01 · ENTERPRISE &amp; BRAND
                                         </span>
-                                        <h4>NFC Digital Business Card</h4>
+                                        <h4>Business Profile Mode</h4>
                                     </div>
                                 </div>
                                 <ul className="nfc-compare-list">
@@ -260,22 +260,19 @@ export default function ProductDetailPage({ onNotification }) {
                                         </li>
                                     ))}
                                 </ul>
-                                {product.id !== 'nfc-business-card' && (
-                                    <Link to="/products/nfc-business-card" className="nfc-compare-link">
-                                        <span>Switch to Business Card</span>
-                                        <ArrowUpRight size={14} />
-                                    </Link>
-                                )}
+                                <div className="nfc-mode-badge-footer">
+                                    <span>Engineered for meetings, client pitches &amp; lead capture</span>
+                                </div>
                             </div>
 
-                            <div className={`nfc-compare-col ${product.id === 'nfc-portfolio-card' ? 'is-current-offering' : ''}`}>
+                            <div className="nfc-compare-col is-current-offering">
                                 <div className="nfc-compare-col-head">
                                     <UserCheck size={17} aria-hidden="true" />
                                     <div>
                                         <span className="nfc-compare-code">
-                                            PRODUCT 02 {product.id === 'nfc-portfolio-card' ? '· CURRENTLY VIEWING' : ''}
+                                            MODE 02 · CAREER &amp; PORTFOLIO
                                         </span>
-                                        <h4>NFC Personal Portfolio Card</h4>
+                                        <h4>Personal Portfolio Mode</h4>
                                     </div>
                                 </div>
                                 <ul className="nfc-compare-list">
@@ -285,12 +282,9 @@ export default function ProductDetailPage({ onNotification }) {
                                         </li>
                                     ))}
                                 </ul>
-                                {product.id !== 'nfc-portfolio-card' && (
-                                    <Link to="/products/nfc-portfolio-card" className="nfc-compare-link">
-                                        <span>Switch to Personal Portfolio</span>
-                                        <ArrowUpRight size={14} />
-                                    </Link>
-                                )}
+                                <div className="nfc-mode-badge-footer">
+                                    <span>Engineered for networking, interviews &amp; one-tap resume</span>
+                                </div>
                             </div>
                         </div>
                     </section>
