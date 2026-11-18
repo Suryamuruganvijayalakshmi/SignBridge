@@ -1,14 +1,31 @@
 export async function onRequestPost(context) {
-    const { request, env } = context;
+    return handleVerifyPayment(context);
+}
 
-    const key_secret = env.RAZORPAY_KEY_SECRET;
-
-    if (!key_secret) {
-        return new Response(
-            JSON.stringify({ success: false, error: 'Server configuration error: RAZORPAY_KEY_SECRET missing' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } }
-        );
+export async function onRequest(context) {
+    if (context.request.method === 'OPTIONS') {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            },
+        });
     }
+    if (context.request.method === 'POST') {
+        return handleVerifyPayment(context);
+    }
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    });
+}
+
+async function handleVerifyPayment(context) {
+    const { request, env = {} } = context;
+
+    const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
 
     try {
         const body = await request.json();
@@ -20,7 +37,13 @@ export async function onRequestPost(context) {
                     success: false,
                     error: 'Missing required parameters: razorpay_order_id, razorpay_payment_id, and razorpay_signature are required',
                 }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
+                {
+                    status: 400,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
             );
         }
 
@@ -44,7 +67,13 @@ export async function onRequestPost(context) {
         if (expectedSignature !== razorpay_signature) {
             return new Response(
                 JSON.stringify({ success: false, error: 'Payment signature verification failed' }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
+                {
+                    status: 400,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
             );
         }
 
@@ -55,13 +84,24 @@ export async function onRequestPost(context) {
                 payment_id: razorpay_payment_id,
                 order_id: razorpay_order_id,
             }),
-            { status: 200, headers: { 'Content-Type': 'application/json' } }
+            {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
         );
     } catch (err) {
         return new Response(
             JSON.stringify({ success: false, error: err.message || 'Internal server error' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } }
+            {
+                status: 500,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
         );
     }
 }
-

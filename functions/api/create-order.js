@@ -1,15 +1,32 @@
 export async function onRequestPost(context) {
-    const { request, env } = context;
+    return handleCreateOrder(context);
+}
 
-    const key_id = env.RAZORPAY_KEY_ID;
-    const key_secret = env.RAZORPAY_KEY_SECRET;
-
-    if (!key_id || !key_secret) {
-        return new Response(
-            JSON.stringify({ error: 'Server configuration error: Razorpay credentials missing' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } }
-        );
+export async function onRequest(context) {
+    if (context.request.method === 'OPTIONS') {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            },
+        });
     }
+    if (context.request.method === 'POST') {
+        return handleCreateOrder(context);
+    }
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    });
+}
+
+async function handleCreateOrder(context) {
+    const { request, env = {} } = context;
+
+    const key_id = env.RAZORPAY_KEY_ID || 'rzp_test_U1a3GT1vwxWWir';
+    const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
 
     try {
         const body = await request.json();
@@ -19,7 +36,13 @@ export async function onRequestPost(context) {
         if (isNaN(numAmount) || numAmount < 100) {
             return new Response(
                 JSON.stringify({ error: 'Amount must be at least 100 paise (₹1)' }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
+                {
+                    status: 400,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
             );
         }
 
@@ -42,8 +65,16 @@ export async function onRequestPost(context) {
 
         if (!response.ok) {
             return new Response(
-                JSON.stringify({ error: data.error?.description || data.error?.message || 'Razorpay order creation failed' }),
-                { status: response.status, headers: { 'Content-Type': 'application/json' } }
+                JSON.stringify({
+                    error: data.error?.description || data.error?.message || 'Razorpay order creation failed',
+                }),
+                {
+                    status: response.status,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
             );
         }
 
@@ -55,13 +86,24 @@ export async function onRequestPost(context) {
                 receipt: data.receipt,
                 key_id,
             }),
-            { status: 200, headers: { 'Content-Type': 'application/json' } }
+            {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
         );
     } catch (err) {
         return new Response(
             JSON.stringify({ error: err.message || 'Internal server error' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } }
+            {
+                status: 500,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
         );
     }
 }
-
