@@ -69,9 +69,9 @@ export default function OwnerSidebar({ activeTab, onSelectTab }) {
                     </div>
                     <div className="owner-user-text">
                         <span className="owner-user-name" title={user?.email}>
-                            {user?.name || 'Owner'}
+                            {user?.name || 'Owner (177330)'}
                         </span>
-                        <span className="owner-user-role">Authorized Admin</span>
+                        <span className="owner-user-role">ID: 177330 · Authorized</span>
                     </div>
                 </div>
 

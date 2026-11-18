@@ -78,31 +78,37 @@ export async function handleApiRequest(req, res) {
     // ─────────────────────────────────────────────────────────────────────────
     if (pathname === '/api/owner/login' && method === 'POST') {
         const body = await parseRequestBody(req);
-        const { email, password } = body;
+        const idOrEmail = (body.id || body.email || '').toString().trim();
+        const password = (body.password || '').toString().trim();
 
-        if (!email || !password) {
-            return sendJSON(res, 400, { error: 'Email and password are required' });
+        if (!idOrEmail || !password) {
+            return sendJSON(res, 400, { error: 'Owner ID and password are required' });
         }
 
+        // Allow direct login with Owner ID 177330 & Password 177330
+        const isIdMatch = (idOrEmail === '177330' && password === '177330');
         const inputHash = hashPassword(password);
         const ownerEmail = (OWNER_CONFIG.email || '').toLowerCase().trim();
+        const isEmailMatch = (idOrEmail.toLowerCase() === ownerEmail && inputHash === OWNER_CONFIG.passwordHash);
 
-        if (email.toLowerCase().trim() !== ownerEmail || inputHash !== OWNER_CONFIG.passwordHash) {
-            return sendJSON(res, 401, { error: 'Invalid owner credentials' });
+        if (!isIdMatch && !isEmailMatch) {
+            return sendJSON(res, 401, { error: 'Invalid Owner ID or Password' });
         }
 
         const token = generateToken({
-            email: ownerEmail,
+            id: '177330',
+            email: '177330',
             role: 'owner',
-            name: 'SignBridge Owner',
+            name: 'SignBridge Owner (177330)',
         });
 
         return sendJSON(res, 200, {
             success: true,
             token,
             user: {
-                email: ownerEmail,
-                name: 'SignBridge Authorized Owner',
+                id: '177330',
+                email: 'Owner #177330',
+                name: 'SignBridge Owner (177330)',
                 role: 'owner',
             },
         });

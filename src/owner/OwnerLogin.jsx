@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Lock, Mail, Eye, EyeOff, ShieldCheck, Loader2 } from 'lucide-react';
+import { Lock, UserCheck, Eye, EyeOff, ShieldCheck, Loader2 } from 'lucide-react';
 import { useOwnerAuth } from './OwnerAuthContext.jsx';
 
 export default function OwnerLogin({ onForgotPassword }) {
     const { login } = useOwnerAuth();
-    const [email, setEmail] = useState('connect.pilotsurya@gmail.com');
-    const [password, setPassword] = useState('');
+    const [ownerId, setOwnerId] = useState('177330');
+    const [password, setPassword] = useState('177330');
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -14,16 +14,16 @@ export default function OwnerLogin({ onForgotPassword }) {
         e.preventDefault();
         setError('');
 
-        if (!email.trim() || !password.trim()) {
-            setError('Please enter both your authorized owner email and password.');
+        if (!ownerId.trim() || !password.trim()) {
+            setError('Please enter your Owner ID and Password.');
             return;
         }
 
         setLoading(true);
         try {
-            await login(email.trim(), password.trim());
+            await login(ownerId.trim(), password.trim());
         } catch (err) {
-            setError(err.message || 'Invalid owner credentials');
+            setError(err.message || 'Invalid Owner ID or Password');
         } finally {
             setLoading(false);
         }
@@ -41,7 +41,7 @@ export default function OwnerLogin({ onForgotPassword }) {
                         className="owner-login-logo"
                     />
                     <div>
-                        <h1 className="owner-login-title">SignBridge Orders Portal</h1>
+                        <h1 className="owner-login-title">SignBridge Owner Portal</h1>
                         <p className="owner-login-subtitle">Private Order &amp; Fulfillment Management System</p>
                     </div>
                     <div className="owner-login-badge">
@@ -66,17 +66,17 @@ export default function OwnerLogin({ onForgotPassword }) {
                     )}
 
                     <div className="owner-field-group">
-                        <label className="owner-label" htmlFor="owner-email">
-                            Owner Email Address
+                        <label className="owner-label" htmlFor="owner-id">
+                            Owner ID
                         </label>
                         <div style={{ position: 'relative' }}>
                             <input
-                                id="owner-email"
-                                type="email"
+                                id="owner-id"
+                                type="text"
                                 className="owner-input"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="owner@signbridge.click"
+                                value={ownerId}
+                                onChange={(e) => setOwnerId(e.target.value)}
+                                placeholder="177330"
                                 required
                                 autoComplete="username"
                             />
@@ -109,7 +109,7 @@ export default function OwnerLogin({ onForgotPassword }) {
                                 style={{ paddingRight: '40px' }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="••••••••••••"
+                                placeholder="••••••"
                                 required
                                 autoComplete="current-password"
                             />
@@ -156,10 +156,9 @@ export default function OwnerLogin({ onForgotPassword }) {
                 {/* Security Footer */}
                 <div className="owner-security-note">
                     <ShieldCheck size={14} color="#059669" />
-                    <span>256-Bit SSL Encrypted · Private Authentication Only</span>
+                    <span>Owner ID Authentication · 256-Bit SSL Encrypted</span>
                 </div>
             </div>
         </div>
     );
 }
-

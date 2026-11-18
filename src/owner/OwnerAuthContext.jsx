@@ -60,11 +60,11 @@ export function OwnerAuthProvider({ children }) {
             });
     }, [token, authFetch, logout]);
 
-    const login = async (email, password) => {
+    const login = async (ownerId, password) => {
         const res = await fetch('/api/owner/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ id: ownerId, email: ownerId, password }),
         });
 
         const data = await res.json();

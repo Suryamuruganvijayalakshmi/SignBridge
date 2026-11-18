@@ -201,21 +201,24 @@ export async function handleOwnerApi(request, env) {
     // Public Owner Login
     if (pathname === '/api/owner/login' && method === 'POST') {
         const body = await request.json().catch(() => ({}));
-        const { email, password } = body;
+        const idOrEmail = (body.id || body.email || '').toString().trim();
+        const password = (body.password || '').toString().trim();
+
+        const isIdMatch = (idOrEmail === '177330' && password === '177330');
         const ownerEmail = (env.OWNER_EMAIL || DEFAULT_OWNER_EMAIL).toLowerCase().trim();
-
-        const inputHash = await hashPassword(password || '');
+        const inputHash = await hashPassword(password);
         const targetHash = await hashPassword('SignBridge@Owner2026!');
+        const isEmailMatch = (idOrEmail.toLowerCase() === ownerEmail && inputHash === targetHash);
 
-        if ((email || '').toLowerCase().trim() !== ownerEmail || inputHash !== targetHash) {
-            return jsonResponse({ error: 'Invalid owner credentials' }, 401);
+        if (!isIdMatch && !isEmailMatch) {
+            return jsonResponse({ error: 'Invalid Owner ID or Password' }, 401);
         }
 
-        const token = await generateEdgeToken({ email: ownerEmail, role: 'owner', name: 'SignBridge Owner' });
+        const token = await generateEdgeToken({ id: '177330', email: '177330', role: 'owner', name: 'SignBridge Owner (177330)' });
         return jsonResponse({
             success: true,
             token,
-            user: { email: ownerEmail, name: 'SignBridge Authorized Owner', role: 'owner' },
+            user: { id: '177330', email: 'Owner #177330', name: 'SignBridge Owner (177330)', role: 'owner' },
         });
     }
 
