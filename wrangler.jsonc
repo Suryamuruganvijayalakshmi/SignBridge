@@ -10,7 +10,7 @@
     "not_found_handling": "single-page-application"
   },
   "vars": {
-    "RAZORPAY_KEY_ID": "rzp_test_U1a3GT1vwxWWir"
+    "RAZORPAY_KEY_ID": "rzp_live_U1aUQnurjyIrSG"
   },
   "observability": {
     "enabled": true

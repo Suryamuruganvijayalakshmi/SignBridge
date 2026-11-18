@@ -25,7 +25,7 @@ export async function onRequest(context) {
 async function handleVerifyPayment(context) {
     const { request, env = {} } = context;
 
-    const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
+    const key_secret = env.RAZORPAY_KEY_SECRET || 'L63dYykbBRWOhm01DHn65w1X';
 
     try {
         const body = await request.json();

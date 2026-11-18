@@ -25,8 +25,8 @@ export async function onRequest(context) {
 async function handleCreateOrder(context) {
     const { request, env = {} } = context;
 
-    const key_id = env.RAZORPAY_KEY_ID || 'rzp_test_U1a3GT1vwxWWir';
-    const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
+    const key_id = env.RAZORPAY_KEY_ID || 'rzp_live_U1aUQnurjyIrSG';
+    const key_secret = env.RAZORPAY_KEY_SECRET || 'L63dYykbBRWOhm01DHn65w1X';
 
     try {
         const body = await request.json();

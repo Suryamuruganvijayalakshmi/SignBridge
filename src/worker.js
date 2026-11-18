@@ -21,8 +21,8 @@ export default {
 
         // Endpoint: POST /api/create-order
         if (url.pathname === '/api/create-order' && request.method === 'POST') {
-            const key_id = env.RAZORPAY_KEY_ID || 'rzp_test_U1a3GT1vwxWWir';
-            const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
+            const key_id = env.RAZORPAY_KEY_ID || 'rzp_live_U1aUQnurjyIrSG';
+            const key_secret = env.RAZORPAY_KEY_SECRET || 'L63dYykbBRWOhm01DHn65w1X';
 
             try {
                 const body = await request.json();
@@ -106,7 +106,7 @@ export default {
 
         // Endpoint: POST /api/verify-payment
         if (url.pathname === '/api/verify-payment' && request.method === 'POST') {
-            const key_secret = env.RAZORPAY_KEY_SECRET || 'nod8Fc8Gorxw5Jxuc6uRhoi0';
+            const key_secret = env.RAZORPAY_KEY_SECRET || 'L63dYykbBRWOhm01DHn65w1X';
 
             try {
                 const body = await request.json();
