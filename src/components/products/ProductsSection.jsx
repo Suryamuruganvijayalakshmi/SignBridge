@@ -2,7 +2,7 @@ import React from 'react';
 import { PRODUCTS_DATA } from '../../data/products.js';
 import ProductCard from './ProductCard.jsx';
 
-export default function ProductsSection() {
+export default function ProductsSection({ onOpenBuy }) {
     return (
         <section className="site-section section-products" id="products" aria-labelledby="products-heading">
             <div className="section-frame">
@@ -24,7 +24,7 @@ export default function ProductsSection() {
                 {/* 2 Product Offerings Grid */}
                 <div className="products-showcase-grid">
                     {PRODUCTS_DATA.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} onOpenBuy={onOpenBuy} />
                     ))}
                 </div>
             </div>

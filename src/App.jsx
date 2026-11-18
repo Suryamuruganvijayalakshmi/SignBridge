@@ -19,6 +19,7 @@ import InfinitePassageLoader from './components/InfinitePassageLoader.jsx';
 // Lazy-loaded heavy routes and modals
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
 const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
+const BuyCardModal = lazy(() => import('./components/checkout/BuyCardModal.jsx'));
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -97,6 +98,7 @@ export default function App() {
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
     const [contactOpen, setContactOpen] = useState(false);
+    const [buyModalOpen, setBuyModalOpen] = useState(false);
     // Starting animation: Uiverse spinning words loader shows on initial site visit
     const [introComplete, setIntroComplete] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
@@ -226,7 +228,7 @@ export default function App() {
 
                                 <CapabilitiesSection />
 
-                                <ProductsSection />
+                                <ProductsSection onOpenBuy={() => setBuyModalOpen(true)} />
 
                                 <ResearchSection onOpenContact={() => setContactOpen(true)} />
 
@@ -239,7 +241,15 @@ export default function App() {
                                 <ContactSection onNotification={triggerToast} />
                             </>
                         } />
-                        <Route path="/products/:slug" element={<ProductDetailPage onNotification={triggerToast} />} />
+                        <Route
+                            path="/products/:slug"
+                            element={
+                                <ProductDetailPage
+                                    onNotification={triggerToast}
+                                    onOpenBuy={() => setBuyModalOpen(true)}
+                                />
+                            }
+                        />
                     </Routes>
                 </Suspense>
 
@@ -255,6 +265,16 @@ export default function App() {
                     <ContactModal
                         isOpen={contactOpen}
                         onClose={() => setContactOpen(false)}
+                        onNotification={triggerToast}
+                    />
+                </Suspense>
+            )}
+
+            {buyModalOpen && (
+                <Suspense fallback={null}>
+                    <BuyCardModal
+                        isOpen={buyModalOpen}
+                        onClose={() => setBuyModalOpen(false)}
                         onNotification={triggerToast}
                     />
                 </Suspense>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Lock, ShoppingBag } from 'lucide-react';
 import ProductMockupVisual from './ProductMockupVisual.jsx';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onOpenBuy }) {
+    const isNfc = product.id === 'nfc-smart-card';
+
     return (
         <article className="product-showcase-card">
             {/* 1. Window Header Bar */}
@@ -44,13 +46,34 @@ export default function ProductCard({ product }) {
 
             {/* 4. Window Footer Actions Bar */}
             <div className="product-card-actions">
-                <Link
-                    to={`/products/${product.slug}`}
-                    className="product-view-btn"
-                >
-                    <span>View Product Specifications</span>
-                    <ArrowRight size={15} aria-hidden="true" />
-                </Link>
+                {isNfc ? (
+                    <div className="product-actions-group">
+                        <button
+                            type="button"
+                            onClick={() => onOpenBuy && onOpenBuy()}
+                            className="product-buy-now-btn"
+                        >
+                            <ShoppingBag size={14} />
+                            <span>Buy Card — ₹499</span>
+                        </button>
+                        <Link
+                            to={`/products/${product.slug}`}
+                            className="product-specs-btn"
+                            title="View specifications"
+                        >
+                            <span>Specs</span>
+                            <ArrowRight size={13} aria-hidden="true" />
+                        </Link>
+                    </div>
+                ) : (
+                    <Link
+                        to={`/products/${product.slug}`}
+                        className="product-view-btn"
+                    >
+                        <span>View Product Specifications</span>
+                        <ArrowRight size={15} aria-hidden="true" />
+                    </Link>
+                )}
             </div>
         </article>
     );

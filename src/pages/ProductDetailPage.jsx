@@ -12,13 +12,16 @@ import {
     UserCheck,
     Sprout,
     Mail,
-    Phone
+    Phone,
+    ShoppingBag,
+    Lock,
+    ShieldCheck
 } from 'lucide-react';
 import { getProductBySlug, PRODUCTS_DATA, NFC_COMPARISON_ROWS } from '../data/products.js';
 import ProductMockupVisual from '../components/products/ProductMockupVisual.jsx';
 import ProductEnquiryForm from '../components/products/ProductEnquiryForm.jsx';
 
-export default function ProductDetailPage({ onNotification }) {
+export default function ProductDetailPage({ onNotification, onOpenBuy }) {
     const { slug } = useParams();
     const product = getProductBySlug(slug);
 
@@ -107,14 +110,34 @@ export default function ProductDetailPage({ onNotification }) {
                         <p className="pd-description">{product.description}</p>
 
                         <div className="pd-hero-actions">
-                            <button
-                                type="button"
-                                onClick={scrollToEnquiry}
-                                className="btn-primary-lime"
-                            >
-                                <span>{product.ctaLabel}</span>
-                                <ArrowUpRight size={16} aria-hidden="true" />
-                            </button>
+                            {isNfcProduct ? (
+                                <>
+                                    <button
+                                        type="button"
+                                        onClick={() => onOpenBuy && onOpenBuy()}
+                                        className="btn-primary-lime"
+                                    >
+                                        <ShoppingBag size={17} />
+                                        <span>Buy NFC Smart Card — ₹499</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={scrollToEnquiry}
+                                        className="btn-secondary-glass"
+                                    >
+                                        <span>Enterprise &amp; Bulk</span>
+                                    </button>
+                                </>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={scrollToEnquiry}
+                                    className="btn-primary-lime"
+                                >
+                                    <span>{product.ctaLabel}</span>
+                                    <ArrowUpRight size={16} aria-hidden="true" />
+                                </button>
+                            )}
                             <a
                                 href="#how-it-works"
                                 onClick={(e) => {
