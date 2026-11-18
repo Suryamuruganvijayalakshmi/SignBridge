@@ -192,9 +192,23 @@ export default {
 
         // Delegate static files and client-side routes to Cloudflare Assets
         if (env.ASSETS && typeof env.ASSETS.fetch === 'function') {
-            return env.ASSETS.fetch(request);
+            const assetResponse = await env.ASSETS.fetch(request);
+            const newHeaders = new Headers(assetResponse.headers);
+
+            // Ensure Content-Security-Policy allows Razorpay iframe & scripts
+            newHeaders.set(
+                'Content-Security-Policy',
+                "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://static.cloudflareinsights.com; frame-src 'self' https://api.razorpay.com https://*.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob: https://*.razorpay.com; media-src 'self' blob:; connect-src 'self' https: https://api.razorpay.com https://*.razorpay.com https://lumberjack.razorpay.com; frame-ancestors 'self';"
+            );
+
+            return new Response(assetResponse.body, {
+                status: assetResponse.status,
+                statusText: assetResponse.statusText,
+                headers: newHeaders,
+            });
         }
 
         return new Response('Not Found', { status: 404 });
     },
 };
+
