@@ -62,8 +62,8 @@ export default function OrderReceipt({
 
     const orderId = paymentData?.orderId || `ORD_${Date.now()}`;
     const paymentId = paymentData?.paymentId || `PAY_${Date.now()}`;
-    const unitPrice = selectedPack?.price ? selectedPack.price / (selectedPack.qty || 1) : 10;
-    const grandTotal = selectedPack?.price || 10;
+    const unitPrice = selectedPack?.price ? selectedPack.price / (selectedPack.qty || 1) : 199;
+    const grandTotal = selectedPack?.price || 199;
 
     return (
         <div className="receipt-view-wrapper">
@@ -383,3 +383,4 @@ export default function OrderReceipt({
         </div>
     );
 }
+

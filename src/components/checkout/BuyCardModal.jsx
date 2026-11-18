@@ -14,9 +14,9 @@ import { initiateRazorpayPayment } from '../../lib/razorpayCheckout.js';
 import OrderReceipt from './OrderReceipt.jsx';
 
 const PACK_OPTIONS = [
-    { qty: 1, label: 'Single Card', price: 10, originalPrice: 999, savings: 'PROMO ₹10' },
-    { qty: 2, label: 'Duo Pack', price: 20, originalPrice: 1998, savings: 'BEST VALUE', popular: true },
-    { qty: 3, label: 'Team Pack', price: 30, originalPrice: 2997, savings: 'PROMO ₹30' }
+    { qty: 1, label: 'Single Card', price: 199, originalPrice: 999, savings: 'SPECIAL ₹199' },
+    { qty: 2, label: 'Duo Pack', price: 349, originalPrice: 1998, savings: 'BEST VALUE', popular: true },
+    { qty: 3, label: 'Team Pack', price: 499, originalPrice: 2997, savings: 'SAVE MORE' }
 ];
 
 export default function BuyCardModal({ isOpen, onClose, onNotification }) {
