@@ -86,11 +86,6 @@ export async function initiateRazorpayPayment({
         throw new Error('Razorpay gateway could not be loaded. Please disable any ad-blockers (like Brave Shields/uBlock) for this site or refresh the page.');
     }
 
-    const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
-    if (!keyId) {
-        throw new Error('Razorpay Key ID missing (VITE_RAZORPAY_KEY_ID is not configured in .env)');
-    }
-
     // 2. Step 1: Call Backend to Create Order
     const orderRes = await fetch('/api/create-order', {
         method: 'POST',
@@ -113,6 +108,12 @@ export async function initiateRazorpayPayment({
 
     if (!order_id) {
         throw new Error('Invalid order response: order_id was not returned from backend');
+    }
+
+    // Resolve public key ID from backend order response or client environment
+    const keyId = orderData.key_id || import.meta.env.VITE_RAZORPAY_KEY_ID;
+    if (!keyId) {
+        throw new Error('Razorpay Key ID missing. Please verify RAZORPAY_KEY_ID in .env.');
     }
 
     // 3. Step 2 & 3: Open Razorpay Modal & Verify on Success

@@ -56,6 +56,7 @@ export async function createRazorpayOrder({ amount, currency = 'INR', receipt, n
             amount: order.amount,
             currency: order.currency,
             receipt: order.receipt,
+            key_id: process.env.RAZORPAY_KEY_ID || process.env.VITE_RAZORPAY_KEY_ID || key_id,
         };
     } catch (apiError) {
         console.error('Razorpay API orders.create error:', apiError);

@@ -53,6 +53,7 @@ export async function onRequestPost(context) {
                 amount: data.amount,
                 currency: data.currency,
                 receipt: data.receipt,
+                key_id,
             }),
             { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
