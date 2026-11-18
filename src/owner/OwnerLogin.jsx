@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Lock, UserCheck, Eye, EyeOff, ShieldCheck, Loader2 } from 'lucide-react';
 import { useOwnerAuth } from './OwnerAuthContext.jsx';
+import StillSunsetMeadow from '../components/originkit/ui/hero-64/still-sunset-meadow';
 
 export default function OwnerLogin({ onForgotPassword }) {
     const { login } = useOwnerAuth();
@@ -31,6 +32,18 @@ export default function OwnerLogin({ onForgotPassword }) {
 
     return (
         <div className="owner-login-viewport">
+            {/* Hero 64 Interactive 3D Meadow Flowers Effect */}
+            <div className="owner-login-scene" aria-hidden="true">
+                <StillSunsetMeadow
+                    sky={{ top: "#FFFFFF", horizon: "#F8B9A4", glow: "#FFD9A8" }}
+                    haze={4}
+                    speed={20}
+                    hover={20}
+                    cloudSpeed={6}
+                />
+                <div className="owner-login-scene-fade" />
+            </div>
+
             <div className="owner-login-card">
 
                 {/* Header */}

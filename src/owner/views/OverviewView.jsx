@@ -13,6 +13,7 @@ import {
     ArrowUpRight,
     Package
 } from 'lucide-react';
+import StillSunsetMeadow from '../../components/originkit/ui/hero-64/still-sunset-meadow';
 
 export default function OverviewView({ metrics, orders, onSelectOrder, onNavigateTab }) {
     if (!metrics) return null;
@@ -105,6 +106,32 @@ export default function OverviewView({ metrics, orders, onSelectOrder, onNavigat
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             
+            {/* Hero 64 Interactive 3D Meadow Flowers Studio Banner */}
+            <div className="owner-meadow-banner">
+                <div className="owner-meadow-canvas-wrap" aria-hidden="true">
+                    <StillSunsetMeadow
+                        sky={{ top: "#FFFFFF", horizon: "#F8B9A4", glow: "#FFD9A8" }}
+                        haze={4}
+                        speed={15}
+                        hover={15}
+                        cloudSpeed={5}
+                    />
+                    <div className="owner-meadow-fade-overlay" />
+                </div>
+                <div className="owner-meadow-content">
+                    <div className="owner-meadow-tag">
+                        <span className="owner-meadow-dot" />
+                        <span>SignBridge Studio · Live Meadow</span>
+                    </div>
+                    <h2 className="owner-meadow-title">
+                        Executive Orders &amp; <em>Dispatch Hub</em>
+                    </h2>
+                    <p className="owner-meadow-desc">
+                        Real-time order management, Razorpay payment verification, and automated customer notifications.
+                    </p>
+                </div>
+            </div>
+
             {/* 1. 10 Key Metrics Grid */}
             <div className="owner-stats-grid">
                 {statCards.map((stat, idx) => {
