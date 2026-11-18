@@ -100,7 +100,9 @@ export default function App() {
         (window.location.hostname === 'orders.signbridge.click' ||
          window.location.hostname === 'orders.localhost' ||
          window.location.pathname.startsWith('/owner') ||
-         window.location.pathname.startsWith('/portal'));
+         window.location.pathname.startsWith('/portal') ||
+         window.location.hash.startsWith('#/owner') ||
+         window.location.hash.startsWith('#/portal'));
 
     if (isOwnerPortal) {
         return (

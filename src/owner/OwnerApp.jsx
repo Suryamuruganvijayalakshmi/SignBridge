@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './owner.css';
+import NeatCursor from '../components/NeatCursor.jsx';
 import { OwnerAuthProvider, useOwnerAuth } from './OwnerAuthContext.jsx';
 import OwnerLogin from './OwnerLogin.jsx';
 import OwnerForgotPassword from './OwnerForgotPassword.jsx';
@@ -144,6 +145,7 @@ function OwnerPortalContent() {
 export default function OwnerApp() {
     return (
         <OwnerAuthProvider>
+            <NeatCursor />
             <OwnerPortalContent />
         </OwnerAuthProvider>
     );

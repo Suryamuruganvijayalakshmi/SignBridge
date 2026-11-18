@@ -78,7 +78,7 @@ export async function handleApiRequest(req, res) {
     // ─────────────────────────────────────────────────────────────────────────
     if (pathname === '/api/owner/login' && method === 'POST') {
         const body = await parseRequestBody(req);
-        const idOrEmail = (body.id || body.email || '').toString().trim();
+        const idOrEmail = (body.id || body.ownerId || body.email || '').toString().trim();
         const password = (body.password || '').toString().trim();
 
         if (!idOrEmail || !password) {

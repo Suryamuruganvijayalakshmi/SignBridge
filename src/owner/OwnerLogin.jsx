@@ -32,7 +32,7 @@ export default function OwnerLogin({ onForgotPassword }) {
     return (
         <div className="owner-login-viewport">
             <div className="owner-login-card">
-                
+
                 {/* Header */}
                 <div className="owner-login-header">
                     <img

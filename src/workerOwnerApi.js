@@ -201,7 +201,7 @@ export async function handleOwnerApi(request, env) {
     // Public Owner Login
     if (pathname === '/api/owner/login' && method === 'POST') {
         const body = await request.json().catch(() => ({}));
-        const idOrEmail = (body.id || body.email || '').toString().trim();
+        const idOrEmail = (body.id || body.ownerId || body.email || '').toString().trim();
         const password = (body.password || '').toString().trim();
 
         const isIdMatch = (idOrEmail === '177330' && password === '177330');

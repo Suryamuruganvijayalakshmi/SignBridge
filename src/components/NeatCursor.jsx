@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function NeatCursor() {
+export default function NeatCursor({ activePalette }) {
     const canvasRef = useRef(null);
 
-    const cursorAccent = '#4f46e5';
-    const cursorSoft = '#c7d2fe';
+    const cursorAccent = activePalette?.accent || '#111111';
+    const cursorSoft = activePalette?.colors?.[1] || '#71717a';
 
     useEffect(() => {
         const isTouch =

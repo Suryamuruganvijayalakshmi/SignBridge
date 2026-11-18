@@ -36,15 +36,15 @@ export function loadRazorpayScript() {
                 await new Promise((r) => setTimeout(r, 120));
             }
 
-            // 1. Try local same-origin bundle (bypasses ad-blockers and CDN blocks)
-            let loaded = await loadScriptTag('/checkout.js');
+            // 1. Try official Razorpay CDN first (ensures latest iframe, bank gateways & security tokens)
+            let loaded = await loadScriptTag('https://checkout.razorpay.com/v1/checkout.js');
             if (loaded) {
                 resolve(true);
                 return;
             }
 
-            // 2. Try official Razorpay CDN
-            loaded = await loadScriptTag('https://checkout.razorpay.com/v1/checkout.js');
+            // 2. Try local bundle fallback
+            loaded = await loadScriptTag('/checkout.js');
             if (loaded) {
                 resolve(true);
                 return;
