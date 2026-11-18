@@ -20,6 +20,7 @@ import InfinitePassageLoader from './components/InfinitePassageLoader.jsx';
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage.jsx'));
 const ContactModal = lazy(() => import('./components/ContactModal.jsx'));
 const BuyCardModal = lazy(() => import('./components/checkout/BuyCardModal.jsx'));
+const OwnerApp = lazy(() => import('./owner/OwnerApp.jsx'));
 
 export const RIBBON_SPECTRUMS = [
     {
@@ -94,6 +95,28 @@ function ScrollToHash() {
 }
 
 export default function App() {
+    const isOwnerPortal = 
+        typeof window !== 'undefined' && 
+        (window.location.hostname === 'orders.signbridge.click' ||
+         window.location.hostname === 'orders.localhost' ||
+         window.location.pathname.startsWith('/owner') ||
+         window.location.pathname.startsWith('/portal'));
+
+    if (isOwnerPortal) {
+        return (
+            <Suspense fallback={
+                <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', color: '#64748b', fontFamily: 'Inter, sans-serif' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ width: '28px', height: '28px', border: '3px solid #e2e8f0', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                        <span style={{ fontSize: '13px', fontWeight: 600 }}>Loading SignBridge Orders Portal...</span>
+                    </div>
+                </div>
+            }>
+                <OwnerApp />
+            </Suspense>
+        );
+    }
+
     const [paletteIndex, setPaletteIndex] = useState(0);
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);

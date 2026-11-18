@@ -3,6 +3,8 @@
  * Handles Razorpay API endpoints and delegates static assets to env.ASSETS
  */
 
+import { handleOwnerApi, recordEdgeOrder } from './workerOwnerApi.js';
+
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);
@@ -161,6 +163,15 @@ export default {
                     );
                 }
 
+                recordEdgeOrder({
+                    razorpay_order_id,
+                    razorpay_payment_id,
+                    amount: body.amount || 199.0,
+                    customer: body.customer || {},
+                    package_label: body.package_label || 'Single Card',
+                    quantity: body.quantity || 1,
+                });
+
                 return new Response(
                     JSON.stringify({
                         success: true,
@@ -188,6 +199,12 @@ export default {
                     }
                 );
             }
+        }
+
+        // Owner Order Portal & Razorpay Webhook APIs
+        if (url.pathname.startsWith('/api/owner') || url.pathname === '/api/razorpay-webhook') {
+            const ownerRes = await handleOwnerApi(request, env);
+            if (ownerRes) return ownerRes;
         }
 
         // Delegate static files and client-side routes to Cloudflare Assets

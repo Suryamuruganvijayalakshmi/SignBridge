@@ -154,6 +154,17 @@ export async function initiateRazorpayPayment({
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
+                            amount: (orderData.amount / 100),
+                            currency: orderData.currency || 'INR',
+                            customer: {
+                                name: notes.name_on_card || prefill.name || '',
+                                email: prefill.email || '',
+                                phone: notes.customer_phone || prefill.contact || '',
+                                address: notes.shipping_address || '',
+                                pincode: notes.pincode || '',
+                            },
+                            package_label: notes.package || 'Single Card',
+                            quantity: Number(notes.quantity) || 1,
                         }),
                     });
 

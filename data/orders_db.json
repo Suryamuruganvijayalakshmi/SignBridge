@@ -1,0 +1,199 @@
+{
+  "orders": [
+    {
+      "id": "SB-ORD-20261118-8492",
+      "order_number": "1001",
+      "razorpay_order_id": "order_U1avAwBmCDOaPd",
+      "razorpay_payment_id": "pay_live_U1av89f41x9q",
+      "razorpay_signature": "verified_sig_live_01",
+      "amount": 199,
+      "currency": "INR",
+      "payment_status": "paid",
+      "order_status": "confirmed",
+      "customer": {
+        "name": "Surya V M",
+        "email": "connect.pilotsurya@gmail.com",
+        "phone": "+91 9842253267",
+        "address": "188/2, Kokkarayanpettai, Pappampalayam",
+        "pincode": "638007"
+      },
+      "items": [
+        {
+          "product_id": "nfc-smart-card",
+          "product_name": "SignBridge NFC Smart Card",
+          "package_label": "Single Card",
+          "quantity": 1,
+          "unit_price": 199,
+          "total_price": 199,
+          "laser_engraved_name": "Surya V M"
+        }
+      ],
+      "shipping": {
+        "courier": "Blue Dart Express",
+        "tracking_id": "BD982741920IN",
+        "tracking_url": "https://www.bluedart.com/tracking?track=BD982741920IN",
+        "shipped_at": null,
+        "delivered_at": null
+      },
+      "internal_notes": [
+        {
+          "id": "note_1",
+          "text": "Laser inscription name confirmed. Matte black blank ready for chip programming.",
+          "author": "SignBridge System",
+          "created_at": "2026-11-18T08:55:29.024Z"
+        }
+      ],
+      "status_history": [
+        {
+          "status": "new",
+          "note": "Customer initiated checkout",
+          "actor": "Customer",
+          "timestamp": "2026-11-18T07:55:29.026Z"
+        },
+        {
+          "status": "confirmed",
+          "note": "Razorpay payment verified (₹199.00 captured)",
+          "actor": "Razorpay",
+          "timestamp": "2026-11-18T07:57:09.026Z"
+        }
+      ],
+      "notifications_log": [
+        {
+          "id": "notif_1",
+          "channel": "email",
+          "type": "order_confirmation",
+          "recipient": "connect.pilotsurya@gmail.com",
+          "status": "delivered",
+          "sent_at": "2026-11-18T07:58:49.026Z",
+          "message_preview": "Order #1001 confirmed! Your SignBridge NFC Smart Card is queued."
+        },
+        {
+          "id": "notif_2",
+          "channel": "whatsapp",
+          "type": "payment_confirmed",
+          "recipient": "+91 9842253267",
+          "status": "delivered",
+          "sent_at": "2026-11-18T07:58:49.026Z",
+          "message_preview": "Hello Surya, your payment of ₹199 for SignBridge NFC Smart Card is confirmed!"
+        }
+      ],
+      "created_at": "2026-11-18T07:55:29.026Z",
+      "updated_at": "2026-11-18T08:55:29.026Z"
+    },
+    {
+      "id": "SB-ORD-20261118-8493",
+      "order_number": "1002",
+      "razorpay_order_id": "order_U1aaWpWe3ujfxC",
+      "razorpay_payment_id": "pay_live_U1aa99k30l2m",
+      "razorpay_signature": "verified_sig_live_02",
+      "amount": 349,
+      "currency": "INR",
+      "payment_status": "paid",
+      "order_status": "processing",
+      "customer": {
+        "name": "Arun Karthik",
+        "email": "arunkarthik.tech@gmail.com",
+        "phone": "+91 9443218765",
+        "address": "Flat 402, Lumina Tech Towers, Whitefield",
+        "pincode": "560066"
+      },
+      "items": [
+        {
+          "product_id": "nfc-smart-card",
+          "product_name": "SignBridge NFC Smart Card",
+          "package_label": "Duo Pack",
+          "quantity": 2,
+          "unit_price": 174.5,
+          "total_price": 349,
+          "laser_engraved_name": "Arun Karthik / Lumina Tech"
+        }
+      ],
+      "shipping": {
+        "courier": "Delhivery Surface",
+        "tracking_id": "DEL550291048",
+        "tracking_url": "https://www.delhivery.com/track/package/DEL550291048",
+        "shipped_at": null,
+        "delivered_at": null
+      },
+      "internal_notes": [],
+      "status_history": [
+        {
+          "status": "new",
+          "note": "Customer initiated checkout for Duo Pack",
+          "actor": "Customer",
+          "timestamp": "2026-11-18T05:55:29.026Z"
+        },
+        {
+          "status": "confirmed",
+          "note": "Payment verified via Razorpay UPI",
+          "actor": "Razorpay",
+          "timestamp": "2026-11-18T05:57:09.026Z"
+        },
+        {
+          "status": "processing",
+          "note": "Chip encoded with dual-mode cloud profile",
+          "actor": "Owner",
+          "timestamp": "2026-11-18T06:55:29.026Z"
+        }
+      ],
+      "notifications_log": [
+        {
+          "id": "notif_3",
+          "channel": "email",
+          "type": "order_confirmation",
+          "recipient": "arunkarthik.tech@gmail.com",
+          "status": "delivered",
+          "sent_at": "2026-11-18T05:57:09.026Z",
+          "message_preview": "Your Duo Pack NFC Card order #1002 is confirmed."
+        }
+      ],
+      "created_at": "2026-11-18T05:55:29.026Z",
+      "updated_at": "2026-11-18T06:55:29.026Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "nfc-smart-card-single",
+      "slug": "nfc-smart-card",
+      "name": "SignBridge NFC Smart Card (Single Card)",
+      "price": 199,
+      "original_price": 999,
+      "stock": 142,
+      "low_stock_threshold": 25,
+      "total_sales": 38,
+      "status": "active"
+    },
+    {
+      "id": "nfc-smart-card-duo",
+      "slug": "nfc-smart-card",
+      "name": "SignBridge NFC Smart Card (Duo Pack)",
+      "price": 349,
+      "original_price": 1998,
+      "stock": 68,
+      "low_stock_threshold": 15,
+      "total_sales": 19,
+      "status": "active"
+    },
+    {
+      "id": "nfc-smart-card-team",
+      "slug": "nfc-smart-card",
+      "name": "SignBridge NFC Smart Card (Team Pack - 3 Cards)",
+      "price": 499,
+      "original_price": 2997,
+      "stock": 36,
+      "low_stock_threshold": 10,
+      "total_sales": 11,
+      "status": "active"
+    }
+  ],
+  "settings": {
+    "whatsapp_provider": "Meta WhatsApp Business Cloud API",
+    "whatsapp_phone_number_id": "109283746192837",
+    "whatsapp_status": "connected",
+    "email_provider": "Resend / Cloudflare Mail",
+    "email_status": "active",
+    "auto_notify_customer": true,
+    "courier_partner": "Blue Dart / Delhivery"
+  },
+  "audit_logs": []
+}

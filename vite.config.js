@@ -5,6 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRazorpayOrder, verifyPaymentSignature } from './server/razorpay.js';
+import { saveOrder } from './server/orderStore.js';
+import { handleApiRequest } from './server/apiRouter.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -94,6 +96,25 @@ function razorpayDevApiPlugin() {
               );
             }
 
+            // Save order in database store
+            let savedOrder = null;
+            try {
+              savedOrder = saveOrder({
+                razorpay_order_id,
+                razorpay_payment_id,
+                razorpay_signature,
+                amount: data.amount || 199.0,
+                currency: data.currency || 'INR',
+                customer: data.customer || {},
+                package_label: data.package_label || 'Single Card',
+                quantity: data.quantity || 1,
+                payment_status: 'paid',
+                order_status: 'confirmed',
+              });
+            } catch (saveErr) {
+              console.error('[SaveOrder Error]:', saveErr);
+            }
+
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.end(
@@ -102,6 +123,8 @@ function razorpayDevApiPlugin() {
                 message: 'Payment verified successfully',
                 payment_id: razorpay_payment_id,
                 order_id: razorpay_order_id,
+                internal_order_id: savedOrder?.id,
+                order_number: savedOrder?.order_number,
               })
             );
           } catch (err) {
@@ -112,6 +135,12 @@ function razorpayDevApiPlugin() {
           }
         });
         return;
+      }
+
+      // Owner Order Portal & Razorpay Webhook APIs
+      if (url.startsWith('/api/owner') || url === '/api/razorpay-webhook') {
+        const handled = await handleApiRequest(req, res);
+        if (handled !== false) return;
       }
 
       next();
