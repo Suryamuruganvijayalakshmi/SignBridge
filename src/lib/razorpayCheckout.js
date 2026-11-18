@@ -8,12 +8,57 @@ export function loadRazorpayScript() {
             resolve(true);
             return;
         }
-        const script = document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.async = true;
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
+
+        const loadScriptTag = (url) => {
+            return new Promise((res) => {
+                const script = document.createElement('script');
+                script.src = url;
+                script.async = true;
+                script.onload = () => {
+                    if (typeof window !== 'undefined' && window.Razorpay) {
+                        res(true);
+                    } else {
+                        res(false);
+                    }
+                };
+                script.onerror = () => res(false);
+                document.body.appendChild(script);
+            });
+        };
+
+        (async () => {
+            // Check if existing script tag in DOM is still loading
+            for (let i = 0; i < 4; i++) {
+                if (typeof window !== 'undefined' && window.Razorpay) {
+                    resolve(true);
+                    return;
+                }
+                await new Promise((r) => setTimeout(r, 120));
+            }
+
+            // 1. Try local same-origin bundle (bypasses ad-blockers and CDN blocks)
+            let loaded = await loadScriptTag('/checkout.js');
+            if (loaded) {
+                resolve(true);
+                return;
+            }
+
+            // 2. Try official Razorpay CDN
+            loaded = await loadScriptTag('https://checkout.razorpay.com/v1/checkout.js');
+            if (loaded) {
+                resolve(true);
+                return;
+            }
+
+            // 3. Try backend proxy
+            loaded = await loadScriptTag('/api/razorpay-checkout.js');
+            if (loaded) {
+                resolve(true);
+                return;
+            }
+
+            resolve(false);
+        })();
     });
 }
 
@@ -38,7 +83,7 @@ export async function initiateRazorpayPayment({
     // 1. Ensure Razorpay SDK is loaded
     const isLoaded = await loadRazorpayScript();
     if (!isLoaded || !window.Razorpay) {
-        throw new Error('Razorpay SDK failed to load. Please verify your network connection.');
+        throw new Error('Razorpay gateway could not be loaded. Please disable any ad-blockers (like Brave Shields/uBlock) for this site or refresh the page.');
     }
 
     const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;

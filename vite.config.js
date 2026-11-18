@@ -15,6 +15,16 @@ function razorpayDevApiPlugin() {
       server.middlewares.use(async (req, res, next) => {
         const url = req.url ? req.url.split('?')[0] : '';
 
+        // Endpoint: GET /api/razorpay-checkout.js (Local fallback)
+        if (req.method === 'GET' && (url === '/api/razorpay-checkout.js' || url === '/checkout.js')) {
+          const filePath = path.resolve(__dirname, 'public/checkout.js');
+          if (fs.existsSync(filePath)) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/javascript');
+            return res.end(fs.readFileSync(filePath));
+          }
+        }
+
         // Endpoint: POST /api/create-order
         if (req.method === 'POST' && url === '/api/create-order') {
           let body = '';

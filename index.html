@@ -43,8 +43,8 @@
     <!-- React Root Mount Target -->
     <div id="root"></div>
 
-    <!-- Razorpay Standard Web Checkout -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- Razorpay Standard Web Checkout (CDN with local fallback) -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js" onerror="this.onerror=null;this.src='/checkout.js';"></script>
 
     <!-- Main React Entry Point -->
     <script type="module" src="/src/main.jsx"></script>
