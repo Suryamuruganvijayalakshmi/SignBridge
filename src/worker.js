@@ -209,7 +209,13 @@ export default {
 
         // Delegate static files and client-side routes to Cloudflare Assets
         if (env.ASSETS && typeof env.ASSETS.fetch === 'function') {
-            const assetResponse = await env.ASSETS.fetch(request);
+            let assetResponse = await env.ASSETS.fetch(request);
+
+            // Fallback for SPA client-side routes (e.g. /owner, /portal, /orders)
+            if (assetResponse.status === 404 && !url.pathname.startsWith('/api') && !url.pathname.includes('.')) {
+                assetResponse = await env.ASSETS.fetch(new Request(new URL('/index.html', request.url), request));
+            }
+
             const newHeaders = new Headers(assetResponse.headers);
 
             // Ensure Content-Security-Policy allows Razorpay iframe & scripts
