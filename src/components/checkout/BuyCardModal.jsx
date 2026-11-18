@@ -11,6 +11,7 @@ import {
     Wifi
 } from 'lucide-react';
 import { initiateRazorpayPayment } from '../../lib/razorpayCheckout.js';
+import OrderReceipt from './OrderReceipt.jsx';
 
 const PACK_OPTIONS = [
     { qty: 1, label: 'Single Card', price: 10, originalPrice: 999, savings: 'PROMO ₹10' },
@@ -126,14 +127,14 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
 
     return (
         <div className="buy-modal-backdrop" onClick={handleBackdropClick} role="dialog" aria-modal="true">
-            <div className="buy-modal-window">
+            <div className={`buy-modal-window ${paymentSuccess ? 'is-receipt' : ''}`}>
                 
                 {/* Modal Header */}
                 <div className="buy-modal-header">
                     <div className="buy-modal-header-left">
-                        <span className="buy-modal-pip" />
+                        <span className={`buy-modal-pip ${paymentSuccess ? 'is-success' : ''}`} />
                         <span className="buy-modal-header-title">
-                            SECURE CHECKOUT // RAZORPAY
+                            {paymentSuccess ? 'OFFICIAL RECEIPT // SIGNBRIDGE' : 'SECURE CHECKOUT // RAZORPAY'}
                         </span>
                     </div>
                     <button
@@ -148,52 +149,20 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
                 </div>
 
                 {/* Modal Body */}
-                <div className="buy-modal-body">
+                <div className={`buy-modal-body ${paymentSuccess ? 'is-receipt-body' : ''}`}>
                     {paymentSuccess ? (
-                        /* Success View */
-                        <div style={{ textAlign: 'center', padding: '16px 0', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-                            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#ecfdf5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #a7f3d0' }}>
-                                <CheckCircle2 size={34} />
-                            </div>
-                            <div>
-                                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', margin: '0 0 6px 0', color: '#18181b' }}>Payment Confirmed!</h3>
-                                <p style={{ fontSize: '13.5px', color: '#52525b', margin: 0 }}>
-                                    Your order for <strong>SignBridge NFC Smart Card</strong> has been received.
-                                </p>
-                            </div>
-
-                            <div style={{ width: '100%', background: '#faf8f5', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '12px', padding: '14px 16px', fontSize: '12px', fontFamily: 'var(--font-mono)', display: 'flex', flexDirection: 'column', gap: '6px', textAlign: 'left' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span style={{ color: '#71717a' }}>Payment ID:</span>
-                                    <span style={{ fontWeight: 700, color: '#18181b' }}>{paymentSuccess.paymentId}</span>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span style={{ color: '#71717a' }}>Order ID:</span>
-                                    <span style={{ color: '#18181b' }}>{paymentSuccess.orderId}</span>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span style={{ color: '#71717a' }}>Amount Paid:</span>
-                                    <span style={{ fontWeight: 700, color: '#059669' }}>₹{selectedPack.price}.00</span>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span style={{ color: '#71717a' }}>Printed Name:</span>
-                                    <span style={{ color: '#18181b' }}>{nameOnCard}</span>
-                                </div>
-                            </div>
-
-                            <p style={{ fontSize: '12px', color: '#71717a', margin: 0 }}>
-                                Order dispatch updates and cloud profile instructions will be sent to <strong>{email}</strong>.
-                            </p>
-
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                className="buy-pay-btn"
-                                style={{ marginTop: '8px' }}
-                            >
-                                Done &amp; Return to Site
-                            </button>
-                        </div>
+                        <OrderReceipt
+                            paymentData={paymentSuccess}
+                            customer={{
+                                nameOnCard,
+                                email,
+                                phone,
+                                address,
+                                pincode,
+                            }}
+                            selectedPack={selectedPack}
+                            onClose={onClose}
+                        />
                     ) : (
                         /* Checkout Form */
                         <form onSubmit={handlePay} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
