@@ -218,10 +218,10 @@ export default {
 
             const newHeaders = new Headers(assetResponse.headers);
 
-            // Ensure Content-Security-Policy allows Razorpay iframe, bank 3D secure frames & scripts
+            // Ensure Content-Security-Policy allows Razorpay iframe & scripts
             newHeaders.set(
                 'Content-Security-Policy',
-                "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://static.cloudflareinsights.com; frame-src 'self' https://checkout.razorpay.com https://api.razorpay.com https://*.razorpay.com https://*.rzp.io https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob: https://*.razorpay.com; media-src 'self' blob:; connect-src 'self' https: https://api.razorpay.com https://*.razorpay.com https://lumberjack.razorpay.com;"
+                "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://static.cloudflareinsights.com; frame-src 'self' https://checkout.razorpay.com https://api.razorpay.com https://*.razorpay.com https://*.rzp.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob: https://*.razorpay.com; media-src 'self' blob:; connect-src 'self' https: https://api.razorpay.com https://*.razorpay.com https://lumberjack.razorpay.com; frame-ancestors *;"
             );
 
             return new Response(assetResponse.body, {
