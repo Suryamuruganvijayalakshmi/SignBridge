@@ -4,7 +4,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "./app/originkit-section-themes.css";
-@source "./components/originkit";
+@source "./components";
+@source "./pages";
 
 @theme {
   --breakpoint-md: 768px;

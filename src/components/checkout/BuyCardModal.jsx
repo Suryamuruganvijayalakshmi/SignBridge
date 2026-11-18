@@ -4,7 +4,6 @@ import {
     ShieldCheck,
     CheckCircle2,
     Lock,
-    CreditCard,
     Sparkles,
     AlertCircle,
     ArrowRight,
@@ -43,7 +42,7 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
         e.preventDefault();
         setErrorMsg('');
 
-        // Basic client validation
+        // Custom validation to prevent ugly browser tooltips
         if (!nameOnCard.trim() || nameOnCard.trim().length < 2) {
             setErrorMsg('Please enter the name you want printed on your card.');
             return;
@@ -51,18 +50,18 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.trim() || !emailRegex.test(email.trim())) {
-            setErrorMsg('Please enter a valid email address for your order confirmation.');
+            setErrorMsg('Please enter a valid email address for receipt and dashboard.');
             return;
         }
 
         const phoneClean = phone.replace(/[^0-9]/g, '');
         if (phoneClean.length < 10) {
-            setErrorMsg('Please enter a valid 10-digit mobile number for courier tracking.');
+            setErrorMsg('Please enter a valid 10-digit mobile number for courier dispatch.');
             return;
         }
 
         if (!address.trim() || address.trim().length < 5) {
-            setErrorMsg('Please provide a complete delivery address.');
+            setErrorMsg('Please enter your complete delivery address.');
             return;
         }
 
@@ -74,7 +73,7 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
         setLoading(true);
 
         try {
-            const amountInPaise = selectedPack.price * 100; // Razorpay requires amount in paise
+            const amountInPaise = selectedPack.price * 100; // Razorpay expects amount in paise
 
             const result = await initiateRazorpayPayment({
                 amount: amountInPaise,
@@ -118,7 +117,7 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
             }
         } catch (err) {
             setLoading(false);
-            setErrorMsg(err.message || 'Unable to launch Razorpay checkout. Please check connection.');
+            setErrorMsg(err.message || 'Unable to connect to Razorpay. Please verify internet connection.');
             if (onNotification) {
                 onNotification(`// ERROR: ${err.message}`);
             }
@@ -126,105 +125,106 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={handleBackdropClick}>
-            <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden text-zinc-900 max-h-[92vh] flex flex-col">
+        <div className="buy-modal-backdrop" onClick={handleBackdropClick} role="dialog" aria-modal="true">
+            <div className="buy-modal-window">
                 
                 {/* Modal Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-zinc-50">
-                    <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
-                        <span className="text-xs font-mono font-bold tracking-wider text-zinc-600 uppercase">
-                            Secure Checkout // Razorpay
+                <div className="buy-modal-header">
+                    <div className="buy-modal-header-left">
+                        <span className="buy-modal-pip" />
+                        <span className="buy-modal-header-title">
+                            SECURE CHECKOUT // RAZORPAY
                         </span>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
                         disabled={loading}
-                        className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/50 transition-colors"
+                        className="buy-modal-close"
                         aria-label="Close checkout modal"
                     >
-                        <X size={18} />
+                        <X size={16} />
                     </button>
                 </div>
 
                 {/* Modal Body */}
-                <div className="p-6 overflow-y-auto space-y-6">
+                <div className="buy-modal-body">
                     {paymentSuccess ? (
                         /* Success View */
-                        <div className="py-6 text-center space-y-4">
-                            <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-200">
-                                <CheckCircle2 size={36} />
+                        <div style={{ textAlign: 'center', padding: '16px 0', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+                            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#ecfdf5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #a7f3d0' }}>
+                                <CheckCircle2 size={34} />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-serif text-zinc-900">Payment Successful!</h3>
-                                <p className="text-sm text-zinc-600 mt-1">
-                                    Your order for <strong>SignBridge NFC Smart Card</strong> has been confirmed.
+                                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', margin: '0 0 6px 0', color: '#18181b' }}>Payment Confirmed!</h3>
+                                <p style={{ fontSize: '13.5px', color: '#52525b', margin: 0 }}>
+                                    Your order for <strong>SignBridge NFC Smart Card</strong> has been received.
                                 </p>
                             </div>
 
-                            <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-4 text-left font-mono text-xs space-y-1.5 text-zinc-700">
-                                <div className="flex justify-between">
-                                    <span className="text-zinc-500">Payment ID:</span>
-                                    <span className="font-semibold text-zinc-900">{paymentSuccess.paymentId}</span>
+                            <div style={{ width: '100%', background: '#faf8f5', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '12px', padding: '14px 16px', fontSize: '12px', fontFamily: 'var(--font-mono)', display: 'flex', flexDirection: 'column', gap: '6px', textAlign: 'left' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <span style={{ color: '#71717a' }}>Payment ID:</span>
+                                    <span style={{ fontWeight: 700, color: '#18181b' }}>{paymentSuccess.paymentId}</span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="text-zinc-500">Order ID:</span>
-                                    <span className="text-zinc-900">{paymentSuccess.orderId}</span>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <span style={{ color: '#71717a' }}>Order ID:</span>
+                                    <span style={{ color: '#18181b' }}>{paymentSuccess.orderId}</span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="text-zinc-500">Amount Paid:</span>
-                                    <span className="font-semibold text-emerald-700">₹{selectedPack.price}.00</span>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <span style={{ color: '#71717a' }}>Amount Paid:</span>
+                                    <span style={{ fontWeight: 700, color: '#059669' }}>₹{selectedPack.price}.00</span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="text-zinc-500">Printed Name:</span>
-                                    <span className="text-zinc-900">{nameOnCard}</span>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <span style={{ color: '#71717a' }}>Printed Name:</span>
+                                    <span style={{ color: '#18181b' }}>{nameOnCard}</span>
                                 </div>
                             </div>
 
-                            <p className="text-xs text-zinc-500">
-                                A confirmation receipt and setup instructions will be sent to <strong>{email}</strong>.
+                            <p style={{ fontSize: '12px', color: '#71717a', margin: 0 }}>
+                                Order dispatch updates and cloud profile instructions will be sent to <strong>{email}</strong>.
                             </p>
 
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="w-full py-3 bg-zinc-900 text-white rounded-xl font-medium text-sm hover:bg-zinc-800 transition-colors shadow-md mt-4"
+                                className="buy-pay-btn"
+                                style={{ marginTop: '8px' }}
                             >
                                 Done &amp; Return to Site
                             </button>
                         </div>
                     ) : (
                         /* Checkout Form */
-                        <form onSubmit={handlePay} className="space-y-5">
+                        <form onSubmit={handlePay} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             
-                            {/* Product Summary Box */}
-                            <div className="flex gap-4 p-3.5 bg-gradient-to-br from-blue-50/60 to-amber-50/40 rounded-xl border border-blue-100 items-center">
+                            {/* Product Summary Snippet */}
+                            <div className="buy-product-snippet">
                                 <img
                                     src="/assets/nfc-smart-card.webp"
                                     alt="SignBridge NFC Card"
-                                    className="w-16 h-20 object-cover rounded-lg shadow-sm border border-zinc-200 shrink-0"
+                                    className="buy-product-thumb"
                                 />
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-1.5 text-blue-700 font-mono text-[10px] font-bold uppercase tracking-wider">
+                                <div className="buy-product-info">
+                                    <div className="buy-product-tag">
                                         <Wifi size={11} />
                                         <span>One Tap · Business &amp; Personal</span>
                                     </div>
-                                    <h4 className="text-base font-semibold text-zinc-900 leading-snug truncate">
+                                    <h4 className="buy-product-name">
                                         SignBridge NFC Smart Card
                                     </h4>
-                                    <p className="text-xs text-zinc-500">
-                                        Matte Black Finish · Dual Profile · Free Delivery
+                                    <p className="buy-product-sub">
+                                        Matte Black Finish · Contactless · Free Courier Delivery
                                     </p>
                                 </div>
                             </div>
 
-                            {/* Quantity / Pack Selector */}
+                            {/* Package Selector */}
                             <div>
-                                <label className="block text-xs font-mono text-zinc-600 font-bold uppercase mb-2">
+                                <label className="buy-field-label">
                                     Select Package
                                 </label>
-                                <div className="grid grid-cols-3 gap-2">
+                                <div className="buy-packages-grid">
                                     {PACK_OPTIONS.map((pack) => {
                                         const isSelected = selectedPack.qty === pack.qty;
                                         return (
@@ -232,139 +232,141 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
                                                 key={pack.qty}
                                                 type="button"
                                                 onClick={() => setSelectedPack(pack)}
-                                                className={`relative p-2.5 rounded-xl border text-left transition-all ${
-                                                    isSelected
-                                                        ? 'border-blue-600 bg-blue-50/40 ring-2 ring-blue-600/20 shadow-sm'
-                                                        : 'border-zinc-200 bg-white hover:border-zinc-300'
-                                                }`}
+                                                className={`buy-package-card ${isSelected ? 'is-active' : ''}`}
                                             >
                                                 {pack.popular && (
-                                                    <span className="absolute -top-2 right-2 px-1.5 py-0.5 bg-blue-600 text-white rounded text-[9px] font-bold font-mono tracking-wider">
+                                                    <span className="buy-package-badge">
                                                         POPULAR
                                                     </span>
                                                 )}
-                                                <div className="text-[11px] font-medium text-zinc-600 truncate">{pack.label}</div>
-                                                <div className="text-base font-bold text-zinc-900 mt-0.5">₹{pack.price}</div>
-                                                <div className="text-[10px] text-zinc-400 line-through">₹{pack.originalPrice}</div>
+                                                <span className="buy-package-name">{pack.label}</span>
+                                                <span className="buy-package-price">₹{pack.price}</span>
+                                                <span className="buy-package-old">₹{pack.originalPrice}</span>
                                             </button>
                                         );
                                     })}
                                 </div>
                             </div>
 
-                            {/* Form Fields */}
-                            <div className="space-y-3.5 pt-1">
-                                <div>
-                                    <label className="block text-xs font-mono text-zinc-600 uppercase mb-1">
-                                        Name on Card <span className="text-red-500">*</span>
+                            {/* Name on Card */}
+                            <div className="buy-form-group">
+                                <label className="buy-field-label">
+                                    Name on Card <span className="req">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Surya Murugan"
+                                    value={nameOnCard}
+                                    onChange={(e) => setNameOnCard(e.target.value)}
+                                    className="buy-input"
+                                    autoComplete="name"
+                                />
+                            </div>
+
+                            {/* Email & Mobile Row */}
+                            <div className="buy-form-row">
+                                <div className="buy-form-group">
+                                    <label className="buy-field-label">
+                                        Email Address <span className="req">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        placeholder="you@company.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="buy-input"
+                                        autoComplete="email"
+                                    />
+                                </div>
+                                <div className="buy-form-group">
+                                    <label className="buy-field-label">
+                                        Mobile / WhatsApp <span className="req">*</span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        placeholder="9876543210"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        className="buy-input"
+                                        autoComplete="tel"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Delivery Address & Pincode */}
+                            <div className="buy-form-row">
+                                <div className="buy-form-group">
+                                    <label className="buy-field-label">
+                                        Delivery Address <span className="req">*</span>
                                     </label>
                                     <input
                                         type="text"
-                                        required
-                                        placeholder="e.g. Surya Murugan"
-                                        value={nameOnCard}
-                                        onChange={(e) => setNameOnCard(e.target.value)}
-                                        className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                                        placeholder="Flat / Building / Street"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        className="buy-input"
+                                        autoComplete="street-address"
                                     />
                                 </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div>
-                                        <label className="block text-xs font-mono text-zinc-600 uppercase mb-1">
-                                            Email Address <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="email"
-                                            required
-                                            placeholder="you@company.com"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-mono text-zinc-600 uppercase mb-1">
-                                            Mobile / WhatsApp <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            required
-                                            placeholder="9876543210"
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
-                                            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-3 gap-3">
-                                    <div className="col-span-2">
-                                        <label className="block text-xs font-mono text-zinc-600 uppercase mb-1">
-                                            Delivery Address <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            required
-                                            placeholder="House / Office / Street"
-                                            value={address}
-                                            onChange={(e) => setAddress(e.target.value)}
-                                            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-mono text-zinc-600 uppercase mb-1">
-                                            Pincode <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            required
-                                            maxLength={6}
-                                            placeholder="600001"
-                                            value={pincode}
-                                            onChange={(e) => setPincode(e.target.value)}
-                                            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
-                                        />
-                                    </div>
+                                <div className="buy-form-group">
+                                    <label className="buy-field-label">
+                                        Postal Pincode <span className="req">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        maxLength={6}
+                                        placeholder="600001"
+                                        value={pincode}
+                                        onChange={(e) => setPincode(e.target.value)}
+                                        className="buy-input"
+                                        autoComplete="postal-code"
+                                    />
                                 </div>
                             </div>
 
                             {/* Error Alert */}
                             {errorMsg && (
-                                <div className="p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-xs text-red-700 animate-fadeIn">
-                                    <AlertCircle size={15} className="shrink-0" />
+                                <div className="buy-error-banner">
+                                    <AlertCircle size={15} style={{ flexShrink: 0 }} />
                                     <span>{errorMsg}</span>
                                 </div>
                             )}
 
+                            {/* Price Summary Line */}
+                            <div className="buy-summary-line">
+                                <span>Total to Pay (All inclusive + Free Shipping):</span>
+                                <span className="buy-summary-total">₹{selectedPack.price}.00</span>
+                            </div>
+
                             {/* Submit & Pay Button */}
-                            <div className="pt-2">
+                            <div>
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-3.5 px-4 bg-zinc-950 hover:bg-zinc-800 text-white rounded-xl font-medium text-sm flex items-center justify-center gap-2 shadow-lg shadow-zinc-900/10 transition-all disabled:opacity-60 disabled:cursor-not-allowed group cursor-pointer"
+                                    className="buy-pay-btn"
                                 >
                                     {loading ? (
                                         <>
                                             <Loader2 size={16} className="animate-spin text-blue-400" />
-                                            <span>Securing Order &amp; Connecting Razorpay...</span>
+                                            <span>Securing Order &amp; Opening Razorpay...</span>
                                         </>
                                     ) : (
                                         <>
-                                            <Lock size={15} className="text-blue-400" />
+                                            <Lock size={15} />
                                             <span>Pay ₹{selectedPack.price} with Razorpay</span>
-                                            <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                                            <ArrowRight size={15} />
                                         </>
                                     )}
                                 </button>
                             </div>
 
-                            {/* Trust badges */}
-                            <div className="flex items-center justify-between pt-1 border-t border-zinc-100 text-[11px] text-zinc-400 font-mono">
-                                <span className="flex items-center gap-1">
-                                    <ShieldCheck size={13} className="text-emerald-600" />
-                                    <span>256-Bit SSL Encrypted</span>
+                            {/* Trust Footer */}
+                            <div className="buy-trust-footer">
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                    <ShieldCheck size={14} style={{ color: '#059669' }} />
+                                    <span>256-Bit SSL Encrypted Razorpay</span>
                                 </span>
-                                <span>UPI · CARDS · NETBANKING</span>
+                                <span>UPI (GPay / PhonePe) · Cards · NetBanking</span>
                             </div>
                         </form>
                     )}
@@ -373,4 +375,3 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
         </div>
     );
 }
-
