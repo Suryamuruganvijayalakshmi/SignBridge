@@ -118,7 +118,7 @@ export default function ProductDetailPage({ onNotification, onOpenBuy }) {
                                         className="btn-primary-lime"
                                     >
                                         <ShoppingBag size={17} />
-                                        <span>Buy NFC Smart Card — ₹499</span>
+                                        <span>Buy NFC Smart Card — ₹10</span>
                                     </button>
                                     <button
                                         type="button"

@@ -54,7 +54,7 @@ export default function ProductCard({ product, onOpenBuy }) {
                             className="product-buy-now-btn"
                         >
                             <ShoppingBag size={14} />
-                            <span>Buy Card — ₹499</span>
+                            <span>Buy Card — ₹10</span>
                         </button>
                         <Link
                             to={`/products/${product.slug}`}

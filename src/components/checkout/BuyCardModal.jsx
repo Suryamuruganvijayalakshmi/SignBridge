@@ -14,9 +14,9 @@ import {
 import { initiateRazorpayPayment } from '../../lib/razorpayCheckout.js';
 
 const PACK_OPTIONS = [
-    { qty: 1, label: 'Single Card', price: 499, originalPrice: 999, savings: '50% OFF' },
-    { qty: 2, label: 'Duo Pack', price: 899, originalPrice: 1998, savings: 'BEST VALUE', popular: true },
-    { qty: 3, label: 'Team Pack', price: 1299, originalPrice: 2997, savings: 'SAVE 57%' }
+    { qty: 1, label: 'Single Card', price: 10, originalPrice: 999, savings: 'PROMO ₹10' },
+    { qty: 2, label: 'Duo Pack', price: 20, originalPrice: 1998, savings: 'BEST VALUE', popular: true },
+    { qty: 3, label: 'Team Pack', price: 30, originalPrice: 2997, savings: 'PROMO ₹30' }
 ];
 
 export default function BuyCardModal({ isOpen, onClose, onNotification }) {
@@ -373,3 +373,4 @@ export default function BuyCardModal({ isOpen, onClose, onNotification }) {
         </div>
     );
 }
+
